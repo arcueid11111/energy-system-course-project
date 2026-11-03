@@ -1,0 +1,9 @@
+{
+  "source": "synthetic",
+  "purpose": "同求解器无噪声单泵曲线倍率恢复，不能作为实测验证",
+  "measurement_node": "J3",
+  "measurement_link": "P1",
+  "calibration_pump": "P1",
+  "truth_factor": 0.9,
+  "baseline_project": "editable_network.json"
+}

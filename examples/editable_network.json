@@ -1,0 +1,429 @@
+{
+  "schema_version": "flowstate-network-1",
+  "name": "可编辑三维泵网示例",
+  "coordinate_unit": "m",
+  "nodes": [
+    {
+      "id": "R1",
+      "kind": "reservoir",
+      "x": 0.0,
+      "y": 20.0,
+      "z": 0.0,
+      "elevation_m": 0.0,
+      "demand_m3h": 0.0,
+      "source_head_m": 2.0,
+      "tank_level_m": 5.0,
+      "tank_min_m": 0.0,
+      "tank_max_m": 10.0,
+      "tank_diameter_m": 3.0,
+      "note": ""
+    },
+    {
+      "id": "J1",
+      "kind": "junction",
+      "x": 10.0,
+      "y": 20.0,
+      "z": 0.0,
+      "elevation_m": 0.0,
+      "demand_m3h": 0.0,
+      "source_head_m": 0.0,
+      "tank_level_m": 5.0,
+      "tank_min_m": 0.0,
+      "tank_max_m": 10.0,
+      "tank_diameter_m": 3.0,
+      "note": ""
+    },
+    {
+      "id": "J2",
+      "kind": "junction",
+      "x": 30.0,
+      "y": 20.0,
+      "z": 0.0,
+      "elevation_m": 0.0,
+      "demand_m3h": 0.0,
+      "source_head_m": 0.0,
+      "tank_level_m": 5.0,
+      "tank_min_m": 0.0,
+      "tank_max_m": 10.0,
+      "tank_diameter_m": 3.0,
+      "note": ""
+    },
+    {
+      "id": "J3",
+      "kind": "junction",
+      "x": 50.0,
+      "y": 5.0,
+      "z": 3.0,
+      "elevation_m": 3.0,
+      "demand_m3h": 3.5,
+      "source_head_m": 0.0,
+      "tank_level_m": 5.0,
+      "tank_min_m": 0.0,
+      "tank_max_m": 10.0,
+      "tank_diameter_m": 3.0,
+      "note": ""
+    },
+    {
+      "id": "J4",
+      "kind": "junction",
+      "x": 65.0,
+      "y": 20.0,
+      "z": 5.0,
+      "elevation_m": 5.0,
+      "demand_m3h": 4.0,
+      "source_head_m": 0.0,
+      "tank_level_m": 5.0,
+      "tank_min_m": 0.0,
+      "tank_max_m": 10.0,
+      "tank_diameter_m": 3.0,
+      "note": ""
+    },
+    {
+      "id": "J5",
+      "kind": "junction",
+      "x": 50.0,
+      "y": 35.0,
+      "z": 8.0,
+      "elevation_m": 8.0,
+      "demand_m3h": 3.0,
+      "source_head_m": 0.0,
+      "tank_level_m": 5.0,
+      "tank_min_m": 0.0,
+      "tank_max_m": 10.0,
+      "tank_diameter_m": 3.0,
+      "note": ""
+    }
+  ],
+  "links": [
+    {
+      "id": "L1",
+      "kind": "pipe",
+      "start": "R1",
+      "end": "J1",
+      "length_m": 10.0,
+      "diameter_m": 0.065,
+      "roughness_m": 0.0001,
+      "minor_loss": 2.0,
+      "enabled": true,
+      "check_valve": false,
+      "opening": 1.0,
+      "speed_ratio": 1.0,
+      "nominal_rpm": 2900.0,
+      "motor_efficiency": 0.87,
+      "drive_efficiency": 0.96,
+      "motor_rated_kw": 2.2,
+      "curve": [
+        {
+          "flow_m3h": 0.0,
+          "head_m": 32.0,
+          "shaft_kw": 0.95,
+          "npsh3_m": 1.4
+        },
+        {
+          "flow_m3h": 5.0,
+          "head_m": 30.0,
+          "shaft_kw": 0.84972,
+          "npsh3_m": 1.5
+        },
+        {
+          "flow_m3h": 10.0,
+          "head_m": 26.0,
+          "shaft_kw": 1.07118,
+          "npsh3_m": 1.8
+        },
+        {
+          "flow_m3h": 15.0,
+          "head_m": 19.0,
+          "shaft_kw": 1.10708,
+          "npsh3_m": 2.4
+        },
+        {
+          "flow_m3h": 20.0,
+          "head_m": 9.0,
+          "shaft_kw": 0.87404,
+          "npsh3_m": 3.3
+        }
+      ],
+      "geometry": [],
+      "source": "hypothetical",
+      "note": ""
+    },
+    {
+      "id": "P1",
+      "kind": "pump",
+      "start": "J1",
+      "end": "J2",
+      "length_m": 50.0,
+      "diameter_m": 0.05,
+      "roughness_m": 0.0001,
+      "minor_loss": 0.0,
+      "enabled": true,
+      "check_valve": false,
+      "opening": 1.0,
+      "speed_ratio": 1.0,
+      "nominal_rpm": 2900.0,
+      "motor_efficiency": 0.87,
+      "drive_efficiency": 0.96,
+      "motor_rated_kw": 2.2,
+      "curve": [
+        {
+          "flow_m3h": 0.0,
+          "head_m": 32.0,
+          "shaft_kw": 0.95,
+          "npsh3_m": 1.4
+        },
+        {
+          "flow_m3h": 5.0,
+          "head_m": 30.0,
+          "shaft_kw": 0.84972,
+          "npsh3_m": 1.5
+        },
+        {
+          "flow_m3h": 10.0,
+          "head_m": 26.0,
+          "shaft_kw": 1.07118,
+          "npsh3_m": 1.8
+        },
+        {
+          "flow_m3h": 15.0,
+          "head_m": 19.0,
+          "shaft_kw": 1.10708,
+          "npsh3_m": 2.4
+        },
+        {
+          "flow_m3h": 20.0,
+          "head_m": 9.0,
+          "shaft_kw": 0.87404,
+          "npsh3_m": 3.3
+        }
+      ],
+      "geometry": [],
+      "source": "hypothetical",
+      "note": ""
+    },
+    {
+      "id": "P2",
+      "kind": "pump",
+      "start": "J1",
+      "end": "J2",
+      "length_m": 50.0,
+      "diameter_m": 0.05,
+      "roughness_m": 0.0001,
+      "minor_loss": 0.0,
+      "enabled": false,
+      "check_valve": false,
+      "opening": 1.0,
+      "speed_ratio": 1.0,
+      "nominal_rpm": 2900.0,
+      "motor_efficiency": 0.87,
+      "drive_efficiency": 0.96,
+      "motor_rated_kw": 2.2,
+      "curve": [
+        {
+          "flow_m3h": 0.0,
+          "head_m": 32.0,
+          "shaft_kw": 0.95,
+          "npsh3_m": 1.4
+        },
+        {
+          "flow_m3h": 5.0,
+          "head_m": 30.0,
+          "shaft_kw": 0.84972,
+          "npsh3_m": 1.5
+        },
+        {
+          "flow_m3h": 10.0,
+          "head_m": 26.0,
+          "shaft_kw": 1.07118,
+          "npsh3_m": 1.8
+        },
+        {
+          "flow_m3h": 15.0,
+          "head_m": 19.0,
+          "shaft_kw": 1.10708,
+          "npsh3_m": 2.4
+        },
+        {
+          "flow_m3h": 20.0,
+          "head_m": 9.0,
+          "shaft_kw": 0.87404,
+          "npsh3_m": 3.3
+        }
+      ],
+      "geometry": [],
+      "source": "hypothetical",
+      "note": ""
+    },
+    {
+      "id": "L2",
+      "kind": "pipe",
+      "start": "J2",
+      "end": "J3",
+      "length_m": 60.0,
+      "diameter_m": 0.04,
+      "roughness_m": 0.0001,
+      "minor_loss": 0.0,
+      "enabled": true,
+      "check_valve": false,
+      "opening": 1.0,
+      "speed_ratio": 1.0,
+      "nominal_rpm": 2900.0,
+      "motor_efficiency": 0.87,
+      "drive_efficiency": 0.96,
+      "motor_rated_kw": 2.2,
+      "curve": [
+        {
+          "flow_m3h": 0.0,
+          "head_m": 32.0,
+          "shaft_kw": 0.95,
+          "npsh3_m": 1.4
+        },
+        {
+          "flow_m3h": 5.0,
+          "head_m": 30.0,
+          "shaft_kw": 0.84972,
+          "npsh3_m": 1.5
+        },
+        {
+          "flow_m3h": 10.0,
+          "head_m": 26.0,
+          "shaft_kw": 1.07118,
+          "npsh3_m": 1.8
+        },
+        {
+          "flow_m3h": 15.0,
+          "head_m": 19.0,
+          "shaft_kw": 1.10708,
+          "npsh3_m": 2.4
+        },
+        {
+          "flow_m3h": 20.0,
+          "head_m": 9.0,
+          "shaft_kw": 0.87404,
+          "npsh3_m": 3.3
+        }
+      ],
+      "geometry": [],
+      "source": "hypothetical",
+      "note": ""
+    },
+    {
+      "id": "L3",
+      "kind": "pipe",
+      "start": "J2",
+      "end": "J4",
+      "length_m": 85.0,
+      "diameter_m": 0.04,
+      "roughness_m": 0.0001,
+      "minor_loss": 0.0,
+      "enabled": true,
+      "check_valve": false,
+      "opening": 1.0,
+      "speed_ratio": 1.0,
+      "nominal_rpm": 2900.0,
+      "motor_efficiency": 0.87,
+      "drive_efficiency": 0.96,
+      "motor_rated_kw": 2.2,
+      "curve": [
+        {
+          "flow_m3h": 0.0,
+          "head_m": 32.0,
+          "shaft_kw": 0.95,
+          "npsh3_m": 1.4
+        },
+        {
+          "flow_m3h": 5.0,
+          "head_m": 30.0,
+          "shaft_kw": 0.84972,
+          "npsh3_m": 1.5
+        },
+        {
+          "flow_m3h": 10.0,
+          "head_m": 26.0,
+          "shaft_kw": 1.07118,
+          "npsh3_m": 1.8
+        },
+        {
+          "flow_m3h": 15.0,
+          "head_m": 19.0,
+          "shaft_kw": 1.10708,
+          "npsh3_m": 2.4
+        },
+        {
+          "flow_m3h": 20.0,
+          "head_m": 9.0,
+          "shaft_kw": 0.87404,
+          "npsh3_m": 3.3
+        }
+      ],
+      "geometry": [],
+      "source": "hypothetical",
+      "note": ""
+    },
+    {
+      "id": "L4",
+      "kind": "pipe",
+      "start": "J2",
+      "end": "J5",
+      "length_m": 110.0,
+      "diameter_m": 0.04,
+      "roughness_m": 0.0001,
+      "minor_loss": 0.0,
+      "enabled": true,
+      "check_valve": false,
+      "opening": 1.0,
+      "speed_ratio": 1.0,
+      "nominal_rpm": 2900.0,
+      "motor_efficiency": 0.87,
+      "drive_efficiency": 0.96,
+      "motor_rated_kw": 2.2,
+      "curve": [
+        {
+          "flow_m3h": 0.0,
+          "head_m": 32.0,
+          "shaft_kw": 0.95,
+          "npsh3_m": 1.4
+        },
+        {
+          "flow_m3h": 5.0,
+          "head_m": 30.0,
+          "shaft_kw": 0.84972,
+          "npsh3_m": 1.5
+        },
+        {
+          "flow_m3h": 10.0,
+          "head_m": 26.0,
+          "shaft_kw": 1.07118,
+          "npsh3_m": 1.8
+        },
+        {
+          "flow_m3h": 15.0,
+          "head_m": 19.0,
+          "shaft_kw": 1.10708,
+          "npsh3_m": 2.4
+        },
+        {
+          "flow_m3h": 20.0,
+          "head_m": 9.0,
+          "shaft_kw": 0.87404,
+          "npsh3_m": 3.3
+        }
+      ],
+      "geometry": [],
+      "source": "hypothetical",
+      "note": ""
+    }
+  ],
+  "settings": {
+    "duration_hours": 1.0,
+    "step_seconds": 300,
+    "demand_multiplier": 1.0,
+    "required_pressure_m": 15.0,
+    "temperature_c": 20.0,
+    "atmospheric_kpa": 101.325,
+    "electricity_price": 0.8,
+    "events": []
+  },
+  "cad_metadata": {},
+  "note": "未完成实机验证。坐标与水力参数需分别核对。"
+}
