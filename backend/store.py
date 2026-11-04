@@ -1,6 +1,7 @@
 import json
 import sqlite3
 import uuid
+from contextlib import contextmanager
 from contextvars import ContextVar
 from datetime import datetime, timezone
 from pathlib import Path
@@ -8,14 +9,19 @@ from pathlib import Path
 DATABASE_OVERRIDE = ContextVar("pump_twin_database", default=None)
 
 
+@contextmanager
 def db():
     path = Path(DATABASE_OVERRIDE.get() or Path.home() / ".flowstate" / "results.sqlite3")
     path.parent.mkdir(parents=True, exist_ok=True)
     con = sqlite3.connect(path, timeout=30)
-    con.execute(
-        "CREATE TABLE IF NOT EXISTS records (id TEXT PRIMARY KEY, kind TEXT NOT NULL, name TEXT NOT NULL, created_at TEXT NOT NULL, payload TEXT NOT NULL)"
-    )
-    return con
+    try:
+        with con:
+            con.execute(
+                "CREATE TABLE IF NOT EXISTS records (id TEXT PRIMARY KEY, kind TEXT NOT NULL, name TEXT NOT NULL, created_at TEXT NOT NULL, payload TEXT NOT NULL)"
+            )
+            yield con
+    finally:
+        con.close()
 
 
 def save(kind, name, payload):

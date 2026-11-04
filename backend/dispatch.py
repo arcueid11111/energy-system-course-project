@@ -4,6 +4,7 @@ import json
 import sqlite3
 import threading
 import uuid
+from contextlib import contextmanager
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -37,11 +38,16 @@ class Dispatcher:
                 (now(),),
             )
 
+    @contextmanager
     def db(self):
         self.path.parent.mkdir(parents=True, exist_ok=True)
         con = sqlite3.connect(self.path, timeout=30)
-        con.row_factory = sqlite3.Row
-        return con
+        try:
+            con.row_factory = sqlite3.Row
+            with con:
+                yield con
+        finally:
+            con.close()
 
     def start(self):
         with self.lock:
