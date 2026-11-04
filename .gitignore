@@ -1,0 +1,16 @@
+.venv*/
+build/
+dist/
+release/
+runtime/
+.idea/
+__pycache__/
+.pytest_cache/
+.ruff_cache/
+*.pyc
+*.sqlite*
+*.lock
+.env*
+.DS_Store
+*.zip
+*.tar.gz

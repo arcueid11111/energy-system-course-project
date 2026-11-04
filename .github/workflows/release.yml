@@ -1,0 +1,79 @@
+name: Build standalone offline apps
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/release.yml']
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Release tag
+        required: true
+        default: v1.0.0
+permissions:
+  contents: read
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: windows-2022
+            artifact: windows-x64
+          - os: macos-14
+            artifact: macos-arm64
+          - os: macos-15-intel
+            artifact: macos-x64
+          - os: ubuntu-22.04
+            artifact: linux-x64
+    runs-on: ${{ matrix.os }}
+    env:
+      QT_QPA_PLATFORM: offscreen
+      MPLBACKEND: Agg
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+          cache: pip
+      - if: runner.os == 'Linux'
+        run: sudo apt-get update && sudo apt-get install -y libegl1 libgl1 libxkbcommon0
+      - run: python -m pip install -r requirements-dev.txt
+      - run: python -m pytest -q
+      - run: python scripts/build_app.py
+      - uses: actions/upload-artifact@v7
+        with:
+          name: app-${{ matrix.artifact }}
+          path: release/*
+      - uses: actions/upload-artifact@v7
+        with:
+          name: check-${{ matrix.artifact }}
+          path: build/self-check-*.json
+  publish:
+    needs: build
+    runs-on: ubuntu-22.04
+    permissions:
+      contents: write
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
+      RELEASE_TAG: ${{ inputs.tag || 'v1.0.0' }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/download-artifact@v8
+        with:
+          pattern: app-*
+          path: release
+          merge-multiple: true
+      - run: python scripts/package_source.py
+      - name: Record download checksums
+        run: cd release && sha256sum Flowstate-* > SHA256SUMS.txt
+      - name: Create or update the release for this exact commit
+        shell: bash
+        run: |
+          if gh release view "$RELEASE_TAG" >/dev/null 2>&1; then
+            tag_sha=$(gh api "repos/$GH_REPO/git/ref/tags/$RELEASE_TAG" --jq '.object.sha')
+            test "$tag_sha" = "$GITHUB_SHA"
+            gh release upload "$RELEASE_TAG" release/* --clobber
+          else
+            gh release create "$RELEASE_TAG" release/* --target "$GITHUB_SHA" --title "FLOWSTATE $RELEASE_TAG — 单机离线版" --notes-file docs/RELEASE.md
+          fi
