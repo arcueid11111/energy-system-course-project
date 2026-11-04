@@ -6,7 +6,6 @@
 
 - Windows x64：解压 `Flowstate-windows-x64.zip`，运行文件夹中的 `Flowstate.exe`，请勿只单独拷走 exe。
 - Apple Silicon Mac：解压 `Flowstate-macos-arm64.zip`，将 `Flowstate.app` 拷到“应用程序”后打开。
-- Intel Mac：使用 `Flowstate-macos-x64.zip`。
 - Linux x64：解压 `Flowstate-linux-x64.tar.gz`，运行 `./Flowstate/Flowstate`。
 
 应用已包含 Python、Qt 和 EPANET 运行组件，无需另外安装 Python。应用未购买商业代码签名证书，系统可能显示首次来源确认。

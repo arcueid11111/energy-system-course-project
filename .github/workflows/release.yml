@@ -21,8 +21,6 @@ jobs:
             artifact: windows-x64
           - os: macos-14
             artifact: macos-arm64
-          - os: macos-15-intel
-            artifact: macos-x64
           - os: ubuntu-22.04
             artifact: linux-x64
     runs-on: ${{ matrix.os }}
@@ -45,9 +43,10 @@ jobs:
           name: app-${{ matrix.artifact }}
           path: release/*
       - uses: actions/upload-artifact@v7
+        if: always()
         with:
           name: check-${{ matrix.artifact }}
-          path: build/self-check-*.json
+          path: build/self-check-*
   publish:
     needs: build
     runs-on: ubuntu-22.04

@@ -91,18 +91,22 @@ def main():
         executable = ROOT / "dist" / "Flowstate" / "Flowstate"
     if not args.no_check:
         report = ROOT / "build" / f"self-check-{name}.json"
+        report.unlink(missing_ok=True)
         result = subprocess.run(
             [str(executable), "--self-check", str(report)],
             cwd=ROOT,
             env={**os.environ, "QT_QPA_PLATFORM": "offscreen", "MPLBACKEND": "Agg"},
             timeout=120,
         )
-        if (
-            result.returncode
-            or not report.exists()
-            or json.loads(report.read_text())["status"] != "passed"
-        ):
-            raise SystemExit(f"Frozen application self-check failed: {report}")
+        details = (
+            report.read_text(encoding="utf-8")
+            if report.exists()
+            else "No self-check report was written."
+        )
+        if result.returncode or not report.exists() or json.loads(details)["status"] != "passed":
+            raise SystemExit(
+                f"Frozen application self-check failed (exit {result.returncode}): {report}\n{details}"
+            )
     release = ROOT / "release"
     release.mkdir(exist_ok=True)
     if sys.platform == "darwin":

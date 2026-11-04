@@ -4,6 +4,7 @@ import json
 import platform
 import sys
 import tempfile
+import traceback
 from pathlib import Path
 
 from PySide6.QtCore import QCoreApplication, QEvent
@@ -61,5 +62,6 @@ def self_check(app, output):
         )
     except Exception as exc:
         report["error"] = str(exc)
+        report["traceback"] = traceback.format_exc()
     output.write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8")
     return 0 if report["status"] == "passed" else 1

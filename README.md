@@ -14,7 +14,6 @@
 |---|---|---|
 | Windows x64 | `Flowstate-windows-x64.zip` | 解压后运行 `Flowstate/Flowstate.exe`，保留整个文件夹 |
 | Apple Silicon Mac | `Flowstate-macos-arm64.zip` | 解压后打开 `Flowstate.app` |
-| Intel Mac | `Flowstate-macos-x64.zip` | 解压后打开 `Flowstate.app` |
 | Linux x64 | `Flowstate-linux-x64.tar.gz` | 解压后运行 `./Flowstate/Flowstate` |
 
 应用未购买商业代码签名证书，首次打开可能需要操作系统的来源确认。发布包按平台分别构建，不跨架构混用。发行版中包含第三方组件的许可说明。
