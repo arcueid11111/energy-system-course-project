@@ -42,6 +42,7 @@ if __name__ == "__main__":
                 "notice": "Short startup solver checks, not mesh convergence or asset validation.",
             },
             indent=2,
-        )
+        ),
+        encoding="utf-8",
     )
     print("Real CFD solver smoke checks passed")

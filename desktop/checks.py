@@ -52,7 +52,7 @@ def self_check(app, output):
             fixture = resource_root() / "examples/cfd/rotor-startup"
             from backend.cfd.fields import display_frame
 
-            physics = json.loads((fixture / "result.json").read_text())
+            physics = json.loads((fixture / "result.json").read_text(encoding="utf-8"))
             physics["case_directory"] = str(fixture)
             field = display_frame(fixture, physics["frames"][-1], plane_axis=0)
             assert field["cell_count"] == 480 and field["maximum"] > 0

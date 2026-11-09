@@ -167,8 +167,12 @@ def execute_acoustics(project, root, progress=None):
     }
     project_text = p.model_dump_json(indent=2)
     (case / "project.json").write_text(project_text, encoding="utf-8")
-    manifest["input_hashes"] = {"project.json": hashlib.sha256(project_text.encode()).hexdigest()}
-    (case / "manifest.json").write_text(json.dumps(manifest, ensure_ascii=False, indent=2))
+    manifest["input_hashes"] = {
+        "project.json": hashlib.sha256((case / "project.json").read_bytes()).hexdigest()
+    }
+    (case / "manifest.json").write_text(
+        json.dumps(manifest, ensure_ascii=False, indent=2), encoding="utf-8"
+    )
     for step in range(count + 1):
         t = step * dt
         rows.append({"seconds": t, "pressure_pa": (reference + pressure[probes]).tolist()})
@@ -285,6 +289,6 @@ def execute_acoustics(project, root, progress=None):
         "computation": "offline-local",
     }
     (case / "result.json").write_text(
-        json.dumps(result, ensure_ascii=False, indent=2, allow_nan=False)
+        json.dumps(result, ensure_ascii=False, indent=2, allow_nan=False), encoding="utf-8"
     )
     return result

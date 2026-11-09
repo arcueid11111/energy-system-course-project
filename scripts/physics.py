@@ -23,20 +23,22 @@ if __name__ == "__main__":
     args = parser.parse_args()
     payload = {
         "workspace": str(args.workspace),
-        "options": json.loads(args.options.read_text()) if args.options else {},
+        "options": json.loads(args.options.read_text(encoding="utf-8")) if args.options else {},
     }
     if args.measurements:
         payload["csv_text"] = args.measurements.read_text(encoding="utf-8-sig")
     if args.result:
-        payload["result"] = json.loads(args.result.read_text())
+        payload["result"] = json.loads(args.result.read_text(encoding="utf-8"))
     if args.project:
-        payload["project"] = json.loads(args.project.read_text())
+        payload["project"] = json.loads(args.project.read_text(encoding="utf-8"))
     if args.network:
-        payload["document"] = json.loads(args.network.read_text())
+        payload["document"] = json.loads(args.network.read_text(encoding="utf-8"))
 
     def save(kind, name, result):
         args.output.parent.mkdir(parents=True, exist_ok=True)
-        args.output.write_text(json.dumps(result, ensure_ascii=False, indent=2, allow_nan=False))
+        args.output.write_text(
+            json.dumps(result, ensure_ascii=False, indent=2, allow_nan=False), encoding="utf-8"
+        )
         return {**result, "id": str(args.output)}
 
     result = execute_physics_task(

@@ -476,7 +476,9 @@ class PhysicsPanel(QWidget):
         path, _ = QFileDialog.getOpenFileName(self, "读取CFD参数", "", "JSON (*.json)")
         if path:
             self.guard(
-                lambda: self.set_project(CFDProject.model_validate_json(Path(path).read_text()))
+                lambda: self.set_project(
+                    CFDProject.model_validate_json(Path(path).read_text(encoding="utf-8"))
+                )
             )
 
     def save_project(self):
@@ -512,7 +514,7 @@ class PhysicsPanel(QWidget):
         if path:
 
             def load():
-                value = json.loads(Path(path).read_text())
+                value = json.loads(Path(path).read_text(encoding="utf-8"))
                 if "frames" in value and not Path(value.get("case_directory", "")).is_dir():
                     value["case_directory"] = str(Path(path).parent)
                 self.display_result(value)
@@ -525,7 +527,7 @@ class PhysicsPanel(QWidget):
         path = resource_root() / "examples/cfd/rotor-startup/result.json"
 
         def read():
-            result = json.loads(path.read_text())
+            result = json.loads(path.read_text(encoding="utf-8"))
             result["case_directory"] = str(path.parent)
             return result
 

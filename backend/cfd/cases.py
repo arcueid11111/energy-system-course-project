@@ -55,7 +55,7 @@ def field(case, name, dimension, value, boundaries, vector_field=False):
 
 
 def scale_mesh(path, factor, three_dimensional=False):
-    text = path.read_text()
+    text = path.read_text(encoding="utf-8")
 
     def replace(match):
         vals = [max(2, round(int(n) * factor)) for n in match.groups()]
@@ -66,7 +66,7 @@ def scale_mesh(path, factor, three_dimensional=False):
     text = re.sub(r"\(\s*(\d+)\s+(\d+)\s+(\d+)\s*\)\s*simpleGrading", replace, text)
     if three_dimensional:
         text = text.replace("type empty;", "type wall;")
-    path.write_text(text)
+    path.write_text(text, encoding="utf-8")
 
 
 def liquid_properties(case, p, bulk):
@@ -355,9 +355,9 @@ def prepare_case(project: CFDProject, directory):
     notes = []
     if rotor:
         scale_mesh(case / "system/blockMeshDict", p.mesh_scale)
-        text = (case / "constant/dynamicMeshDict").read_text()
+        text = (case / "constant/dynamicMeshDict").read_text(encoding="utf-8")
         text = text.replace("omega         60 [rpm];", f"omega         {p.rpm:.12g} [rpm];")
-        (case / "constant/dynamicMeshDict").write_text(text)
+        (case / "constant/dynamicMeshDict").write_text(text, encoding="utf-8")
         steps.append(("createNonConformalCouples", []))
         notes.append(
             "30°周期叶轮扇区，流量为整周等效流量的1/12；载荷是扇区载荷，不能直接充当完整蜗壳径向力。"
@@ -384,14 +384,14 @@ def prepare_case(project: CFDProject, directory):
         for name in ("fvSchemes", "fvSolution"):
             shutil.copy2(root / "throttle/system" / name, case / "system" / name)
         solution = case / "system/fvSolution"
-        text = solution.read_text().replace(
+        text = solution.read_text(encoding="utf-8").replace(
             "PIMPLE\n{", "PIMPLE\n{\n    correctPhi yes;\n    correctMeshPhi yes;"
         )
         text = text.replace(
             "solvers\n{",
             'solvers\n{\n    "pcorr.*" { solver GAMG; smoother DIC; tolerance 1e-9; relTol 0; }\n    "MeshPhi.*" { solver GAMG; smoother symGaussSeidel; tolerance 1e-9; relTol 0; }',
         )
-        solution.write_text(text)
+        solution.write_text(text, encoding="utf-8")
         write_foam(
             case / "constant/g",
             f"dimensions [0 1 -2 0 0 0 0]; value {vector(p.gravity_ms2)};",
@@ -422,7 +422,9 @@ VoFCavitation
         )
         for name in ("fvSchemes", "fvSolution"):
             file = case / "system" / name
-            file.write_text(file.read_text().replace("epsilon", "omega"))
+            file.write_text(
+                file.read_text(encoding="utf-8").replace("epsilon", "omega"), encoding="utf-8"
+            )
         with (case / "system/fvSchemes").open("a") as out:
             out.write("\nwallDist { method meshWave; }\n")
     pressure_velocity_fields(
@@ -435,18 +437,18 @@ VoFCavitation
         # changes the generic rotor wall to the moving-wall condition.
         u = (
             (case / "0/U")
-            .read_text()
+            .read_text(encoding="utf-8")
             .replace(
                 "wall { type noSlip; }",
                 "wall { type noSlip; }\nrotor { type movingWallVelocity; value $internalField; }",
             )
         )
-        (case / "0/U").write_text(u)
+        (case / "0/U").write_text(u, encoding="utf-8")
     if p.kind == "throttle":
         for file in (case / "0").iterdir():
-            text = file.read_text()
+            text = file.read_text(encoding="utf-8")
             text = text.replace("type            empty;", "type            zeroGradient;")
-            file.write_text(text)
+            file.write_text(text, encoding="utf-8")
         # Pressure-controlled throttle benchmark, not the fixed-flow pump test.
         field(
             case,

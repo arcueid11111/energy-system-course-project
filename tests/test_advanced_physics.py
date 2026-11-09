@@ -102,10 +102,15 @@ def test_boundary_pressure_waveforms_do_not_prescribe_flow(tmp_path):
         "rpm": [[0, 0], [p.end_time_s, 600]],
     }
     apply_waveforms(tmp_path, m, waves)
-    assert "flowRateOutletVelocity" not in (tmp_path / "0/U").read_text()
-    assert "uniformFixedValue" in (tmp_path / "0/p_rgh").read_text()
-    assert "omega {type table" in (tmp_path / "constant/dynamicMeshDict").read_text()
-    assert json.loads((tmp_path / "manifest.json").read_text())["coupling_boundary"] == waves
+    assert "flowRateOutletVelocity" not in (tmp_path / "0/U").read_text(encoding="utf-8")
+    assert "uniformFixedValue" in (tmp_path / "0/p_rgh").read_text(encoding="utf-8")
+    assert "omega {type table" in (tmp_path / "constant/dynamicMeshDict").read_text(
+        encoding="utf-8"
+    )
+    assert (
+        json.loads((tmp_path / "manifest.json").read_text(encoding="utf-8"))["coupling_boundary"]
+        == waves
+    )
 
 
 def test_transient_network_trip_and_two_port_feedback():
@@ -129,7 +134,7 @@ def test_actual_solver_fixture_fields_and_streamlines():
     from backend.cfd.fields import display_frame
 
     root = Path(__file__).resolve().parents[1] / "examples/cfd/rotor-startup"
-    r = json.loads((root / "result.json").read_text())
+    r = json.loads((root / "result.json").read_text(encoding="utf-8"))
     display = display_frame(
         root, r["frames"][-1], plane_axis=0, seeds=[(-0.02, 0.005, 0.001)], streamlines=True
     )

@@ -72,13 +72,13 @@ wall {type noSlip;} nonCouple {type movingWallSlipVelocity;value $internalField;
         raise ValueError("当前耦合不支持反转；需要完整四象限验证")
     speed[:, 1] *= 2 * math.pi / 60
     dynamic = case / "constant/dynamicMeshDict"
-    text = dynamic.read_text()
+    text = dynamic.read_text(encoding="utf-8")
     text, n = re.subn(
         r"omega\s+[-+\d.eE]+\s*\[rpm\]\s*;", f"omega {{type table; values {table(speed)};}}", text
     )
     if n != 1:
         raise ValueError("无法唯一设置旋转网格转速时序")
-    dynamic.write_text(text)
+    dynamic.write_text(text, encoding="utf-8")
     if overrides.get("checkpoint"):
         restore_checkpoint(case, manifest, overrides["checkpoint"])
     manifest["coupling_boundary"] = overrides
@@ -90,13 +90,15 @@ wall {type noSlip;} nonCouple {type movingWallSlipVelocity;value $internalField;
         for f in (case / d).rglob("*")
         if f.is_file()
     }
-    (case / "manifest.json").write_text(json.dumps(manifest, ensure_ascii=False, indent=2))
+    (case / "manifest.json").write_text(
+        json.dumps(manifest, ensure_ascii=False, indent=2), encoding="utf-8"
+    )
 
 
 def restore_checkpoint(case, manifest, source):
     """Transfer a matching mesh's actual internal fields, preserving NEW port BCs."""
     source = Path(source).resolve()
-    old = json.loads((source / "result.json").read_text())
+    old = json.loads((source / "result.json").read_text(encoding="utf-8"))
     a = old["manifest"]["project"]
     b = manifest["project"]
     for key in (
@@ -123,17 +125,17 @@ def restore_checkpoint(case, manifest, source):
         src = latest / target.name
         if not target.is_file() or not src.is_file():
             continue
-        text = src.read_text()
+        text = src.read_text(encoding="utf-8")
         match = re.search(r"internalField\s+(.*?)(?=\s*boundaryField\s*\{)", text, re.S)
         if not match:
             raise ValueError("检查点字段缺少internalField：" + target.name)
         new = re.sub(
             r"internalField\s+.*?(?=\s*boundaryField\s*\{)",
             "internalField " + match[1] + "\n",
-            target.read_text(),
+            target.read_text(encoding="utf-8"),
             flags=re.S,
         )
-        target.write_text(new)
+        target.write_text(new, encoding="utf-8")
     # A checkpoint must be an integer revolution from its original geometry.
     rotations = a["rpm"] * old["frames"][-1]["seconds"] / 60
     if abs(rotations - round(rotations)) > 1e-5:
@@ -203,7 +205,7 @@ def coupled_simulation(project, document, options, root, progress=None):
     else:
         if not checkpoint:
             raise ValueError("运行态耦合需提供已稳定的整数转数CFD检查点，或显式选择start_from_rest")
-        old = json.loads((Path(checkpoint) / "result.json").read_text())
+        old = json.loads((Path(checkpoint) / "result.json").read_text(encoding="utf-8"))
         last = old["performance"][-1]
         if abs(last["flow_m3h"] / 3600 - q0) > max(abs(q0) * 0.05, 1e-8):
             raise ValueError("检查点初始流量与管网运行态不匹配（>5%）")

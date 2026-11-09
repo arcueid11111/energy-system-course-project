@@ -338,4 +338,4 @@ def export_design_inp(doc):
     with tempfile.TemporaryDirectory() as temp:
         path = Path(temp) / "design.inp"
         wntr.network.write_inpfile(build_design(doc), str(path), units="LPS", version=2.2)
-        return path.read_text()
+        return path.read_text(encoding="utf-8")

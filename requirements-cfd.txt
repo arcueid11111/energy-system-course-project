@@ -1,0 +1,6 @@
+# Minimal local CFD smoke/field-processing dependencies (no desktop/CAD/EPANET).
+# In particular, Linux ARM runners do not need the unavailable Gmsh wheel.
+numpy>=2.2,<3
+scipy>=1.13,<2
+pydantic>=2.9,<3
+vtk>=9.4,<10

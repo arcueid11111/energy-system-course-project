@@ -11,14 +11,27 @@ FILES = [
     "LICENSE",
     "THIRD_PARTY_NOTICES.md",
     "requirements.txt",
+    "requirements-cfd.txt",
     "requirements-dev.txt",
     "pyproject.toml",
     "start.sh",
     "start.bat",
     "启动图形界面.command",
     ".gitignore",
+    ".gitattributes",
 ]
-FOLDERS = ["backend", "desktop", "scripts", "packaging", "examples", "tests", "docs", ".github", "resources", "cfd_runtime"]
+FOLDERS = [
+    "backend",
+    "desktop",
+    "scripts",
+    "packaging",
+    "examples",
+    "tests",
+    "docs",
+    ".github",
+    "resources",
+    "cfd_runtime",
+]
 
 
 def source_files():

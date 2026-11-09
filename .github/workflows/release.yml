@@ -66,7 +66,7 @@ jobs:
         with:
           python-version: '3.12'
       - run: docker build -t flowstate-openfoam:14 cfd_runtime
-      - run: python -m pip install -r requirements.txt
+      - run: python -m pip install -r requirements-cfd.txt
       - run: python scripts/cfd_smoke.py
       - name: Export local offline solver image
         run: |
