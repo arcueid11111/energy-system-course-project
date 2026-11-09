@@ -18,7 +18,7 @@ FILES = [
     "启动图形界面.command",
     ".gitignore",
 ]
-FOLDERS = ["backend", "desktop", "scripts", "packaging", "examples", "tests", "docs", ".github"]
+FOLDERS = ["backend", "desktop", "scripts", "packaging", "examples", "tests", "docs", ".github", "resources", "cfd_runtime"]
 
 
 def source_files():

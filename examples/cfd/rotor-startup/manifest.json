@@ -1,0 +1,115 @@
+{
+  "schema_version": "flowstate-cfd-case-1",
+  "solver": "OpenFOAM Foundation 14",
+  "project": {
+    "schema_version": "flowstate-cfd-1",
+    "name": "径向叶轮周期扇区 · 单相脉动",
+    "kind": "impeller",
+    "runtime": {
+      "mode": "docker",
+      "docker_command": "docker",
+      "docker_context": "",
+      "image": "flowstate-openfoam:14",
+      "bashrc": "/opt/openfoam14/etc/bashrc",
+      "wsl_distribution": "Ubuntu",
+      "cpus": 2,
+      "memory_gb": 3,
+      "timeout_seconds": 3600
+    },
+    "provenance": "parameterized_benchmark",
+    "source_note": "参数化数值基准，未做实机验证",
+    "mesh_scale": 0.35,
+    "end_time_s": 0.002,
+    "delta_t_s": 0.0001,
+    "write_interval_s": 0.001,
+    "max_courant": 0.3,
+    "temperature_k": 293.15,
+    "rho_kgm3": 998.2,
+    "viscosity_pas": 0.001002,
+    "bulk_modulus_pa": 2200000000.0,
+    "vapour_pressure_pa": 2339.0,
+    "inlet_absolute_pa": 101325.0,
+    "outlet_absolute_pa": 101325.0,
+    "inlet_velocity_ms": 1.0,
+    "flow_m3h": 5.0,
+    "rpm": 600.0,
+    "rotor_angle_per_step_deg": 1.0,
+    "turbulence": "kOmegaSST",
+    "cavitation": {
+      "nuclei_per_m3": 16000000000000.0,
+      "nucleus_diameter_m": 2e-06,
+      "evaporation": 1.0,
+      "condensation": 1.0
+    },
+    "pipe_length_m": 20.0,
+    "pipe_diameter_m": 0.1,
+    "pipe_cells": 80,
+    "radial_cells": 4,
+    "wall": {
+      "thickness_m": 0.003,
+      "young_pa": 210000000000.0,
+      "poisson": 0.3,
+      "restraint_factor": 1.0
+    },
+    "close_start_s": 0.002,
+    "close_duration_s": 0.001,
+    "cad_directory": "",
+    "geometry_units": "m",
+    "fluid_seed": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "cad_bounds": null,
+    "rotor_origin": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "rotor_axis": [
+      1.0,
+      0.0,
+      0.0
+    ],
+    "cad_rotating": false,
+    "cad_cavitation": false,
+    "cad_elastic_bulk": false,
+    "probe_points": []
+  },
+  "compressible": false,
+  "pressure_unit": "m2/s2 gauge relative to inlet total pressure",
+  "pressure_reference_pa": 101325,
+  "sector_angle_deg": 30,
+  "steps": [
+    [
+      "blockMesh",
+      []
+    ],
+    [
+      "createNonConformalCouples",
+      []
+    ]
+  ],
+  "wave_reference": null,
+  "assumptions": [
+    "30°周期叶轮扇区，流量为整周等效流量的1/12；载荷是扇区载荷，不能直接充当完整蜗壳径向力。"
+  ],
+  "validated_on_real_asset": false,
+  "input_hashes": {
+    "0/U": "624cbfe3b1b3c42124206727c6fd766a21aef52c265404085e03f9d2efbc9131",
+    "0/omega": "7991751a0809376fdbadafafd96e4a1347b3e1cf88cbff5e34e3d6c87c12435f",
+    "0/k": "74ca03d8e5a4830f0d1a1f0877d5176c9a9383d0922e8e81525bfa19bb14a2f7",
+    "0/nut": "7e8e6b9165148554b4a98f4e801a772a24ef4abe71639d988cd3a219c38ba8d6",
+    "0/p": "91c9a53e6be67d366d2d8f6f55c322703fc7833e89a9c4b82834416121a4177f",
+    "constant/dynamicMeshDict": "d14cbab6ef2abc64a05e898516ff58d98084577a0bd0904bfe88c99ab6c8196d",
+    "constant/momentumTransport": "a9e5cbfde938797a902b967440b3b66a16630a907fee701c70eea6e88abab86b",
+    "constant/physicalProperties": "47dd7c611dfc2324aca57c4d04271a493a68f03e11c2f44ba64c2e13ee76734c",
+    "system/decomposeParDict": "551485b477d706ae64ac0d153693bcce73cfd63c600fddfc6910948745fec637",
+    "system/fvSchemes": "17be64c00f0248a7b6186f4ce4b7962ad15564d4976b24b7ed0fc3ba63b0ea99",
+    "system/fvSolution": "6c299b2978f8e93760a403d9ebf81b1e052cc07198642d9d887e63cfaf856a0a",
+    "system/blockMeshDict": "cceac2bf70fffec95208d0178a7c532b5923bed5edaaabde23f74d61baac02f8",
+    "system/functions": "7d755c085ebc0a86556f99ea67326349669f880237d9f3869458aa9fe9ea670b",
+    "system/createNonConformalCouplesDict": "c247da25112c396f561365441ab2a6fbc2c91c8e75e70361592bcb31bc7165af",
+    "system/controlDict": "4e7931c32abc96eff4df5dcd68dfc4f0671c4353de50255cf26805bc0b472f8b"
+  }
+}

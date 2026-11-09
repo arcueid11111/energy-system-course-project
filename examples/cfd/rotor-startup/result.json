@@ -1,0 +1,1038 @@
+{
+  "case_directory": ".",
+  "manifest": {
+    "schema_version": "flowstate-cfd-case-1",
+    "solver": "OpenFOAM Foundation 14",
+    "project": {
+      "schema_version": "flowstate-cfd-1",
+      "name": "径向叶轮周期扇区 · 单相脉动",
+      "kind": "impeller",
+      "runtime": {
+        "mode": "docker",
+        "docker_command": "docker",
+        "docker_context": "",
+        "image": "flowstate-openfoam:14",
+        "bashrc": "/opt/openfoam14/etc/bashrc",
+        "wsl_distribution": "Ubuntu",
+        "cpus": 2,
+        "memory_gb": 3,
+        "timeout_seconds": 3600
+      },
+      "provenance": "parameterized_benchmark",
+      "source_note": "参数化数值基准，未做实机验证",
+      "mesh_scale": 0.35,
+      "end_time_s": 0.002,
+      "delta_t_s": 0.0001,
+      "write_interval_s": 0.001,
+      "max_courant": 0.3,
+      "temperature_k": 293.15,
+      "rho_kgm3": 998.2,
+      "viscosity_pas": 0.001002,
+      "bulk_modulus_pa": 2200000000.0,
+      "vapour_pressure_pa": 2339.0,
+      "inlet_absolute_pa": 101325.0,
+      "outlet_absolute_pa": 101325.0,
+      "inlet_velocity_ms": 1.0,
+      "flow_m3h": 5.0,
+      "rpm": 600.0,
+      "rotor_angle_per_step_deg": 1.0,
+      "turbulence": "kOmegaSST",
+      "cavitation": {
+        "nuclei_per_m3": 16000000000000.0,
+        "nucleus_diameter_m": 2e-06,
+        "evaporation": 1.0,
+        "condensation": 1.0
+      },
+      "pipe_length_m": 20.0,
+      "pipe_diameter_m": 0.1,
+      "pipe_cells": 80,
+      "radial_cells": 4,
+      "wall": {
+        "thickness_m": 0.003,
+        "young_pa": 210000000000.0,
+        "poisson": 0.3,
+        "restraint_factor": 1.0
+      },
+      "close_start_s": 0.002,
+      "close_duration_s": 0.001,
+      "cad_directory": "",
+      "geometry_units": "m",
+      "fluid_seed": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "cad_bounds": null,
+      "rotor_origin": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rotor_axis": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "cad_rotating": false,
+      "cad_cavitation": false,
+      "cad_elastic_bulk": false,
+      "probe_points": []
+    },
+    "compressible": false,
+    "pressure_unit": "m2/s2 gauge relative to inlet total pressure",
+    "pressure_reference_pa": 101325,
+    "sector_angle_deg": 30,
+    "steps": [
+      [
+        "blockMesh",
+        []
+      ],
+      [
+        "createNonConformalCouples",
+        []
+      ]
+    ],
+    "wave_reference": null,
+    "assumptions": [
+      "30°周期叶轮扇区，流量为整周等效流量的1/12；载荷是扇区载荷，不能直接充当完整蜗壳径向力。"
+    ],
+    "validated_on_real_asset": false,
+    "input_hashes": {
+      "0/U": "624cbfe3b1b3c42124206727c6fd766a21aef52c265404085e03f9d2efbc9131",
+      "0/omega": "7991751a0809376fdbadafafd96e4a1347b3e1cf88cbff5e34e3d6c87c12435f",
+      "0/k": "74ca03d8e5a4830f0d1a1f0877d5176c9a9383d0922e8e81525bfa19bb14a2f7",
+      "0/nut": "7e8e6b9165148554b4a98f4e801a772a24ef4abe71639d988cd3a219c38ba8d6",
+      "0/p": "91c9a53e6be67d366d2d8f6f55c322703fc7833e89a9c4b82834416121a4177f",
+      "constant/dynamicMeshDict": "d14cbab6ef2abc64a05e898516ff58d98084577a0bd0904bfe88c99ab6c8196d",
+      "constant/momentumTransport": "a9e5cbfde938797a902b967440b3b66a16630a907fee701c70eea6e88abab86b",
+      "constant/physicalProperties": "47dd7c611dfc2324aca57c4d04271a493a68f03e11c2f44ba64c2e13ee76734c",
+      "system/decomposeParDict": "551485b477d706ae64ac0d153693bcce73cfd63c600fddfc6910948745fec637",
+      "system/fvSchemes": "17be64c00f0248a7b6186f4ce4b7962ad15564d4976b24b7ed0fc3ba63b0ea99",
+      "system/fvSolution": "6c299b2978f8e93760a403d9ebf81b1e052cc07198642d9d887e63cfaf856a0a",
+      "system/blockMeshDict": "cceac2bf70fffec95208d0178a7c532b5923bed5edaaabde23f74d61baac02f8",
+      "system/functions": "7d755c085ebc0a86556f99ea67326349669f880237d9f3869458aa9fe9ea670b",
+      "system/createNonConformalCouplesDict": "c247da25112c396f561365441ab2a6fbc2c91c8e75e70361592bcb31bc7165af",
+      "system/controlDict": "4e7931c32abc96eff4df5dcd68dfc4f0671c4353de50255cf26805bc0b472f8b"
+    }
+  },
+  "frames": [
+    {
+      "seconds": 0.0,
+      "path": "VTK/case_0.vtk"
+    },
+    {
+      "seconds": 0.001,
+      "path": "VTK/case_10.vtk"
+    },
+    {
+      "seconds": 0.002,
+      "path": "VTK/case_20.vtk"
+    }
+  ],
+  "loads": [
+    {
+      "seconds": 0.0,
+      "force_n": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "moment_nm": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pressure_force_n": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "viscous_force_n": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "seconds": 0.0001,
+      "force_n": [
+        57.66683392555473,
+        91.97782588384554,
+        -773.8954419288062
+      ],
+      "moment_nm": [
+        -46.608747007072715,
+        12.806272420029861,
+        -2.0102959879367237
+      ],
+      "pressure_force_n": [
+        57.66795345366,
+        91.97674100392,
+        -773.8725546719
+      ],
+      "viscous_force_n": [
+        -0.001119528105268,
+        0.001084879925543,
+        -0.02288725690624
+      ]
+    },
+    {
+      "seconds": 0.0002,
+      "force_n": [
+        1.711672435052851,
+        5.688711078938522,
+        -59.79270496160929
+      ],
+      "moment_nm": [
+        -3.842095593907051,
+        1.009814607378851,
+        0.00273532993129263
+      ],
+      "pressure_force_n": [
+        1.712785948113,
+        5.687470637984,
+        -59.77207468959
+      ],
+      "viscous_force_n": [
+        -0.001113513060149,
+        0.001240440954522,
+        -0.02063027201929
+      ]
+    },
+    {
+      "seconds": 0.0003,
+      "force_n": [
+        0.24745165574175898,
+        3.456431548454515,
+        -33.78698607681306
+      ],
+      "moment_nm": [
+        -2.165534405175312,
+        0.5639605326741923,
+        0.05500933129736809
+      ],
+      "pressure_force_n": [
+        0.2485469319315,
+        3.455004858618,
+        -33.76772690564
+      ],
+      "viscous_force_n": [
+        -0.001095276189741,
+        0.001426689836515,
+        -0.01925917117306
+      ]
+    },
+    {
+      "seconds": 0.0004,
+      "force_n": [
+        -0.116596655828685,
+        2.882435549856332,
+        -24.07393083752793
+      ],
+      "moment_nm": [
+        -1.5457666643586312,
+        0.4030774190665285,
+        0.06796965536730376
+      ],
+      "pressure_force_n": [
+        -0.1155287073509,
+        2.880822221452,
+        -24.05573948572
+      ],
+      "viscous_force_n": [
+        -0.001067948477785,
+        0.001613328404332,
+        -0.01819135180793
+      ]
+    },
+    {
+      "seconds": 0.0005,
+      "force_n": [
+        -0.178353236817977,
+        2.761130594357994,
+        -19.95176930573329
+      ],
+      "moment_nm": [
+        -1.2847796513803111,
+        0.3339022720717664,
+        0.07164021203585119
+      ],
+      "pressure_force_n": [
+        -0.1773108352168,
+        2.759370816064,
+        -19.93447749829
+      ],
+      "viscous_force_n": [
+        -0.001042401601177,
+        0.001759778293994,
+        -0.01729180744329
+      ]
+    },
+    {
+      "seconds": 0.0006,
+      "force_n": [
+        -0.225899640207284,
+        2.728104121682917,
+        -17.27826311579573
+      ],
+      "moment_nm": [
+        -1.118221100723427,
+        0.2900858937591959,
+        0.0747547326312062
+      ],
+      "pressure_force_n": [
+        -0.2248886775213,
+        2.72619480619,
+        -17.26176986135
+      ],
+      "viscous_force_n": [
+        -0.001010962685984,
+        0.001909315492917,
+        -0.01649325444573
+      ]
+    },
+    {
+      "seconds": 0.0007,
+      "force_n": [
+        -0.1977822398797973,
+        2.804679843273167,
+        -15.64710680592081
+      ],
+      "moment_nm": [
+        -1.018758360806005,
+        0.26222447740451943,
+        0.0750259243336501
+      ],
+      "pressure_force_n": [
+        -0.1967940395232,
+        2.802636567784,
+        -15.63133586859
+      ],
+      "viscous_force_n": [
+        -0.0009882003565973,
+        0.002043275489167,
+        -0.01577093733081
+      ]
+    },
+    {
+      "seconds": 0.0008,
+      "force_n": [
+        -0.1672494462234093,
+        2.915696298291487,
+        -14.37522219087367
+      ],
+      "moment_nm": [
+        -0.942648077647227,
+        0.2405643920841099,
+        0.07565379977555114
+      ],
+      "pressure_force_n": [
+        -0.1662870385625,
+        2.91351753102,
+        -14.36009994706
+      ],
+      "viscous_force_n": [
+        -0.0009624076609093,
+        0.002178767271487,
+        -0.01512224381367
+      ]
+    },
+    {
+      "seconds": 0.0009,
+      "force_n": [
+        -0.14818147089940262,
+        3.010015549796168,
+        -13.54228267075133
+      ],
+      "moment_nm": [
+        -0.893557657971567,
+        0.22542859130630272,
+        0.07624251424261805
+      ],
+      "pressure_force_n": [
+        -0.1472448177351,
+        3.007710949781,
+        -13.5277734027
+      ],
+      "viscous_force_n": [
+        -0.0009366531643026,
+        0.002304600015168,
+        -0.01450926805133
+      ]
+    },
+    {
+      "seconds": 0.001,
+      "force_n": [
+        -0.1115360981958184,
+        3.069216491622333,
+        -12.83028651822745
+      ],
+      "moment_nm": [
+        -0.8505033109437946,
+        0.2122465426736408,
+        0.07559383813391478
+      ],
+      "pressure_force_n": [
+        -0.1106249101463,
+        3.066800742198,
+        -12.81636398789
+      ],
+      "viscous_force_n": [
+        -0.0009111880495184,
+        0.002415749424333,
+        -0.01392253033745
+      ]
+    },
+    {
+      "seconds": 0.0011,
+      "force_n": [
+        -0.07294475226145469,
+        3.161016867601969,
+        -11.91066840536224
+      ],
+      "moment_nm": [
+        -0.7925831562786114,
+        0.19673965997186052,
+        0.07519400491143158
+      ],
+      "pressure_force_n": [
+        -0.07206028059865,
+        3.158500016926,
+        -11.89730424383
+      ],
+      "viscous_force_n": [
+        -0.0008844716628047,
+        0.002516850675969,
+        -0.01336416153224
+      ]
+    },
+    {
+      "seconds": 0.0012,
+      "force_n": [
+        -0.017189971522402498,
+        3.282041943420445,
+        -11.049277610418079
+      ],
+      "moment_nm": [
+        -0.7381791132820628,
+        0.18244833221226758,
+        0.07408006864423915
+      ],
+      "pressure_force_n": [
+        -0.01633380798896,
+        3.279431645562,
+        -11.0364359284
+      ],
+      "viscous_force_n": [
+        -0.0008561635334425,
+        0.002610297858445,
+        -0.01284168201808
+      ]
+    },
+    {
+      "seconds": 0.0013,
+      "force_n": [
+        0.0291391110528567,
+        3.376800594876964,
+        -10.40706601427556
+      ],
+      "moment_nm": [
+        -0.6981049611644746,
+        0.1714183017854576,
+        0.07323933298771401
+      ],
+      "pressure_force_n": [
+        0.02996765766622,
+        3.374091399554,
+        -10.39473401239
+      ],
+      "viscous_force_n": [
+        -0.0008285466133633,
+        0.002709195322964,
+        -0.01233200188556
+      ]
+    },
+    {
+      "seconds": 0.0014,
+      "force_n": [
+        0.08726241531708749,
+        3.432042340868514,
+        -9.58963096196654
+      ],
+      "moment_nm": [
+        -0.6452993125281499,
+        0.15788855067342208,
+        0.07106885638522349
+      ],
+      "pressure_force_n": [
+        0.08806849246519,
+        3.429263748066,
+        -9.577756294633
+      ],
+      "viscous_force_n": [
+        -0.0008060771481025,
+        0.002778592802514,
+        -0.01187466733354
+      ]
+    },
+    {
+      "seconds": 0.0015,
+      "force_n": [
+        0.13631564605047,
+        3.1918299158445187,
+        -8.61994938986184
+      ],
+      "moment_nm": [
+        -0.579235055604988,
+        0.13938159739403072,
+        0.0642036050437051
+      ],
+      "pressure_force_n": [
+        0.1371037346277,
+        3.188983774153,
+        -8.608451949037
+      ],
+      "viscous_force_n": [
+        -0.00078808857723,
+        0.002846141691519,
+        -0.01149744082484
+      ]
+    },
+    {
+      "seconds": 0.0016,
+      "force_n": [
+        0.012966918428599102,
+        2.9334298416683002,
+        -8.443219026792569
+      ],
+      "moment_nm": [
+        -0.566018983446314,
+        0.1371966477343424,
+        0.06777548176047014
+      ],
+      "pressure_force_n": [
+        0.01373874125179,
+        2.930513097396,
+        -8.432101465244
+      ],
+      "viscous_force_n": [
+        -0.0007718228231909,
+        0.0029167442723,
+        -0.01111756154857
+      ]
+    },
+    {
+      "seconds": 0.0017,
+      "force_n": [
+        -0.0086720355383406,
+        2.991536823997074,
+        -8.49929848683958
+      ],
+      "moment_nm": [
+        -0.5724786554838336,
+        0.137813639433226,
+        0.06992356833423691
+      ],
+      "pressure_force_n": [
+        -0.007916452985659,
+        2.988549164312,
+        -8.488548848863
+      ],
+      "viscous_force_n": [
+        -0.0007555825526816,
+        0.002987659685074,
+        -0.01074963797658
+      ]
+    },
+    {
+      "seconds": 0.0018,
+      "force_n": [
+        -0.0459593876709973,
+        2.9707171911965817,
+        -8.52969441507348
+      ],
+      "moment_nm": [
+        -0.5765491630535082,
+        0.13765714202434,
+        0.07201900309957836
+      ],
+      "pressure_force_n": [
+        -0.0452204545864,
+        2.967656126058,
+        -8.519314320491
+      ],
+      "viscous_force_n": [
+        -0.0007389330845973,
+        0.003061065138582,
+        -0.01038009458248
+      ]
+    },
+    {
+      "seconds": 0.0019,
+      "force_n": [
+        -0.08211189283572799,
+        2.9649347848317733,
+        -8.50892470800739
+      ],
+      "moment_nm": [
+        -0.5762037113158331,
+        0.1375748093253984,
+        0.07444843721588182
+      ],
+      "pressure_force_n": [
+        -0.0813909665217,
+        2.961802864685,
+        -8.498906111541
+      ],
+      "viscous_force_n": [
+        -0.000720926314028,
+        0.003131920146773,
+        -0.01001859646639
+      ]
+    },
+    {
+      "seconds": 0.002,
+      "force_n": [
+        -0.1317373129789438,
+        2.95103257134256,
+        -8.569318591066386
+      ],
+      "moment_nm": [
+        -0.5817313506180768,
+        0.1377335962012437,
+        0.07766308409046734
+      ],
+      "pressure_force_n": [
+        -0.1310344045754,
+        2.94783621046,
+        -8.559660127826
+      ],
+      "viscous_force_n": [
+        -0.0007029084035438,
+        0.00319636088256,
+        -0.009658463240387
+      ]
+    }
+  ],
+  "load_analysis": {
+    "samples": 21,
+    "axes": {
+      "force_x": {
+        "mean": -0.06290534382430439,
+        "rms_fluctuation": 0.10075632379161936,
+        "minimum": -0.225899640207284,
+        "maximum": 0.13631564605047,
+        "peak_to_peak": 0.362215286257754,
+        "impulse_above_initial": 0.005845329662282758,
+        "dominant_hz": 666.6666666666664,
+        "frequency_resolution_hz": 666.6666666666664,
+        "nyquist_hz": 4999.999999999998,
+        "discarded_samples": 6,
+        "resampled": false,
+        "spectrum": [
+          {
+            "hz": 0.0,
+            "amplitude": 0.1177991190105842
+          },
+          {
+            "hz": 666.6666666666664,
+            "amplitude": 0.14247419881030432
+          },
+          {
+            "hz": 1333.3333333333328,
+            "amplitude": 0.09254190093266833
+          },
+          {
+            "hz": 1999.999999999999,
+            "amplitude": 0.029700343662748246
+          },
+          {
+            "hz": 2666.6666666666656,
+            "amplitude": 0.021469617564517283
+          },
+          {
+            "hz": 3333.333333333332,
+            "amplitude": 0.018355279605988362
+          },
+          {
+            "hz": 3999.999999999998,
+            "amplitude": 0.017052373035037278
+          },
+          {
+            "hz": 4666.666666666665,
+            "amplitude": 0.013014289527012796
+          }
+        ]
+      },
+      "force_y": {
+        "mean": 3.0522063453543185,
+        "rms_fluctuation": 0.19375126567037818,
+        "minimum": 2.728104121682917,
+        "maximum": 3.432042340868514,
+        "peak_to_peak": 0.7039382191855967,
+        "impulse_above_initial": 0.01510741135500964,
+        "dominant_hz": 666.6666666666664,
+        "frequency_resolution_hz": 666.6666666666664,
+        "nyquist_hz": 4999.999999999998,
+        "discarded_samples": 6,
+        "resampled": false,
+        "spectrum": [
+          {
+            "hz": 0.0,
+            "amplitude": 0.27026683357508885
+          },
+          {
+            "hz": 666.6666666666664,
+            "amplitude": 0.2879473734233434
+          },
+          {
+            "hz": 1333.3333333333328,
+            "amplitude": 0.22826141431816752
+          },
+          {
+            "hz": 1999.999999999999,
+            "amplitude": 0.11284929715326253
+          },
+          {
+            "hz": 2666.6666666666656,
+            "amplitude": 0.06329192316038006
+          },
+          {
+            "hz": 3333.333333333332,
+            "amplitude": 0.03872575090546753
+          },
+          {
+            "hz": 3999.999999999998,
+            "amplitude": 0.0276920264725587
+          },
+          {
+            "hz": 4666.666666666665,
+            "amplitude": 0.00843156839071273
+          }
+        ]
+      },
+      "force_z": {
+        "mean": -11.186680594082178,
+        "rms_fluctuation": 2.846501151534159,
+        "minimum": -17.27826311579573,
+        "maximum": -8.443219026792569,
+        "peak_to_peak": 8.835044089003162,
+        "impulse_above_initial": -0.10750163827261891,
+        "dominant_hz": 666.6666666666664,
+        "frequency_resolution_hz": 666.6666666666664,
+        "nyquist_hz": 4999.999999999998,
+        "discarded_samples": 6,
+        "resampled": false,
+        "spectrum": [
+          {
+            "hz": 0.0,
+            "amplitude": 1.2962739101614364
+          },
+          {
+            "hz": 666.6666666666664,
+            "amplitude": 2.5616381788555715
+          },
+          {
+            "hz": 1333.3333333333328,
+            "amplitude": 1.064776085933412
+          },
+          {
+            "hz": 1999.999999999999,
+            "amplitude": 0.16938325658438327
+          },
+          {
+            "hz": 2666.6666666666656,
+            "amplitude": 0.12802068751748985
+          },
+          {
+            "hz": 3333.333333333332,
+            "amplitude": 0.12272470315607632
+          },
+          {
+            "hz": 3999.999999999998,
+            "amplitude": 0.034395689653248476
+          },
+          {
+            "hz": 4666.666666666665,
+            "amplitude": 0.033283186438910636
+          }
+        ]
+      },
+      "moment_x": {
+        "mean": -0.7433381313911914,
+        "rms_fluctuation": 0.17770982036209176,
+        "minimum": -1.118221100723427,
+        "maximum": -0.566018983446314,
+        "peak_to_peak": 0.5522021172771131,
+        "impulse_above_initial": -0.006630612961745286,
+        "dominant_hz": 666.6666666666664,
+        "frequency_resolution_hz": 666.6666666666664,
+        "nyquist_hz": 4999.999999999998,
+        "discarded_samples": 6,
+        "resampled": false,
+        "spectrum": [
+          {
+            "hz": 0.0,
+            "amplitude": 0.07885096677496661
+          },
+          {
+            "hz": 666.6666666666664,
+            "amplitude": 0.16275901862749884
+          },
+          {
+            "hz": 1333.3333333333328,
+            "amplitude": 0.06890131539385691
+          },
+          {
+            "hz": 1999.999999999999,
+            "amplitude": 0.012106206160688925
+          },
+          {
+            "hz": 2666.6666666666656,
+            "amplitude": 0.00927576352426031
+          },
+          {
+            "hz": 3333.333333333332,
+            "amplitude": 0.008197216016784163
+          },
+          {
+            "hz": 3999.999999999998,
+            "amplitude": 0.002264737456261619
+          },
+          {
+            "hz": 4666.666666666665,
+            "amplitude": 0.0021598213050086365
+          }
+        ]
+      },
+      "moment_y": {
+        "mean": 0.18442681159889054,
+        "rms_fluctuation": 0.04956286714674987,
+        "minimum": 0.1371966477343424,
+        "maximum": 0.2900858937591959,
+        "peak_to_peak": 0.15288924602485351,
+        "impulse_above_initial": 0.001781456262710394,
+        "dominant_hz": 666.6666666666664,
+        "frequency_resolution_hz": 666.6666666666664,
+        "nyquist_hz": 4999.999999999998,
+        "discarded_samples": 6,
+        "resampled": false,
+        "spectrum": [
+          {
+            "hz": 0.0,
+            "amplitude": 0.02212397425672499
+          },
+          {
+            "hz": 666.6666666666664,
+            "amplitude": 0.044169667921571155
+          },
+          {
+            "hz": 1333.3333333333328,
+            "amplitude": 0.0180654598549851
+          },
+          {
+            "hz": 1999.999999999999,
+            "amplitude": 0.0034099907528138016
+          },
+          {
+            "hz": 2666.6666666666656,
+            "amplitude": 0.0024594620431697043
+          },
+          {
+            "hz": 3333.333333333332,
+            "amplitude": 0.002361226594241786
+          },
+          {
+            "hz": 3999.999999999998,
+            "amplitude": 0.0009682461084593396
+          },
+          {
+            "hz": 4666.666666666665,
+            "amplitude": 0.0009710971625642197
+          }
+        ]
+      },
+      "moment_z": {
+        "mean": 0.07312575010599255,
+        "rms_fluctuation": 0.003463513389111484,
+        "minimum": 0.0642036050437051,
+        "maximum": 0.07766308409046734,
+        "peak_to_peak": 0.01345947904676223,
+        "impulse_above_initial": -7.548867497602537e-05,
+        "dominant_hz": 666.6666666666664,
+        "frequency_resolution_hz": 666.6666666666664,
+        "nyquist_hz": 4999.999999999998,
+        "discarded_samples": 6,
+        "resampled": false,
+        "spectrum": [
+          {
+            "hz": 0.0,
+            "amplitude": 0.002247379130117743
+          },
+          {
+            "hz": 666.6666666666664,
+            "amplitude": 0.004657587014717739
+          },
+          {
+            "hz": 1333.3333333333328,
+            "amplitude": 0.003643298884460848
+          },
+          {
+            "hz": 1999.999999999999,
+            "amplitude": 0.0019034495024820614
+          },
+          {
+            "hz": 2666.6666666666656,
+            "amplitude": 0.0014906545628311921
+          },
+          {
+            "hz": 3333.333333333332,
+            "amplitude": 0.0011667048917382039
+          },
+          {
+            "hz": 3999.999999999998,
+            "amplitude": 0.001101649247679873
+          },
+          {
+            "hz": 4666.666666666665,
+            "amplitude": 0.0008617261556033675
+          }
+        ]
+      }
+    },
+    "blade_passing_hz": 120.0
+  },
+  "pressure_probes": [],
+  "performance": [
+    {
+      "seconds": 0.001,
+      "flow_m3h": 5.000003822517667,
+      "head_m": 0.49587795498576526,
+      "npsha_m": 10.111964796390376,
+      "inlet": {
+        "outward_flow_m3s": -0.00011732228114644685,
+        "total_head_m": 10.350906513697065,
+        "pressure_pa": 101290.60102710106,
+        "elevation_m": 0.0022923460244406325,
+        "velocity_head_m": 0.00351439892910968
+      },
+      "outlet": {
+        "outward_flow_m3s": 0.00011574082922494599,
+        "total_head_m": 10.84678446868283,
+        "pressure_pa": 106116.53474689605,
+        "elevation_m": -0.013392001778603824,
+        "velocity_head_m": 0.006396676011465709
+      }
+    },
+    {
+      "seconds": 0.002,
+      "flow_m3h": 4.999997494304652,
+      "head_m": 0.5771831976492496,
+      "npsha_m": 10.111965306416609,
+      "inlet": {
+        "outward_flow_m3s": -0.00011801960819116617,
+        "total_head_m": 10.350907023723298,
+        "pressure_pa": 101290.2553923835,
+        "elevation_m": 0.0017386550164872922,
+        "velocity_head_m": 0.003550217443148533
+      },
+      "outlet": {
+        "outward_flow_m3s": 0.00011574068273853361,
+        "total_head_m": 10.928090221372548,
+        "pressure_pa": 106925.50067600104,
+        "elevation_m": -0.00798973545704047,
+        "velocity_head_m": 0.0050621087597776115
+      }
+    }
+  ],
+  "summary": {
+    "cells": 480,
+    "frames": 3,
+    "maximum_velocity_ms": 4.099146739751908,
+    "minimum_pressure_pa": 91081.5714717865,
+    "maximum_pressure_pa": 113678.67314987183,
+    "maximum_vapour_fraction": 0.0
+  },
+  "verification": {
+    "real_asset_validated": false,
+    "mesh_independence_established": false,
+    "time_step_independence_established": false
+  },
+  "solver_run": null,
+  "model": "3-D finite-volume OpenFOAM 14",
+  "computation": "offline-local",
+  "example_notice": "真实求解器短时启动输出，仅展示读取与可视化；480单元/0.002秒，不是收敛泵性能或实机验证。",
+  "fixture_files_sha256": {
+    "log.foamRun.excerpt.txt": "5e322f88359bbefb70819583c9e1d611f21379d67569cc42a7fb77869e72e9b2",
+    "log.foamToVTK": "2ee5353135084fab0ebb2630a554f1febc2662b5dd2968d8c00155461a15f84a",
+    "log.checkMesh": "e7da8506583c75cced186bd9a8614aff57c0e3957e8f8469c92bf06ea5430be0",
+    "manifest.json": "4aa012bbf609812485a953c1007009088f2377e57d4b7e805f171a40b22cd81e",
+    "0/U": "624cbfe3b1b3c42124206727c6fd766a21aef52c265404085e03f9d2efbc9131",
+    "0/omega": "7991751a0809376fdbadafafd96e4a1347b3e1cf88cbff5e34e3d6c87c12435f",
+    "0/k": "74ca03d8e5a4830f0d1a1f0877d5176c9a9383d0922e8e81525bfa19bb14a2f7",
+    "0/nut": "7e8e6b9165148554b4a98f4e801a772a24ef4abe71639d988cd3a219c38ba8d6",
+    "0/p": "91c9a53e6be67d366d2d8f6f55c322703fc7833e89a9c4b82834416121a4177f",
+    "system/decomposeParDict": "551485b477d706ae64ac0d153693bcce73cfd63c600fddfc6910948745fec637",
+    "system/fvSchemes": "17be64c00f0248a7b6186f4ce4b7962ad15564d4976b24b7ed0fc3ba63b0ea99",
+    "system/fvSolution": "6c299b2978f8e93760a403d9ebf81b1e052cc07198642d9d887e63cfaf856a0a",
+    "system/blockMeshDict": "cceac2bf70fffec95208d0178a7c532b5923bed5edaaabde23f74d61baac02f8",
+    "system/functions": "7d755c085ebc0a86556f99ea67326349669f880237d9f3869458aa9fe9ea670b",
+    "system/createNonConformalCouplesDict": "c247da25112c396f561365441ab2a6fbc2c91c8e75e70361592bcb31bc7165af",
+    "system/controlDict": "4e7931c32abc96eff4df5dcd68dfc4f0671c4353de50255cf26805bc0b472f8b",
+    "constant/dynamicMeshDict": "d14cbab6ef2abc64a05e898516ff58d98084577a0bd0904bfe88c99ab6c8196d",
+    "constant/momentumTransport": "a9e5cbfde938797a902b967440b3b66a16630a907fee701c70eea6e88abab86b",
+    "constant/physicalProperties": "47dd7c611dfc2324aca57c4d04271a493a68f03e11c2f44ba64c2e13ee76734c",
+    "VTK/case_10.vtk": "2d465ad038ee0459c96563cbab71c58cb7392c5b6b036326dd00a49fdc315357",
+    "VTK/case_0.vtk": "284b7e763b7f99d8368d88fb8ce7b0e02df9adc63facbe97ac05cd4e09bd1ca4",
+    "VTK/case_20.vtk": "fa76a56763c982e39e4d27f6ed6f7dea6a20d3824acb6ca4f09c80dc2cf94811",
+    "constant/fvMesh/polyFaces": "8aacf34f3ff5b3ce0082e524e1f76b509ba5876e669c61ebe319cfbe94f14915",
+    "constant/polyMesh/owner": "34f6f1562986064aaff8c925b186eb4c08b2f0e4a5323c66050aa89cd61d263b",
+    "constant/polyMesh/boundary": "b834db8499daba784f1a192d78cc9133e5634a363f9cb3b34942e30daca24d01",
+    "constant/polyMesh/neighbour": "e542a81ede618b0087078c87a46fed02ea709da1416831b71ce201d87c78f340",
+    "constant/polyMesh/points": "6f97d02779a9f19a404a5652c76479fc2fba73030f278f95be68027939deb9e8",
+    "constant/polyMesh/cellZones": "2c23ac5e97bbf17bdc096a9cadfe586f2a4c6a6276b51f71389098e0169fb6ba",
+    "constant/polyMesh/faces": "3f38345319b9dd0ed50b5de2fb8452958267e33b2ab9c7903ced760068d5aa76",
+    "postProcessing/inletFlowRate/0/surfaceFieldValue.dat": "b1c7244ec28addc2bb5eed76b756cddd379a8024976ce6c85bc5b2ce6ab00867",
+    "postProcessing/outletFlowRate/0/surfaceFieldValue.dat": "3c57aebc1fb9fb46f1434c2e42faf8f304fcad33e04dd7050b81fdb086c7185f",
+    "postProcessing/forces/0/forces.dat": "31fdd9c4de38e3f4203780791679c30dd4b812eeebdb7abc9a3429338029f378",
+    "VTK/nonCoupleIn2/nonCoupleIn2_20.vtk": "8363b98fe8607344d7844e7df0961dd126a92b3897f419cc414632c2cb37a50b",
+    "VTK/nonCoupleIn2/nonCoupleIn2_0.vtk": "97b6ea1fc841834362e6c21fbb99d1444a5f7114fe77d098a36e7ba5cd8e8836",
+    "VTK/nonCoupleIn2/nonCoupleIn2_10.vtk": "346e4103f8fba417928c6670b8292a43ac953dd24374cea5a303b622ae6da576",
+    "VTK/cyclicIn1/cyclicIn1_10.vtk": "15793948c774fbe301270522f65a54ac5ed65c9c121536528af2c59b4dc9c12d",
+    "VTK/cyclicIn1/cyclicIn1_0.vtk": "00fd234d5132a575b7fbcd838e4f907e6eea7aebf33e0410630cef8e2b83d443",
+    "VTK/cyclicIn1/cyclicIn1_20.vtk": "503a1ab974d493f8836a3019b3bdf8c19acf12aefc3e02024eba26b8f343579b",
+    "VTK/cyclicOut1/cyclicOut1_10.vtk": "1d8bd404ba7db425af67f654f9a8735f2f0399a1ac9ed53162f65b6612d20af2",
+    "VTK/cyclicOut1/cyclicOut1_0.vtk": "aa5b3340eb8ba50378cdc6cdbbe9c8d6557dc3731b827aaf43c2366ba334fabf",
+    "VTK/cyclicOut1/cyclicOut1_20.vtk": "c5794049134c8e8bc7df63c73e3890318cb7147302c9abca31c9a2f29e61b64f",
+    "VTK/nonCoupleOut1/nonCoupleOut1_20.vtk": "8369024940bfe348bbb453eb07fc5c2c38f2f221389dbc18940ec7f1585af292",
+    "VTK/nonCoupleOut1/nonCoupleOut1_0.vtk": "12d12168075643cc0420279af2878bbf28b9905e8128c615ced448f993eff3c1",
+    "VTK/nonCoupleOut1/nonCoupleOut1_10.vtk": "c4285197f3f74f5d9a7595a936b0f91e7cd322bb2bbcc3b9d0097b41b6b08127",
+    "VTK/cyclicIn2/cyclicIn2_0.vtk": "e9cc50e8237e7a04af647a915a4b12b580f3905d8b5d4bc863559aff9f751326",
+    "VTK/cyclicIn2/cyclicIn2_20.vtk": "5cbe2b3df37ffb166cd6536f80baf2a09c32929d25822644d100f7bbdee9eb77",
+    "VTK/cyclicIn2/cyclicIn2_10.vtk": "bd75eda8ad70804c293ce8c780e0ed873d92151f48a26c19778ae548524ece05",
+    "VTK/rotorBlades/rotorBlades_10.vtk": "ceeadc8d04287904e79d5aa1c33befb73143af8b9ed22228f7264cf9c425f6ed",
+    "VTK/rotorBlades/rotorBlades_0.vtk": "6a42563b90672c2603f6e5827e5a1a7961f5ff0adeeb4ac0a236d5f6f4f88ef3",
+    "VTK/rotorBlades/rotorBlades_20.vtk": "77cbb69ab71bdb3e993e330d818c4204b7d79401840e56b80dd6b0cef251d5c2",
+    "VTK/outlet/outlet_0.vtk": "1a8d11664c54bcfa2d800f65bab286e382ee2944989702bf77de0c95486c37c6",
+    "VTK/outlet/outlet_20.vtk": "ff44a64a76644c483b59a84a355560226ae73f01d6583f82f4560eb6dc8b793e",
+    "VTK/outlet/outlet_10.vtk": "96b88f3e305c6c2cf6504b29eb29282a701cf4cb4b26ee657def78cfd381004c",
+    "VTK/nonCoupleIn1/nonCoupleIn1_10.vtk": "6cc81fcac5b364a25272b8b708c2f72b8320d41e2ad61122048eeee97cc70949",
+    "VTK/nonCoupleIn1/nonCoupleIn1_0.vtk": "5e81f05aa1d2a29c58ff6b5886d0075f8b067c79833cc38249fe5738f14b26f7",
+    "VTK/nonCoupleIn1/nonCoupleIn1_20.vtk": "bc084a42dc8119016b304ce56bf0434c22c13bed73cbcfc5e65441c0f10161ef",
+    "VTK/cyclicOut2/cyclicOut2_0.vtk": "f839c4a17ffe06cb7d2f041cb3165b9258340ea67d126865a87ddcaa0aa5bde1",
+    "VTK/cyclicOut2/cyclicOut2_20.vtk": "403a338966b759a8dd9e5ecf6c511008eaa5b31b275a5eab3e28b10af651d584",
+    "VTK/cyclicOut2/cyclicOut2_10.vtk": "24d05ef0f600888e9725abf389d190023925772643ca4a06e18394cdbb5866c3",
+    "VTK/inlet/inlet_20.vtk": "128ab195eeaa0c652f40e46d699c730dd7fd14fad208587d5842b7f4f108a8cf",
+    "VTK/inlet/inlet_0.vtk": "a0ffc27d5059249f465dd332db463a3c2b02826e08e7c37307710013ad01934e",
+    "VTK/inlet/inlet_10.vtk": "7ada0bf29f3cc01bc877a0e51970909a97b599fbe5f62a5f6e872b26eefe3d36",
+    "VTK/rotorDuct/rotorDuct_20.vtk": "f42bb6d768262d467fc5152d777669b372b9535ee0cde23f32edc958e551be6b",
+    "VTK/rotorDuct/rotorDuct_10.vtk": "c8afb935befec8bea3c9943beb2bb777aa0d12c647d7c18227ac1f7e892dc9e4",
+    "VTK/rotorDuct/rotorDuct_0.vtk": "be0d2c7327b6c75ce12f996c9d7ffd7eb01bf553f44afea4dce86beede23179d",
+    "VTK/nonCoupleOut2/nonCoupleOut2_0.vtk": "73cadec28e307cd14d284731d947601a150f1ef347586daa8533b674c43035ea",
+    "VTK/nonCoupleOut2/nonCoupleOut2_10.vtk": "ba402ba97c18299dfb472e398f50ebb82bd16e1806c5cfd2478a1323002db289",
+    "VTK/nonCoupleOut2/nonCoupleOut2_20.vtk": "413ba475fcd08396c2f72b6f5541859a23741f98d88b897ce56c4dac1de6d398",
+    "VTK/statorDuct/statorDuct_0.vtk": "5e1f7306dbfb41667cacdb7dc27d5f650f04ee2acee85fda4994f0de49794c7f",
+    "VTK/statorDuct/statorDuct_20.vtk": "a37efe6d6c0a06a4c842dc64bffaa43b393435e3a386dde0e1dda89667db4d9d",
+    "VTK/statorDuct/statorDuct_10.vtk": "3488417a7fa2faaeceeabf0ba328b58b0f91ccd109ae5095e129d56212f99be0"
+  }
+}

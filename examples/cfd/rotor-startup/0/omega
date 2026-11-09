@@ -1,0 +1,15 @@
+FoamFile
+{ format ascii; class volScalarField; object omega; }
+dimensions [0 0 -1 0 0 0 0];
+internalField uniform 15.971914125;
+boundaryField
+{
+#includeEtc "caseDicts/setConstraintTypes"
+
+inlet { type fixedValue; value $internalField; }
+outlet { type inletOutlet; inletValue $internalField; value $internalField; }
+wall { type omegaWallFunction; value $internalField; }
+nonCouple { type zeroGradient; value $internalField; }
+
+}
+

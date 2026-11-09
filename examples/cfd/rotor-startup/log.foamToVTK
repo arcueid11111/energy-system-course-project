@@ -1,0 +1,714 @@
+/*---------------------------------------------------------------------------*\
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.org
+    \\  /    A nd           | Version:  14
+     \\/     M anipulation  |
+\*---------------------------------------------------------------------------*/
+Build  : 14-a4867fc914c1
+Exec   : foamToVTK -ascii
+Date   : Nov 09 2026
+Time   : 08:48:09
+Host   : "a2842122344b"
+PID    : 1
+I/O    : uncollated
+Case   : //case
+nProcs : 1
+sigFpe : Floating point exception trapping - not supported on this platform
+fileModificationChecking : Monitoring run-time modified files using timeStampMaster (fileModificationSkew 10)
+allowSystemOperations : Allowing user-supplied system call operations
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+Create time
+
+Create mesh for time = 0
+
+patchToPatch: Calculating couplings between ...
+    source patch nonCoupleIn1 with 24 faces and ...
+    target patch nonCoupleIn2 with 24 faces
+    Source min/average/max coverage = 1/1/1
+    Target min/average/max coverage = 1/1/1
+    Source average openness/error/depth/angle = 5.68290113916e-17/3.83135628653e-16/2.27761955609e-16/0
+    Source max openness/error/depth/angle = 2.96186305415e-16/1.44990860927e-15/1.38619177772e-15/0
+    48 couplings calculated in 0.006795s
+patchToPatch: Calculating couplings between ...
+    source patch nonCoupleIn1 with 24 faces and ...
+    target patch nonCoupleIn2 with 24 faces ...
+    with transformation axis=(-1 0 0), centre=(0 0 0), angle=30
+    Source min/average/max coverage = 0/1.89876866179e-12/1.99106945183e-11
+    Target min/average/max coverage = 0/1.89876824701e-12/1.99103406282e-11
+    Source average openness/error/depth/angle = 7.65557226041e-19/2.34119092521e-17/0/0
+    Source max openness/error/depth/angle = 7.28358648924e-18/2.03365676921e-16/0/0
+    8 couplings calculated in 0.00015s
+patchToPatch: Calculating couplings between ...
+    source patch nonCoupleIn1 with 24 faces and ...
+    target patch nonCoupleIn2 with 24 faces ...
+    with transformation axis=(-1 0 0), centre=(0 0 0), angle=60
+    No couplings found
+patchToPatch: Calculating couplings between ...
+    source patch nonCoupleIn1 with 24 faces and ...
+    target patch nonCoupleIn2 with 24 faces ...
+    with transformation axis=(-1 0 0), centre=(0 0 0), angle=90
+    No couplings found
+patchToPatch: Calculating couplings between ...
+    source patch nonCoupleIn1 with 24 faces and ...
+    target patch nonCoupleIn2 with 24 faces ...
+    with transformation axis=(-1 0 0), centre=(0 0 0), angle=120
+    No couplings found
+patchToPatch: Calculating couplings between ...
+    source patch nonCoupleIn1 with 24 faces and ...
+    target patch nonCoupleIn2 with 24 faces ...
+    with transformation axis=(-1 0 0), centre=(0 0 0), angle=150
+    No couplings found
+patchToPatch: Calculating couplings between ...
+    source patch nonCoupleIn1 with 24 faces and ...
+    target patch nonCoupleIn2 with 24 faces ...
+    with transformation axis=(-1 0 0), centre=(0 0 0), angle=180
+    No couplings found
+patchToPatch: Calculating couplings between ...
+    source patch nonCoupleIn1 with 24 faces and ...
+    target patch nonCoupleIn2 with 24 faces ...
+    with transformation axis=(-1 0 0), centre=(0 0 0), angle=210
+    No couplings found
+patchToPatch: Calculating couplings between ...
+    source patch nonCoupleIn1 with 24 faces and ...
+    target patch nonCoupleIn2 with 24 faces ...
+    with transformation axis=(-1 0 0), centre=(0 0 0), angle=240
+    No couplings found
+patchToPatch: Calculating couplings between ...
+    source patch nonCoupleIn1 with 24 faces and ...
+    target patch nonCoupleIn2 with 24 faces ...
+    with transformation axis=(-1 0 0), centre=(0 0 0), angle=270
+    No couplings found
+patchToPatch: Calculating couplings between ...
+    source patch nonCoupleIn1 with 24 faces and ...
+    target patch nonCoupleIn2 with 24 faces ...
+    with transformation axis=(-1 0 0), centre=(0 0 0), angle=300
+    No couplings found
+patchToPatch: Calculating couplings between ...
+    source patch nonCoupleIn1 with 24 faces and ...
+    target patch nonCoupleIn2 with 24 faces ...
+    with transformation axis=(-1 0 0), centre=(0 0 0), angle=330
+    Source min/average/max coverage = 0/1.89775323513e-12/1.9903643603e-11
+    Target min/average/max coverage = 0/1.89771918833e-12/1.99036325206e-11
+    Source average openness/error/depth/angle = 5.45370850702e-19/3.29370101896e-17/0/0
+    Source max openness/error/depth/angle = 5.48199302653e-18/4.36945113449e-16/0/0
+    8 couplings calculated in 0.000134s
+patchToPatch: Calculating couplings between ...
+    source patch nonCoupleOut1 with 24 faces and ...
+    target patch nonCoupleOut2 with 24 faces
+    Source min/average/max coverage = 1/1/1
+    Target min/average/max coverage = 1/1/1
+    Source average openness/error/depth/angle = 5.61619939371e-17/4.54713838028e-16/5.0035297459e-16/6.04756332762e-07
+    Source max openness/error/depth/angle = 3.88406512468e-16/2.70208780361e-15/2.30001314393e-15/8.53773646252e-07
+    48 couplings calculated in 0.007879s
+patchToPatch: Calculating couplings between ...
+    source patch nonCoupleOut1 with 24 faces and ...
+    target patch nonCoupleOut2 with 24 faces ...
+    with transformation axis=(-1 0 0), centre=(0 0 0), angle=-30
+    Source min/average/max coverage = 0/2.38166519658e-13/1.42923496756e-12
+    Target min/average/max coverage = 0/2.39045234584e-13/1.4342714075e-12
+    Source average openness/error/depth/angle = 1.55862844809e-29/1.02336732101e-14/5.50469210682e-27/4.9803462698e-07
+    Source max openness/error/depth/angle = 1.97458540143e-28/6.21160580389e-14/3.49027663938e-26/8.53773646252e-07
+    8 couplings calculated in 0.000151s
+patchToPatch: Calculating couplings between ...
+    source patch nonCoupleOut1 with 24 faces and ...
+    target patch nonCoupleOut2 with 24 faces ...
+    with transformation axis=(-1 0 0), centre=(0 0 0), angle=-60
+    No couplings found
+patchToPatch: Calculating couplings between ...
+    source patch nonCoupleOut1 with 24 faces and ...
+    target patch nonCoupleOut2 with 24 faces ...
+    with transformation axis=(-1 0 0), centre=(0 0 0), angle=-90
+    No couplings found
+patchToPatch: Calculating couplings between ...
+    source patch nonCoupleOut1 with 24 faces and ...
+    target patch nonCoupleOut2 with 24 faces ...
+    with transformation axis=(-1 0 0), centre=(0 0 0), angle=-120
+    No couplings found
+patchToPatch: Calculating couplings between ...
+    source patch nonCoupleOut1 with 24 faces and ...
+    target patch nonCoupleOut2 with 24 faces ...
+    with transformation axis=(-1 0 0), centre=(0 0 0), angle=-150
+    No couplings found
+patchToPatch: Calculating couplings between ...
+    source patch nonCoupleOut1 with 24 faces and ...
+    target patch nonCoupleOut2 with 24 faces ...
+    with transformation axis=(-1 0 0), centre=(0 0 0), angle=-180
+    No couplings found
+patchToPatch: Calculating couplings between ...
+    source patch nonCoupleOut1 with 24 faces and ...
+    target patch nonCoupleOut2 with 24 faces ...
+    with transformation axis=(-1 0 0), centre=(0 0 0), angle=-210
+    No couplings found
+patchToPatch: Calculating couplings between ...
+    source patch nonCoupleOut1 with 24 faces and ...
+    target patch nonCoupleOut2 with 24 faces ...
+    with transformation axis=(-1 0 0), centre=(0 0 0), angle=-240
+    No couplings found
+patchToPatch: Calculating couplings between ...
+    source patch nonCoupleOut1 with 24 faces and ...
+    target patch nonCoupleOut2 with 24 faces ...
+    with transformation axis=(-1 0 0), centre=(0 0 0), angle=-270
+    No couplings found
+patchToPatch: Calculating couplings between ...
+    source patch nonCoupleOut1 with 24 faces and ...
+    target patch nonCoupleOut2 with 24 faces ...
+    with transformation axis=(-1 0 0), centre=(0 0 0), angle=-300
+    No couplings found
+patchToPatch: Calculating couplings between ...
+    source patch nonCoupleOut1 with 24 faces and ...
+    target patch nonCoupleOut2 with 24 faces ...
+    with transformation axis=(-1 0 0), centre=(0 0 0), angle=-330
+    Source min/average/max coverage = 0/2.36953376422e-13/1.42200968132e-12
+    Target min/average/max coverage = 0/2.3783932456e-13/1.42703594736e-12
+    Source average openness/error/depth/angle = 2.9888338861e-29/1.02741363645e-14/5.48687472149e-27/4.62460725053e-07
+    Source max openness/error/depth/angle = 1.82047778932e-28/6.30871737448e-14/3.61730829514e-26/8.53773646252e-07
+    8 couplings calculated in 0.000133s
+fvMeshStitcher: Connecting
+    Cell min/average/max openness = 0/4.53967341617e-17/1.75935098003e-16
+    Cell min/average/max projected volume fraction = 0/6.78623823802e-16/5.10702591328e-15
+Time: 0
+fvMeshStitcher: Connecting
+    Cell min/average/max openness = 0/4.53967341617e-17/1.75935098003e-16
+    Cell min/average/max projected volume fraction = 0/6.78623823802e-16/5.10702591328e-15
+    volScalarFields            : p nut k omega
+    volVectorFields            : U
+
+    Internal  : "//case/VTK/case_0.vtk"
+    Original cells:480 points:805   Additional cells:0  additional points:0
+
+Combining patches:
+    patch 0 statorDuct
+    patch 1 rotorDuct
+    patch 2 rotorBlades
+    patch 3 inlet
+    patch 4 outlet
+    patch 5 cyclicIn1
+    patch 6 cyclicIn2
+    patch 7 nonCoupleIn1
+    patch 8 nonCoupleIn2
+    patch 9 cyclicOut1
+    patch 10 cyclicOut2
+    patch 11 nonCoupleOut1
+    patch 12 nonCoupleOut2
+    discarding empty/nonConformal/processor patch 13 nonConformalCoupleIn0_on_nonCoupleIn1
+    discarding empty/nonConformal/processor patch 14 nonConformalCoupleIn0_on_nonCoupleIn2
+    discarding empty/nonConformal/processor patch 15 nonConformalCoupleIn30_on_nonCoupleIn1
+    discarding empty/nonConformal/processor patch 16 nonConformalCoupleIn30_on_nonCoupleIn2
+    discarding empty/nonConformal/processor patch 17 nonConformalCoupleIn60_on_nonCoupleIn1
+    discarding empty/nonConformal/processor patch 18 nonConformalCoupleIn60_on_nonCoupleIn2
+    discarding empty/nonConformal/processor patch 19 nonConformalCoupleIn90_on_nonCoupleIn1
+    discarding empty/nonConformal/processor patch 20 nonConformalCoupleIn90_on_nonCoupleIn2
+    discarding empty/nonConformal/processor patch 21 nonConformalCoupleIn120_on_nonCoupleIn1
+    discarding empty/nonConformal/processor patch 22 nonConformalCoupleIn120_on_nonCoupleIn2
+    discarding empty/nonConformal/processor patch 23 nonConformalCoupleIn150_on_nonCoupleIn1
+    discarding empty/nonConformal/processor patch 24 nonConformalCoupleIn150_on_nonCoupleIn2
+    discarding empty/nonConformal/processor patch 25 nonConformalCoupleIn180_on_nonCoupleIn1
+    discarding empty/nonConformal/processor patch 26 nonConformalCoupleIn180_on_nonCoupleIn2
+    discarding empty/nonConformal/processor patch 27 nonConformalCoupleIn210_on_nonCoupleIn1
+    discarding empty/nonConformal/processor patch 28 nonConformalCoupleIn210_on_nonCoupleIn2
+    discarding empty/nonConformal/processor patch 29 nonConformalCoupleIn240_on_nonCoupleIn1
+    discarding empty/nonConformal/processor patch 30 nonConformalCoupleIn240_on_nonCoupleIn2
+    discarding empty/nonConformal/processor patch 31 nonConformalCoupleIn270_on_nonCoupleIn1
+    discarding empty/nonConformal/processor patch 32 nonConformalCoupleIn270_on_nonCoupleIn2
+    discarding empty/nonConformal/processor patch 33 nonConformalCoupleIn300_on_nonCoupleIn1
+    discarding empty/nonConformal/processor patch 34 nonConformalCoupleIn300_on_nonCoupleIn2
+    discarding empty/nonConformal/processor patch 35 nonConformalCoupleIn330_on_nonCoupleIn1
+    discarding empty/nonConformal/processor patch 36 nonConformalCoupleIn330_on_nonCoupleIn2
+    discarding empty/nonConformal/processor patch 37 nonConformalCoupleOut0_on_nonCoupleOut1
+    discarding empty/nonConformal/processor patch 38 nonConformalCoupleOut0_on_nonCoupleOut2
+    discarding empty/nonConformal/processor patch 39 nonConformalCoupleOut30_on_nonCoupleOut1
+    discarding empty/nonConformal/processor patch 40 nonConformalCoupleOut30_on_nonCoupleOut2
+    discarding empty/nonConformal/processor patch 41 nonConformalCoupleOut60_on_nonCoupleOut1
+    discarding empty/nonConformal/processor patch 42 nonConformalCoupleOut60_on_nonCoupleOut2
+    discarding empty/nonConformal/processor patch 43 nonConformalCoupleOut90_on_nonCoupleOut1
+    discarding empty/nonConformal/processor patch 44 nonConformalCoupleOut90_on_nonCoupleOut2
+    discarding empty/nonConformal/processor patch 45 nonConformalCoupleOut120_on_nonCoupleOut1
+    discarding empty/nonConformal/processor patch 46 nonConformalCoupleOut120_on_nonCoupleOut2
+    discarding empty/nonConformal/processor patch 47 nonConformalCoupleOut150_on_nonCoupleOut1
+    discarding empty/nonConformal/processor patch 48 nonConformalCoupleOut150_on_nonCoupleOut2
+    discarding empty/nonConformal/processor patch 49 nonConformalCoupleOut180_on_nonCoupleOut1
+    discarding empty/nonConformal/processor patch 50 nonConformalCoupleOut180_on_nonCoupleOut2
+    discarding empty/nonConformal/processor patch 51 nonConformalCoupleOut210_on_nonCoupleOut1
+    discarding empty/nonConformal/processor patch 52 nonConformalCoupleOut210_on_nonCoupleOut2
+    discarding empty/nonConformal/processor patch 53 nonConformalCoupleOut240_on_nonCoupleOut1
+    discarding empty/nonConformal/processor patch 54 nonConformalCoupleOut240_on_nonCoupleOut2
+    discarding empty/nonConformal/processor patch 55 nonConformalCoupleOut270_on_nonCoupleOut1
+    discarding empty/nonConformal/processor patch 56 nonConformalCoupleOut270_on_nonCoupleOut2
+    discarding empty/nonConformal/processor patch 57 nonConformalCoupleOut300_on_nonCoupleOut1
+    discarding empty/nonConformal/processor patch 58 nonConformalCoupleOut300_on_nonCoupleOut2
+    discarding empty/nonConformal/processor patch 59 nonConformalCoupleOut330_on_nonCoupleOut1
+    discarding empty/nonConformal/processor patch 60 nonConformalCoupleOut330_on_nonCoupleOut2
+    discarding empty/nonConformal/processor patch 61 nonConformalError_on_nonCoupleIn1
+    discarding empty/nonConformal/processor patch 62 nonConformalError_on_nonCoupleIn2
+    discarding empty/nonConformal/processor patch 63 nonConformalError_on_nonCoupleOut1
+    discarding empty/nonConformal/processor patch 64 nonConformalError_on_nonCoupleOut2
+    Patch     : "//case/VTK/statorDuct/statorDuct_0.vtk"
+    Patch     : "//case/VTK/rotorDuct/rotorDuct_0.vtk"
+    Patch     : "//case/VTK/rotorBlades/rotorBlades_0.vtk"
+    Patch     : "//case/VTK/inlet/inlet_0.vtk"
+    Patch     : "//case/VTK/outlet/outlet_0.vtk"
+    Patch     : "//case/VTK/cyclicIn1/cyclicIn1_0.vtk"
+    Patch     : "//case/VTK/cyclicIn2/cyclicIn2_0.vtk"
+    Patch     : "//case/VTK/nonCoupleIn1/nonCoupleIn1_0.vtk"
+    Patch     : "//case/VTK/nonCoupleIn2/nonCoupleIn2_0.vtk"
+    Patch     : "//case/VTK/cyclicOut1/cyclicOut1_0.vtk"
+    Patch     : "//case/VTK/cyclicOut2/cyclicOut2_0.vtk"
+    Patch     : "//case/VTK/nonCoupleOut1/nonCoupleOut1_0.vtk"
+    Patch     : "//case/VTK/nonCoupleOut2/nonCoupleOut2_0.vtk"
+Time: 0.001
+patchToPatch: Calculating couplings between ...
+    source patch nonCoupleIn1 with 24 faces and ...
+    target patch nonCoupleIn2 with 24 faces
+    Source min/average/max coverage = 0.279439242283/0.879140242646/1
+    Target min/average/max coverage = 0.279439242283/0.879140242646/1
+    Source average openness/error/depth/angle = 1.20429511922e-16/5.97873279539e-16/3.05064047239e-16/0
+    Source max openness/error/depth/angle = 2.96186305415e-16/1.98368888691e-15/6.29230914351e-16/0
+    220 couplings calculated in 0.000606s
+patchToPatch: Calculating couplings between ...
+    source patch nonCoupleIn1 with 24 faces and ...
+    target patch nonCoupleIn2 with 24 faces ...
+    with transformation axis=(-1 0 0), centre=(0 0 0), angle=30
+    Source min/average/max coverage = 0/0.119861452584/0.719887382517
+    Target min/average/max coverage = 0/0.119861452584/0.719887382517
+    Source average openness/error/depth/angle = 1.33918085717e-17/1.03038920335e-16/6.10895467583e-17/0
+    Source max openness/error/depth/angle = 1.48093152708e-16/1.49156763746e-15/1.10099738364e-15/0
+    20 couplings calculated in 0.000146s
+patchToPatch: Calculating couplings between ...
+    source patch nonCoupleIn1 with 24 faces and ...
+    target patch nonCoupleIn2 with 24 faces ...
+    with transformation axis=(-1 0 0), centre=(0 0 0), angle=60
+    No couplings found
+patchToPatch: Calculating couplings between ...
+    source patch nonCoupleIn1 with 24 faces and ...
+    target patch nonCoupleIn2 with 24 faces ...
+    with transformation axis=(-1 0 0), centre=(0 0 0), angle=90
+    No couplings found
+patchToPatch: Calculating couplings between ...
+    source patch nonCoupleIn1 with 24 faces and ...
+    target patch nonCoupleIn2 with 24 faces ...
+    with transformation axis=(-1 0 0), centre=(0 0 0), angle=120
+    No couplings found
+patchToPatch: Calculating couplings between ...
+    source patch nonCoupleIn1 with 24 faces and ...
+    target patch nonCoupleIn2 with 24 faces ...
+    with transformation axis=(-1 0 0), centre=(0 0 0), angle=150
+    No couplings found
+patchToPatch: Calculating couplings between ...
+    source patch nonCoupleIn1 with 24 faces and ...
+    target patch nonCoupleIn2 with 24 faces ...
+    with transformation axis=(-1 0 0), centre=(0 0 0), angle=180
+    No couplings found
+patchToPatch: Calculating couplings between ...
+    source patch nonCoupleIn1 with 24 faces and ...
+    target patch nonCoupleIn2 with 24 faces ...
+    with transformation axis=(-1 0 0), centre=(0 0 0), angle=210
+    No couplings found
+patchToPatch: Calculating couplings between ...
+    source patch nonCoupleIn1 with 24 faces and ...
+    target patch nonCoupleIn2 with 24 faces ...
+    with transformation axis=(-1 0 0), centre=(0 0 0), angle=240
+    No couplings found
+patchToPatch: Calculating couplings between ...
+    source patch nonCoupleIn1 with 24 faces and ...
+    target patch nonCoupleIn2 with 24 faces ...
+    with transformation axis=(-1 0 0), centre=(0 0 0), angle=270
+    No couplings found
+patchToPatch: Calculating couplings between ...
+    source patch nonCoupleIn1 with 24 faces and ...
+    target patch nonCoupleIn2 with 24 faces ...
+    with transformation axis=(-1 0 0), centre=(0 0 0), angle=300
+    No couplings found
+patchToPatch: Calculating couplings between ...
+    source patch nonCoupleIn1 with 24 faces and ...
+    target patch nonCoupleIn2 with 24 faces ...
+    with transformation axis=(-1 0 0), centre=(0 0 0), angle=330
+    No couplings found
+patchToPatch: Calculating couplings between ...
+    source patch nonCoupleOut1 with 24 faces and ...
+    target patch nonCoupleOut2 with 24 faces
+    Source min/average/max coverage = 0.28022009672/0.880036682787/1
+    Target min/average/max coverage = 0.280497192368/0.880082865395/1
+    Source average openness/error/depth/angle = 1.03709997091e-16/0.00230940792511/0.00021154298542/0.168281372117
+    Source max openness/error/depth/angle = 3.88374588603e-16/0.00884383335461/0.00101144361001/1.00830371569
+    90 couplings calculated in 0.001254s
+patchToPatch: Calculating couplings between ...
+    source patch nonCoupleOut1 with 24 faces and ...
+    target patch nonCoupleOut2 with 24 faces ...
+    with transformation axis=(-1 0 0), centre=(0 0 0), angle=-30
+    Source min/average/max coverage = 0/0.119963317213/0.719779903281
+    Target min/average/max coverage = 0/0.120045218853/0.720271313116
+    Source average openness/error/depth/angle = 1.45620571197e-17/0.00148975528581/0.000390245341632/0.167982818239
+    Source max openness/error/depth/angle = 1.00245209369e-16/0.00907513748396/0.00246932796574/1.00789690943
+    8 couplings calculated in 0.00014s
+patchToPatch: Calculating couplings between ...
+    source patch nonCoupleOut1 with 24 faces and ...
+    target patch nonCoupleOut2 with 24 faces ...
+    with transformation axis=(-1 0 0), centre=(0 0 0), angle=-60
+    No couplings found
+patchToPatch: Calculating couplings between ...
+    source patch nonCoupleOut1 with 24 faces and ...
+    target patch nonCoupleOut2 with 24 faces ...
+    with transformation axis=(-1 0 0), centre=(0 0 0), angle=-90
+    No couplings found
+patchToPatch: Calculating couplings between ...
+    source patch nonCoupleOut1 with 24 faces and ...
+    target patch nonCoupleOut2 with 24 faces ...
+    with transformation axis=(-1 0 0), centre=(0 0 0), angle=-120
+    No couplings found
+patchToPatch: Calculating couplings between ...
+    source patch nonCoupleOut1 with 24 faces and ...
+    target patch nonCoupleOut2 with 24 faces ...
+    with transformation axis=(-1 0 0), centre=(0 0 0), angle=-150
+    No couplings found
+patchToPatch: Calculating couplings between ...
+    source patch nonCoupleOut1 with 24 faces and ...
+    target patch nonCoupleOut2 with 24 faces ...
+    with transformation axis=(-1 0 0), centre=(0 0 0), angle=-180
+    No couplings found
+patchToPatch: Calculating couplings between ...
+    source patch nonCoupleOut1 with 24 faces and ...
+    target patch nonCoupleOut2 with 24 faces ...
+    with transformation axis=(-1 0 0), centre=(0 0 0), angle=-210
+    No couplings found
+patchToPatch: Calculating couplings between ...
+    source patch nonCoupleOut1 with 24 faces and ...
+    target patch nonCoupleOut2 with 24 faces ...
+    with transformation axis=(-1 0 0), centre=(0 0 0), angle=-240
+    No couplings found
+patchToPatch: Calculating couplings between ...
+    source patch nonCoupleOut1 with 24 faces and ...
+    target patch nonCoupleOut2 with 24 faces ...
+    with transformation axis=(-1 0 0), centre=(0 0 0), angle=-270
+    No couplings found
+patchToPatch: Calculating couplings between ...
+    source patch nonCoupleOut1 with 24 faces and ...
+    target patch nonCoupleOut2 with 24 faces ...
+    with transformation axis=(-1 0 0), centre=(0 0 0), angle=-300
+    No couplings found
+patchToPatch: Calculating couplings between ...
+    source patch nonCoupleOut1 with 24 faces and ...
+    target patch nonCoupleOut2 with 24 faces ...
+    with transformation axis=(-1 0 0), centre=(0 0 0), angle=-330
+    No couplings found
+fvMeshStitcher: Connecting
+    1/0 small couplings removed/added to nonConformalCoupleOut0_on_nonCoupleOut1
+    0/1 small couplings removed/added to nonConformalCoupleOut30_on_nonCoupleOut1
+    Cell min/average/max openness = 0/6.64695631439e-17/2.82692037074e-16
+    Cell min/average/max projected volume fraction = 0/1.26410460174e-06/0.000593743925003
+    volScalarFields            : p nut k omega
+    volVectorFields            : U
+
+    Internal  : "//case/VTK/case_10.vtk"
+    Original cells:480 points:805   Additional cells:0  additional points:0
+
+Combining patches:
+    patch 0 statorDuct
+    patch 1 rotorDuct
+    patch 2 rotorBlades
+    patch 3 inlet
+    patch 4 outlet
+    patch 5 cyclicIn1
+    patch 6 cyclicIn2
+    patch 7 nonCoupleIn1
+    patch 8 nonCoupleIn2
+    patch 9 cyclicOut1
+    patch 10 cyclicOut2
+    patch 11 nonCoupleOut1
+    patch 12 nonCoupleOut2
+    discarding empty/nonConformal/processor patch 13 nonConformalCoupleIn0_on_nonCoupleIn1
+    discarding empty/nonConformal/processor patch 14 nonConformalCoupleIn0_on_nonCoupleIn2
+    discarding empty/nonConformal/processor patch 15 nonConformalCoupleIn30_on_nonCoupleIn1
+    discarding empty/nonConformal/processor patch 16 nonConformalCoupleIn30_on_nonCoupleIn2
+    discarding empty/nonConformal/processor patch 17 nonConformalCoupleIn60_on_nonCoupleIn1
+    discarding empty/nonConformal/processor patch 18 nonConformalCoupleIn60_on_nonCoupleIn2
+    discarding empty/nonConformal/processor patch 19 nonConformalCoupleIn90_on_nonCoupleIn1
+    discarding empty/nonConformal/processor patch 20 nonConformalCoupleIn90_on_nonCoupleIn2
+    discarding empty/nonConformal/processor patch 21 nonConformalCoupleIn120_on_nonCoupleIn1
+    discarding empty/nonConformal/processor patch 22 nonConformalCoupleIn120_on_nonCoupleIn2
+    discarding empty/nonConformal/processor patch 23 nonConformalCoupleIn150_on_nonCoupleIn1
+    discarding empty/nonConformal/processor patch 24 nonConformalCoupleIn150_on_nonCoupleIn2
+    discarding empty/nonConformal/processor patch 25 nonConformalCoupleIn180_on_nonCoupleIn1
+    discarding empty/nonConformal/processor patch 26 nonConformalCoupleIn180_on_nonCoupleIn2
+    discarding empty/nonConformal/processor patch 27 nonConformalCoupleIn210_on_nonCoupleIn1
+    discarding empty/nonConformal/processor patch 28 nonConformalCoupleIn210_on_nonCoupleIn2
+    discarding empty/nonConformal/processor patch 29 nonConformalCoupleIn240_on_nonCoupleIn1
+    discarding empty/nonConformal/processor patch 30 nonConformalCoupleIn240_on_nonCoupleIn2
+    discarding empty/nonConformal/processor patch 31 nonConformalCoupleIn270_on_nonCoupleIn1
+    discarding empty/nonConformal/processor patch 32 nonConformalCoupleIn270_on_nonCoupleIn2
+    discarding empty/nonConformal/processor patch 33 nonConformalCoupleIn300_on_nonCoupleIn1
+    discarding empty/nonConformal/processor patch 34 nonConformalCoupleIn300_on_nonCoupleIn2
+    discarding empty/nonConformal/processor patch 35 nonConformalCoupleIn330_on_nonCoupleIn1
+    discarding empty/nonConformal/processor patch 36 nonConformalCoupleIn330_on_nonCoupleIn2
+    discarding empty/nonConformal/processor patch 37 nonConformalCoupleOut0_on_nonCoupleOut1
+    discarding empty/nonConformal/processor patch 38 nonConformalCoupleOut0_on_nonCoupleOut2
+    discarding empty/nonConformal/processor patch 39 nonConformalCoupleOut30_on_nonCoupleOut1
+    discarding empty/nonConformal/processor patch 40 nonConformalCoupleOut30_on_nonCoupleOut2
+    discarding empty/nonConformal/processor patch 41 nonConformalCoupleOut60_on_nonCoupleOut1
+    discarding empty/nonConformal/processor patch 42 nonConformalCoupleOut60_on_nonCoupleOut2
+    discarding empty/nonConformal/processor patch 43 nonConformalCoupleOut90_on_nonCoupleOut1
+    discarding empty/nonConformal/processor patch 44 nonConformalCoupleOut90_on_nonCoupleOut2
+    discarding empty/nonConformal/processor patch 45 nonConformalCoupleOut120_on_nonCoupleOut1
+    discarding empty/nonConformal/processor patch 46 nonConformalCoupleOut120_on_nonCoupleOut2
+    discarding empty/nonConformal/processor patch 47 nonConformalCoupleOut150_on_nonCoupleOut1
+    discarding empty/nonConformal/processor patch 48 nonConformalCoupleOut150_on_nonCoupleOut2
+    discarding empty/nonConformal/processor patch 49 nonConformalCoupleOut180_on_nonCoupleOut1
+    discarding empty/nonConformal/processor patch 50 nonConformalCoupleOut180_on_nonCoupleOut2
+    discarding empty/nonConformal/processor patch 51 nonConformalCoupleOut210_on_nonCoupleOut1
+    discarding empty/nonConformal/processor patch 52 nonConformalCoupleOut210_on_nonCoupleOut2
+    discarding empty/nonConformal/processor patch 53 nonConformalCoupleOut240_on_nonCoupleOut1
+    discarding empty/nonConformal/processor patch 54 nonConformalCoupleOut240_on_nonCoupleOut2
+    discarding empty/nonConformal/processor patch 55 nonConformalCoupleOut270_on_nonCoupleOut1
+    discarding empty/nonConformal/processor patch 56 nonConformalCoupleOut270_on_nonCoupleOut2
+    discarding empty/nonConformal/processor patch 57 nonConformalCoupleOut300_on_nonCoupleOut1
+    discarding empty/nonConformal/processor patch 58 nonConformalCoupleOut300_on_nonCoupleOut2
+    discarding empty/nonConformal/processor patch 59 nonConformalCoupleOut330_on_nonCoupleOut1
+    discarding empty/nonConformal/processor patch 60 nonConformalCoupleOut330_on_nonCoupleOut2
+    discarding empty/nonConformal/processor patch 61 nonConformalError_on_nonCoupleIn1
+    discarding empty/nonConformal/processor patch 62 nonConformalError_on_nonCoupleIn2
+    discarding empty/nonConformal/processor patch 63 nonConformalError_on_nonCoupleOut1
+    discarding empty/nonConformal/processor patch 64 nonConformalError_on_nonCoupleOut2
+    Patch     : "//case/VTK/statorDuct/statorDuct_10.vtk"
+    Patch     : "//case/VTK/rotorDuct/rotorDuct_10.vtk"
+    Patch     : "//case/VTK/rotorBlades/rotorBlades_10.vtk"
+    Patch     : "//case/VTK/inlet/inlet_10.vtk"
+    Patch     : "//case/VTK/outlet/outlet_10.vtk"
+    Patch     : "//case/VTK/cyclicIn1/cyclicIn1_10.vtk"
+    Patch     : "//case/VTK/cyclicIn2/cyclicIn2_10.vtk"
+    Patch     : "//case/VTK/nonCoupleIn1/nonCoupleIn1_10.vtk"
+    Patch     : "//case/VTK/nonCoupleIn2/nonCoupleIn2_10.vtk"
+    Patch     : "//case/VTK/cyclicOut1/cyclicOut1_10.vtk"
+    Patch     : "//case/VTK/cyclicOut2/cyclicOut2_10.vtk"
+    Patch     : "//case/VTK/nonCoupleOut1/nonCoupleOut1_10.vtk"
+    Patch     : "//case/VTK/nonCoupleOut2/nonCoupleOut2_10.vtk"
+    surfScalarFields  : phi
+    surfVectorFields  : Uf
+Time: 0.002
+patchToPatch: Calculating couplings between ...
+    source patch nonCoupleIn1 with 24 faces and ...
+    target patch nonCoupleIn2 with 24 faces
+    Source min/average/max coverage = 0/0.759066490513/1
+    Target min/average/max coverage = 0/0.759066490513/1
+    Source average openness/error/depth/angle = 8.42987064288e-17/5.93313028323e-16/2.82495857408e-16/0
+    Source max openness/error/depth/angle = 2.96186305414e-16/1.94406233996e-15/6.58191216764e-16/0
+    180 couplings calculated in 0.000505s
+patchToPatch: Calculating couplings between ...
+    source patch nonCoupleIn1 with 24 faces and ...
+    target patch nonCoupleIn2 with 24 faces ...
+    with transformation axis=(-1 0 0), centre=(0 0 0), angle=30
+    Source min/average/max coverage = 0/0.239713428638/1
+    Target min/average/max coverage = 0/0.239713428638/1
+    Source average openness/error/depth/angle = 4.02883876928e-17/1.89077364696e-16/8.19885457197e-17/0
+    Source max openness/error/depth/angle = 3.27363811249e-16/1.14924641719e-15/4.45413221353e-16/0
+    60 couplings calculated in 0.000211s
+patchToPatch: Calculating couplings between ...
+    source patch nonCoupleIn1 with 24 faces and ...
+    target patch nonCoupleIn2 with 24 faces ...
+    with transformation axis=(-1 0 0), centre=(0 0 0), angle=60
+    No couplings found
+patchToPatch: Calculating couplings between ...
+    source patch nonCoupleIn1 with 24 faces and ...
+    target patch nonCoupleIn2 with 24 faces ...
+    with transformation axis=(-1 0 0), centre=(0 0 0), angle=90
+    No couplings found
+patchToPatch: Calculating couplings between ...
+    source patch nonCoupleIn1 with 24 faces and ...
+    target patch nonCoupleIn2 with 24 faces ...
+    with transformation axis=(-1 0 0), centre=(0 0 0), angle=120
+    No couplings found
+patchToPatch: Calculating couplings between ...
+    source patch nonCoupleIn1 with 24 faces and ...
+    target patch nonCoupleIn2 with 24 faces ...
+    with transformation axis=(-1 0 0), centre=(0 0 0), angle=150
+    No couplings found
+patchToPatch: Calculating couplings between ...
+    source patch nonCoupleIn1 with 24 faces and ...
+    target patch nonCoupleIn2 with 24 faces ...
+    with transformation axis=(-1 0 0), centre=(0 0 0), angle=180
+    No couplings found
+patchToPatch: Calculating couplings between ...
+    source patch nonCoupleIn1 with 24 faces and ...
+    target patch nonCoupleIn2 with 24 faces ...
+    with transformation axis=(-1 0 0), centre=(0 0 0), angle=210
+    No couplings found
+patchToPatch: Calculating couplings between ...
+    source patch nonCoupleIn1 with 24 faces and ...
+    target patch nonCoupleIn2 with 24 faces ...
+    with transformation axis=(-1 0 0), centre=(0 0 0), angle=240
+    No couplings found
+patchToPatch: Calculating couplings between ...
+    source patch nonCoupleIn1 with 24 faces and ...
+    target patch nonCoupleIn2 with 24 faces ...
+    with transformation axis=(-1 0 0), centre=(0 0 0), angle=270
+    No couplings found
+patchToPatch: Calculating couplings between ...
+    source patch nonCoupleIn1 with 24 faces and ...
+    target patch nonCoupleIn2 with 24 faces ...
+    with transformation axis=(-1 0 0), centre=(0 0 0), angle=300
+    No couplings found
+patchToPatch: Calculating couplings between ...
+    source patch nonCoupleIn1 with 24 faces and ...
+    target patch nonCoupleIn2 with 24 faces ...
+    with transformation axis=(-1 0 0), centre=(0 0 0), angle=330
+    No couplings found
+patchToPatch: Calculating couplings between ...
+    source patch nonCoupleOut1 with 24 faces and ...
+    target patch nonCoupleOut2 with 24 faces
+    Source min/average/max coverage = 0/0.759993744326/1
+    Target min/average/max coverage = 0/0.760071975616/1
+    Source average openness/error/depth/angle = 5.24354623537e-17/0.00305942759093/0.000401983300311/0.205494487667
+    Source max openness/error/depth/angle = 1.95762959991e-16/0.0109562252981/0.00210299898183/1.23193340198
+    72 couplings calculated in 0.001068s
+patchToPatch: Calculating couplings between ...
+    source patch nonCoupleOut1 with 24 faces and ...
+    target patch nonCoupleOut2 with 24 faces ...
+    with transformation axis=(-1 0 0), centre=(0 0 0), angle=-30
+    Source min/average/max coverage = 0/0.240006255674/1
+    Target min/average/max coverage = 0/0.240084522741/1
+    Source average openness/error/depth/angle = 2.59749873245e-17/0.00210486650854/0.000332710462196/0.205564522381
+    Source max openness/error/depth/angle = 2.00223635366e-16/0.0107530570811/0.00182810556479/1.23207215421
+    26 couplings calculated in 0.000456s
+patchToPatch: Calculating couplings between ...
+    source patch nonCoupleOut1 with 24 faces and ...
+    target patch nonCoupleOut2 with 24 faces ...
+    with transformation axis=(-1 0 0), centre=(0 0 0), angle=-60
+    No couplings found
+patchToPatch: Calculating couplings between ...
+    source patch nonCoupleOut1 with 24 faces and ...
+    target patch nonCoupleOut2 with 24 faces ...
+    with transformation axis=(-1 0 0), centre=(0 0 0), angle=-90
+    No couplings found
+patchToPatch: Calculating couplings between ...
+    source patch nonCoupleOut1 with 24 faces and ...
+    target patch nonCoupleOut2 with 24 faces ...
+    with transformation axis=(-1 0 0), centre=(0 0 0), angle=-120
+    No couplings found
+patchToPatch: Calculating couplings between ...
+    source patch nonCoupleOut1 with 24 faces and ...
+    target patch nonCoupleOut2 with 24 faces ...
+    with transformation axis=(-1 0 0), centre=(0 0 0), angle=-150
+    No couplings found
+patchToPatch: Calculating couplings between ...
+    source patch nonCoupleOut1 with 24 faces and ...
+    target patch nonCoupleOut2 with 24 faces ...
+    with transformation axis=(-1 0 0), centre=(0 0 0), angle=-180
+    No couplings found
+patchToPatch: Calculating couplings between ...
+    source patch nonCoupleOut1 with 24 faces and ...
+    target patch nonCoupleOut2 with 24 faces ...
+    with transformation axis=(-1 0 0), centre=(0 0 0), angle=-210
+    No couplings found
+patchToPatch: Calculating couplings between ...
+    source patch nonCoupleOut1 with 24 faces and ...
+    target patch nonCoupleOut2 with 24 faces ...
+    with transformation axis=(-1 0 0), centre=(0 0 0), angle=-240
+    No couplings found
+patchToPatch: Calculating couplings between ...
+    source patch nonCoupleOut1 with 24 faces and ...
+    target patch nonCoupleOut2 with 24 faces ...
+    with transformation axis=(-1 0 0), centre=(0 0 0), angle=-270
+    No couplings found
+patchToPatch: Calculating couplings between ...
+    source patch nonCoupleOut1 with 24 faces and ...
+    target patch nonCoupleOut2 with 24 faces ...
+    with transformation axis=(-1 0 0), centre=(0 0 0), angle=-300
+    No couplings found
+patchToPatch: Calculating couplings between ...
+    source patch nonCoupleOut1 with 24 faces and ...
+    target patch nonCoupleOut2 with 24 faces ...
+    with transformation axis=(-1 0 0), centre=(0 0 0), angle=-330
+    No couplings found
+fvMeshStitcher: Connecting
+    1/0 small couplings removed/added to nonConformalCoupleOut30_on_nonCoupleOut1
+    Cell min/average/max openness = 0/6.74368356059e-17/3.27441309419e-16
+    Cell min/average/max projected volume fraction = 0/2.31591477353e-06/0.00109203278059
+    volScalarFields            : p nut k omega
+    volVectorFields            : U
+
+    Internal  : "//case/VTK/case_20.vtk"
+    Original cells:480 points:805   Additional cells:0  additional points:0
+
+Combining patches:
+    patch 0 statorDuct
+    patch 1 rotorDuct
+    patch 2 rotorBlades
+    patch 3 inlet
+    patch 4 outlet
+    patch 5 cyclicIn1
+    patch 6 cyclicIn2
+    patch 7 nonCoupleIn1
+    patch 8 nonCoupleIn2
+    patch 9 cyclicOut1
+    patch 10 cyclicOut2
+    patch 11 nonCoupleOut1
+    patch 12 nonCoupleOut2
+    discarding empty/nonConformal/processor patch 13 nonConformalCoupleIn0_on_nonCoupleIn1
+    discarding empty/nonConformal/processor patch 14 nonConformalCoupleIn0_on_nonCoupleIn2
+    discarding empty/nonConformal/processor patch 15 nonConformalCoupleIn30_on_nonCoupleIn1
+    discarding empty/nonConformal/processor patch 16 nonConformalCoupleIn30_on_nonCoupleIn2
+    discarding empty/nonConformal/processor patch 17 nonConformalCoupleIn60_on_nonCoupleIn1
+    discarding empty/nonConformal/processor patch 18 nonConformalCoupleIn60_on_nonCoupleIn2
+    discarding empty/nonConformal/processor patch 19 nonConformalCoupleIn90_on_nonCoupleIn1
+    discarding empty/nonConformal/processor patch 20 nonConformalCoupleIn90_on_nonCoupleIn2
+    discarding empty/nonConformal/processor patch 21 nonConformalCoupleIn120_on_nonCoupleIn1
+    discarding empty/nonConformal/processor patch 22 nonConformalCoupleIn120_on_nonCoupleIn2
+    discarding empty/nonConformal/processor patch 23 nonConformalCoupleIn150_on_nonCoupleIn1
+    discarding empty/nonConformal/processor patch 24 nonConformalCoupleIn150_on_nonCoupleIn2
+    discarding empty/nonConformal/processor patch 25 nonConformalCoupleIn180_on_nonCoupleIn1
+    discarding empty/nonConformal/processor patch 26 nonConformalCoupleIn180_on_nonCoupleIn2
+    discarding empty/nonConformal/processor patch 27 nonConformalCoupleIn210_on_nonCoupleIn1
+    discarding empty/nonConformal/processor patch 28 nonConformalCoupleIn210_on_nonCoupleIn2
+    discarding empty/nonConformal/processor patch 29 nonConformalCoupleIn240_on_nonCoupleIn1
+    discarding empty/nonConformal/processor patch 30 nonConformalCoupleIn240_on_nonCoupleIn2
+    discarding empty/nonConformal/processor patch 31 nonConformalCoupleIn270_on_nonCoupleIn1
+    discarding empty/nonConformal/processor patch 32 nonConformalCoupleIn270_on_nonCoupleIn2
+    discarding empty/nonConformal/processor patch 33 nonConformalCoupleIn300_on_nonCoupleIn1
+    discarding empty/nonConformal/processor patch 34 nonConformalCoupleIn300_on_nonCoupleIn2
+    discarding empty/nonConformal/processor patch 35 nonConformalCoupleIn330_on_nonCoupleIn1
+    discarding empty/nonConformal/processor patch 36 nonConformalCoupleIn330_on_nonCoupleIn2
+    discarding empty/nonConformal/processor patch 37 nonConformalCoupleOut0_on_nonCoupleOut1
+    discarding empty/nonConformal/processor patch 38 nonConformalCoupleOut0_on_nonCoupleOut2
+    discarding empty/nonConformal/processor patch 39 nonConformalCoupleOut30_on_nonCoupleOut1
+    discarding empty/nonConformal/processor patch 40 nonConformalCoupleOut30_on_nonCoupleOut2
+    discarding empty/nonConformal/processor patch 41 nonConformalCoupleOut60_on_nonCoupleOut1
+    discarding empty/nonConformal/processor patch 42 nonConformalCoupleOut60_on_nonCoupleOut2
+    discarding empty/nonConformal/processor patch 43 nonConformalCoupleOut90_on_nonCoupleOut1
+    discarding empty/nonConformal/processor patch 44 nonConformalCoupleOut90_on_nonCoupleOut2
+    discarding empty/nonConformal/processor patch 45 nonConformalCoupleOut120_on_nonCoupleOut1
+    discarding empty/nonConformal/processor patch 46 nonConformalCoupleOut120_on_nonCoupleOut2
+    discarding empty/nonConformal/processor patch 47 nonConformalCoupleOut150_on_nonCoupleOut1
+    discarding empty/nonConformal/processor patch 48 nonConformalCoupleOut150_on_nonCoupleOut2
+    discarding empty/nonConformal/processor patch 49 nonConformalCoupleOut180_on_nonCoupleOut1
+    discarding empty/nonConformal/processor patch 50 nonConformalCoupleOut180_on_nonCoupleOut2
+    discarding empty/nonConformal/processor patch 51 nonConformalCoupleOut210_on_nonCoupleOut1
+    discarding empty/nonConformal/processor patch 52 nonConformalCoupleOut210_on_nonCoupleOut2
+    discarding empty/nonConformal/processor patch 53 nonConformalCoupleOut240_on_nonCoupleOut1
+    discarding empty/nonConformal/processor patch 54 nonConformalCoupleOut240_on_nonCoupleOut2
+    discarding empty/nonConformal/processor patch 55 nonConformalCoupleOut270_on_nonCoupleOut1
+    discarding empty/nonConformal/processor patch 56 nonConformalCoupleOut270_on_nonCoupleOut2
+    discarding empty/nonConformal/processor patch 57 nonConformalCoupleOut300_on_nonCoupleOut1
+    discarding empty/nonConformal/processor patch 58 nonConformalCoupleOut300_on_nonCoupleOut2
+    discarding empty/nonConformal/processor patch 59 nonConformalCoupleOut330_on_nonCoupleOut1
+    discarding empty/nonConformal/processor patch 60 nonConformalCoupleOut330_on_nonCoupleOut2
+    discarding empty/nonConformal/processor patch 61 nonConformalError_on_nonCoupleIn1
+    discarding empty/nonConformal/processor patch 62 nonConformalError_on_nonCoupleIn2
+    discarding empty/nonConformal/processor patch 63 nonConformalError_on_nonCoupleOut1
+    discarding empty/nonConformal/processor patch 64 nonConformalError_on_nonCoupleOut2
+    Patch     : "//case/VTK/statorDuct/statorDuct_20.vtk"
+    Patch     : "//case/VTK/rotorDuct/rotorDuct_20.vtk"
+    Patch     : "//case/VTK/rotorBlades/rotorBlades_20.vtk"
+    Patch     : "//case/VTK/inlet/inlet_20.vtk"
+    Patch     : "//case/VTK/outlet/outlet_20.vtk"
+    Patch     : "//case/VTK/cyclicIn1/cyclicIn1_20.vtk"
+    Patch     : "//case/VTK/cyclicIn2/cyclicIn2_20.vtk"
+    Patch     : "//case/VTK/nonCoupleIn1/nonCoupleIn1_20.vtk"
+    Patch     : "//case/VTK/nonCoupleIn2/nonCoupleIn2_20.vtk"
+    Patch     : "//case/VTK/cyclicOut1/cyclicOut1_20.vtk"
+    Patch     : "//case/VTK/cyclicOut2/cyclicOut2_20.vtk"
+    Patch     : "//case/VTK/nonCoupleOut1/nonCoupleOut1_20.vtk"
+    Patch     : "//case/VTK/nonCoupleOut2/nonCoupleOut2_20.vtk"
+    surfScalarFields  : phi
+    surfVectorFields  : Uf
+End
+

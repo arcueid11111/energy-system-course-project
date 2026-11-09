@@ -16,6 +16,9 @@ from desktop.window import MainWindow
 
 @pytest.fixture(scope="module")
 def app():
+    from desktop.environment import prepare_qt_plugins
+
+    prepare_qt_plugins()
     instance = QApplication.instance() or QApplication([])
     assert instance.platformName() == "offscreen"
     yield instance
@@ -131,3 +134,25 @@ def test_desktop_work_directory_excludes_duplicate_instance(tmp_path):
         first.close()
     second = Controller(tmp_path / "shared")
     second.close()
+
+
+def test_physics_workspace_actual_fields_and_task_options(window):
+    import json
+
+    panel = window.physics_panel
+    panel.load_example()
+    wait_qt(lambda: panel.field.data is not None)
+    assert panel.field.data["cell_count"] == 480
+    assert panel.plot.rows
+    panel.channel.setCurrentText("force_x_n")
+    panel.spectrum.setChecked(True)
+    assert panel.plot.rows and "Hz" in panel.plot.label
+    panel.task.setCurrentIndex(1)
+    assert panel.kind.currentText() == "cavitating_impeller"
+    assert panel.project().end_time_s >= 0.6
+    assert len(json.loads(panel.options.toPlainText())["pressures_pa"]) >= 4
+    panel.preset("water_hammer")
+    assert panel.project().wave_solver == "acoustic_fv"
+    assert panel.project().end_time_s < 0.031
+    panel.plane.setCurrentIndex(1)
+    wait_qt(lambda: not window.workers)

@@ -1,17 +1,7 @@
-## 单机离线桌面版
+FLOWSTATE v2：本机三维流体与弹性瞬变工作台。
 
-所有仿真、优化、校准、CAD 解析和数据存储均在下载电脑上执行。不包含远程服务、账户登录或网页前端。
+新增 OpenFOAM Foundation 14 旋转/两相汽蚀/CAD 流域任务、真实 VTK 场回放与切片/矢量/流线、壁面流体力与频谱、汽蚀扬程扫描与 NPSH3、三维线性声学直管水锤基准、管网弹性 MOC、波形双向耦合、网格/步长校核和实测 CSV 比较。所有计算在使用者电脑完成，无远程计算服务。
 
-### 下载与启动
+下载 Windows x64、Apple Silicon macOS 或 Linux x64 应用。Intel Mac 不构建。OpenFOAM 功能需另装本机 OpenFOAM 14，或从本发行导入对应 CPU 架构的离线 Docker 镜像；普通管网、声学基准和场文件查看不需要 OpenFOAM。
 
-- Windows x64：解压 `Flowstate-windows-x64.zip`，运行文件夹中的 `Flowstate.exe`，请勿只单独拷走 exe。
-- Apple Silicon Mac：解压 `Flowstate-macos-arm64.zip`，将 `Flowstate.app` 拷到“应用程序”后打开。
-- Linux x64：解压 `Flowstate-linux-x64.tar.gz`，运行 `./Flowstate/Flowstate`。
-
-应用已包含 Python、Qt 和 EPANET 运行组件，无需另外安装 Python。应用未购买商业代码签名证书，系统可能显示首次来源确认。
-
-### 功能
-
-二维管网设计、三维视图、DXF 中心线导入、管段分割、独立水力求解、时间回放、泵曲线、方案比较、任务队列、参数优化和观测校准。
-
-CAD 当前支持 DXF；DWG 先另存为 DXF。示例参数及合成样本不构成真实设备验证。
+数值基准和真实求解器短时输出不等于实机验证。周期叶轮只代表扇区载荷；未稳定汽蚀扫描、未收敛耦合、粗网格非线性水锤误差均明确报告。尚无真实设备 CAD/仪器数据，未完成整机经验校准、空蚀侵蚀率或结构强度验证。详见 docs/PHYSICS.md、docs/VERIFICATION.md、docs/CFD_INSTALL.md。

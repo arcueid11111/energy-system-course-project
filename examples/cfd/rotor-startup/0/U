@@ -1,0 +1,19 @@
+FoamFile
+{ format ascii; class volVectorField; object U; }
+dimensions [velocity];
+internalField uniform (0 0 0);
+boundaryField
+{
+#includeEtc "caseDicts/setConstraintTypes"
+
+inlet { type pressureInletOutletVelocity; value $internalField; }
+outlet { type flowRateOutletVelocity; volumetricFlowRate 0.000115740740741; value $internalField; }
+
+"(statorDuct|nonCoupleIn1|nonCoupleOut2)" { type noSlip; }
+"(rotorDuct|rotorBlades|nonCoupleIn2|nonCoupleOut1)"
+{ type movingWallVelocity; value $internalField; }
+nonCouple { type movingWallSlipVelocity; value $internalField; }
+
+
+}
+

@@ -1,0 +1,87 @@
+Excerpt of actual solver log; full log retained with development run.
+/*---------------------------------------------------------------------------*\
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.org
+    \\  /    A nd           | Version:  14
+     \\/     M anipulation  |
+\*---------------------------------------------------------------------------*/
+Build  : 14-a4867fc914c1
+Exec   : foamRun
+Date   : Nov 09 2026
+Time   : 08:48:08
+Host   : "ea720c473fda"
+PID    : 1
+I/O    : uncollated
+Case   : //case
+nProcs : 1
+sigFpe : Floating point exception trapping - not supported on this platform
+fileModificationChecking : Monitoring run-time modified files using timeStampMaster (fileModificationSkew 10)
+allowSystemOperations : Allowing user-supplied system call operations
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+Create time
+
+Create mesh for time = 0
+
+patchToPatch: Calculating couplings between ...
+    source patch nonCoupleIn1 with 24 faces and ...
+    target patch nonCoupleIn2 with 24 faces
+    Source min/average/max coverage = 1/1/1
+    Target min/average/max coverage = 1/1/1
+    Source average openness/error/depth/angle = 5.68290113916e-17/3.83135628653e-16/2.27761955609e-16/0
+    Source max openness/error/depth/angle = 2.96186305415e-16/1.44990860927e-15/1.38619177772e-15/0
+    48 couplings calculated in 0.007289s
+patchToPatch: Calculating couplings between ...
+    source patch nonCoupleIn1 with 24 faces and ...
+    target patch nonCoupleIn2 with 24 faces ...
+    with transformation axis=(-1 0 0), centre=(0 0 0), angle=30
+    Source min/average/max coverage = 0/1.89876866179e-12/1.99106945183e-11
+    Target min/average/max coverage = 0/1.89876824701e-12/1.99103406282e-11
+    Source average openness/error/depth/angle = 7.65557226041e-19/2.34119092521e-17/0/0
+... intermediate iterations omitted ...
+    target patch nonCoupleOut2 with 24 faces ...
+    with transformation axis=(-1 0 0), centre=(0 0 0), angle=-240
+    No couplings found
+patchToPatch: Calculating couplings between ...
+    source patch nonCoupleOut1 with 24 faces and ...
+    target patch nonCoupleOut2 with 24 faces ...
+    with transformation axis=(-1 0 0), centre=(0 0 0), angle=-270
+    No couplings found
+patchToPatch: Calculating couplings between ...
+    source patch nonCoupleOut1 with 24 faces and ...
+    target patch nonCoupleOut2 with 24 faces ...
+    with transformation axis=(-1 0 0), centre=(0 0 0), angle=-300
+    No couplings found
+patchToPatch: Calculating couplings between ...
+    source patch nonCoupleOut1 with 24 faces and ...
+    target patch nonCoupleOut2 with 24 faces ...
+    with transformation axis=(-1 0 0), centre=(0 0 0), angle=-330
+    No couplings found
+fvMeshStitcher: Connecting
+    Cell min/average/max openness = 0/4.66441073698e-17/1.875825705e-16
+    Cell min/average/max volume conservation error = -3.99614027402e-16/-7.3495024607e-18/4.62162309952e-16
+    nonConformalCoupleIn0_on_nonCoupleIn1 min/average/max mesh flux error = 0/0/0
+    nonConformalCoupleIn30_on_nonCoupleIn1 min/average/max mesh flux error = 0/0/0
+    nonConformalCoupleOut0_on_nonCoupleOut1 min/average/max mesh flux error = 0/0/0
+    nonConformalCoupleOut30_on_nonCoupleOut1 min/average/max mesh flux error = 0/0/0
+    Cell min/average/max projected volume fraction = 0/2.53678092654e-06/0.00119808428735
+DILUPBiCGStab:  Solving for Ux, Initial residual = 0.010950198429, Final residual = 4.44667933957e-05, No Iterations 1
+DILUPBiCGStab:  Solving for Uy, Initial residual = 0.0229934842148, Final residual = 8.11951448527e-05, No Iterations 1
+DILUPBiCGStab:  Solving for Uz, Initial residual = 0.00637997369552, Final residual = 4.2055160303e-05, No Iterations 1
+GAMG:  Solving for p, Initial residual = 0.0543384211339, Final residual = 6.78930897207e-07, No Iterations 5
+time step continuity errors : sum local = 1.6888109761e-09, global = -3.44798241535e-10
+PIMPLE: Iteration 2
+DILUPBiCGStab:  Solving for Ux, Initial residual = 0.00102705940685, Final residual = 9.7514929579e-08, No Iterations 1
+DILUPBiCGStab:  Solving for Uy, Initial residual = 0.00133104072506, Final residual = 2.90276605455e-07, No Iterations 1
+DILUPBiCGStab:  Solving for Uz, Initial residual = 0.000357735111311, Final residual = 8.48503373597e-10, No Iterations 1
+GAMG:  Solving for p, Initial residual = 0.0140662028575, Final residual = 4.13948910925e-07, No Iterations 5
+time step continuity errors : sum local = 1.03314269866e-09, global = 2.41840718765e-10, cumulative = 1.06792623527e-08
+
+Selecting patchDistMethod meshWave
+DILUPBiCGStab:  Solving for omega, Initial residual = 0.0064946621635, Final residual = 1.04094183847e-07, No Iterations 1
+DILUPBiCGStab:  Solving for k, Initial residual = 0.0336488115861, Final residual = 3.61466972579e-10, No Iterations 2
+ExecutionTime = 0.433784 s  ClockTime = 1 s
+
+End
+

@@ -17,7 +17,7 @@ jobs:
         with:
           python-version: '3.12'
           cache: pip
-      - run: sudo apt-get update && sudo apt-get install -y libegl1 libgl1 libxkbcommon0
+      - run: sudo apt-get update && sudo apt-get install -y libegl1 libgl1 libxkbcommon0 libglu1-mesa
       - run: python -m pip install -r requirements-dev.txt
       - run: python -m ruff check gui.py backend desktop scripts tests
       - run: python -m pytest -q

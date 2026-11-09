@@ -8,7 +8,7 @@ on:
       tag:
         description: Release tag
         required: true
-        default: v1.0.0
+        default: v2.0.0
 permissions:
   contents: read
 jobs:
@@ -24,7 +24,7 @@ jobs:
           - os: ubuntu-22.04
             artifact: linux-x64
     runs-on: ${{ matrix.os }}
-    timeout-minutes: 20
+    timeout-minutes: 35
     env:
       QT_QPA_PLATFORM: offscreen
       MPLBACKEND: Agg
@@ -35,7 +35,7 @@ jobs:
           python-version: '3.12'
           cache: pip
       - if: runner.os == 'Linux'
-        run: sudo apt-get update && sudo apt-get install -y libegl1 libgl1 libxkbcommon0
+        run: sudo apt-get update && sudo apt-get install -y libegl1 libgl1 libxkbcommon0 libglu1-mesa
       - run: python -m pip install -r requirements-dev.txt
       - run: python -m pytest -q
       - run: python scripts/build_app.py
@@ -43,20 +43,55 @@ jobs:
         with:
           name: app-${{ matrix.artifact }}
           path: release/*
+          retention-days: 1
       - uses: actions/upload-artifact@v7
         if: always()
         with:
           name: check-${{ matrix.artifact }}
           path: build/self-check-*
+  cfd-runtime:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-24.04
+            arch: amd64
+          - os: ubuntu-24.04-arm
+            arch: arm64
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+      - run: docker build -t flowstate-openfoam:14 cfd_runtime
+      - run: python -m pip install -r requirements.txt
+      - run: python scripts/cfd_smoke.py
+      - name: Export local offline solver image
+        run: |
+          mkdir -p release
+          docker save flowstate-openfoam:14 | gzip -1 > release/Flowstate-openfoam14-${{ matrix.arch }}.tar.gz
+      - uses: actions/upload-artifact@v7
+        with:
+          name: app-cfd-${{ matrix.arch }}
+          path: release/*
+          retention-days: 1
+          compression-level: 0
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: cfd-check-${{ matrix.arch }}
+          path: reports/cfd-smoke.json
   publish:
-    needs: build
+    needs: [build, cfd-runtime]
     runs-on: ubuntu-22.04
     permissions:
       contents: write
     env:
       GH_TOKEN: ${{ github.token }}
       GH_REPO: ${{ github.repository }}
-      RELEASE_TAG: ${{ inputs.tag || 'v1.0.0' }}
+      RELEASE_TAG: ${{ inputs.tag || 'v2.0.0' }}
     steps:
       - uses: actions/checkout@v7
       - uses: actions/download-artifact@v8
@@ -65,8 +100,12 @@ jobs:
           path: release
           merge-multiple: true
       - run: python scripts/package_source.py
+      - name: Include corresponding Gmsh source
+        run: |
+          curl --fail --location https://gmsh.info/src/gmsh-4.15.2-source.tgz -o release/gmsh-4.15.2-source.tgz
+          echo "be3f66f225d27ba9fa014f07e83169285da8a051b0e8ab7103d88066b39bdd3e  release/gmsh-4.15.2-source.tgz" | sha256sum -c -
       - name: Record download checksums
-        run: cd release && sha256sum Flowstate-* > SHA256SUMS.txt
+        run: cd release && sha256sum Flowstate-* gmsh-* > SHA256SUMS.txt
       - name: Create or update the release for this exact commit
         shell: bash
         run: |

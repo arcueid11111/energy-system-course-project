@@ -48,6 +48,15 @@ class Controller:
             "design_calibration", document["name"], {"document": document, **options}
         )
 
+    def physics_submit(self, kind, name, payload):
+        return self.manager.submit(kind, name, {**payload, "workspace": str(self.folder)})
+
+    def physics_result(self, identifier):
+        return self._record(lambda: store.get(identifier, "physics_result"))
+
+    def physics_history(self):
+        return self._record(lambda: store.listing("physics_result"))
+
     def batch(self, documents):
         return self.manager.submit_many(
             [("design_simulation", d["name"], {"document": d}) for d in documents]

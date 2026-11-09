@@ -1,5 +1,14 @@
 # FLOWSTATE · 离心泵与二维/三维管网
 
+
+**v2 本机物理工作台已加入三维旋转流动、压力脉动、两相汽蚀扬程下降与管网水锤。**
+
+- [三维模型、CAD 流域、双向耦合和适用边界](docs/PHYSICS.md)
+- [本机安装、离线 OpenFOAM 镜像与 GUI 使用](docs/CFD_INSTALL.md)
+- [实际数值校核与尚未完成的实机验证](docs/VERIFICATION.md)
+
+原有二维/三维管网设计和中心线 DXF 导入保留。新的 STEP/STL 导入针对封闭 CFD 流体域，二者不能互相替代。所有计算在下载后的电脑独立执行。
+
 **在自己的电脑上设计管网、导入 CAD、运行仿真和查看结果。全部计算与数据存储均在本机完成。**
 
 [下载可直接运行的应用](https://github.com/arcueid11111/energy-system-course-project/releases/latest) · [详细操作](docs/USER_GUIDE.md) · [模型与验证](docs/MODEL.md)

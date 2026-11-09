@@ -29,6 +29,8 @@ def copy_licenses():
         "ezdxf",
         "matplotlib",
         "six",
+        "vtk",
+        "gmsh",
     ]:
         dist = importlib.metadata.distribution(name)
         for entry in dist.files or []:
@@ -62,6 +64,12 @@ def main():
         name = "macos-" + ("arm64" if platform.machine() == "arm64" else "x64")
         executable = ROOT / "dist" / "Flowstate.app" / "Contents" / "MacOS" / "Flowstate"
         bundle = ROOT / "dist" / "Flowstate.app"
+        # Qt excludes UF_HIDDEN dylibs from its plugin inventory on macOS.
+        # Clear only that filesystem flag in our freshly generated output.
+        for item in bundle.rglob("*"):
+            flags = item.stat().st_flags
+            if flags & 0x8000:
+                os.chflags(item, flags & ~0x8000)
         # Finder metadata inherited from a local source checkout must not invalidate
         # the ad-hoc bundle signature. This touches only our freshly built output.
         for attribute in ("com.apple.FinderInfo", "com.apple.ResourceFork"):

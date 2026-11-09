@@ -51,6 +51,13 @@ STATE_NAMES = {
     "cancelled": "已取消",
 }
 KIND_NAMES = {
+    "physics_cfd": "三维流场",
+    "physics_scan": "汽蚀扫描",
+    "physics_mesh": "网格校核",
+    "physics_timestep": "步长校核",
+    "physics_transient": "管网瞬变",
+    "physics_coupled": "双向耦合",
+    "physics_validation": "物理实测对比",
     "design_simulation": "自建管网仿真",
     "design_optimization": "自建管网优化",
     "design_calibration": "测量数据校准",
@@ -419,6 +426,10 @@ class MainWindow(QMainWindow):
         v.addWidget(self.calibration_output, 1)
         self.last_calibration = None
         self.tabs.addTab(page, "观测对照与校准")
+        from .physics_panel import PhysicsPanel
+
+        self.physics_panel = PhysicsPanel(self)
+        self.tabs.addTab(self.physics_panel, "三维物理与瞬变")
         self.update_observation_targets()
 
     def update_observation_targets(self):
@@ -1141,7 +1152,12 @@ class MainWindow(QMainWindow):
         if not job:
             return
         result = job.get("result") or {}
-        if result.get("design_calibration_id"):
+        if result.get("physics_result_id"):
+            self.work(
+                lambda: self.controller.physics_result(result["physics_result_id"]),
+                self.physics_panel.display_result,
+            )
+        elif result.get("design_calibration_id"):
             controller = self.controller
             self.work(
                 lambda: controller.calibration(result["design_calibration_id"]),

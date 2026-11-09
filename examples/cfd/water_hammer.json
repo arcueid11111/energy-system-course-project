@@ -1,0 +1,82 @@
+{
+  "schema_version": "flowstate-cfd-1",
+  "name": "弹性直管快速关阀 · 三维可压缩基准",
+  "kind": "water_hammer",
+  "runtime": {
+    "mode": "docker",
+    "docker_command": "docker",
+    "docker_context": "",
+    "image": "flowstate-openfoam:14",
+    "bashrc": "/opt/openfoam14/etc/bashrc",
+    "wsl_distribution": "Ubuntu",
+    "cpus": 2,
+    "memory_gb": 3,
+    "timeout_seconds": 3600
+  },
+  "provenance": "parameterized_benchmark",
+  "source_note": "参数化数值基准，未做实机验证",
+  "mesh_scale": 1.0,
+  "end_time_s": 0.02,
+  "delta_t_s": 0.00002,
+  "write_interval_s": 0.0025,
+  "max_courant": 0.3,
+  "temperature_k": 293.15,
+  "rho_kgm3": 998.2,
+  "viscosity_pas": 0.001002,
+  "bulk_modulus_pa": 2200000000.0,
+  "vapour_pressure_pa": 2339.0,
+  "inlet_absolute_pa": 101325.0,
+  "outlet_absolute_pa": 101325.0,
+  "inlet_velocity_ms": 1.0,
+  "flow_m3h": 5.0,
+  "rpm": 600.0,
+  "rotor_angle_per_step_deg": 1.0,
+  "turbulence": "laminar",
+  "cavitation": {
+    "nuclei_per_m3": 16000000000000.0,
+    "nucleus_diameter_m": 2e-6,
+    "evaporation": 1.0,
+    "condensation": 1.0
+  },
+  "pipe_length_m": 20.0,
+  "pipe_diameter_m": 0.1,
+  "pipe_cells": 80,
+  "radial_cells": 2,
+  "wave_frictionless_benchmark": true,
+  "wave_solver": "acoustic_fv",
+  "wall": {
+    "thickness_m": 0.003,
+    "young_pa": 210000000000.0,
+    "poisson": 0.3,
+    "restraint_factor": 1.0
+  },
+  "close_start_s": 0.002,
+  "close_duration_s": 0.001,
+  "cad_directory": "",
+  "geometry_units": "m",
+  "fluid_seed": [
+    0.0,
+    0.0,
+    0.0
+  ],
+  "cad_bounds": null,
+  "rotor_origin": [
+    0.0,
+    0.0,
+    0.0
+  ],
+  "rotor_axis": [
+    1.0,
+    0.0,
+    0.0
+  ],
+  "cad_rotating": false,
+  "cad_cavitation": false,
+  "cad_elastic_bulk": false,
+  "probe_points": [],
+  "gravity_ms2": [
+    0.0,
+    0.0,
+    0.0
+  ]
+}

@@ -1,0 +1,142 @@
+/*---------------------------------------------------------------------------*\
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.org
+    \\  /    A nd           | Version:  14
+     \\/     M anipulation  |
+\*---------------------------------------------------------------------------*/
+Build  : 14-a4867fc914c1
+Exec   : checkMesh
+Date   : Nov 09 2026
+Time   : 08:48:08
+Host   : "205e5d40c53b"
+PID    : 1
+I/O    : uncollated
+Case   : //case
+nProcs : 1
+sigFpe : Floating point exception trapping - not supported on this platform
+fileModificationChecking : Monitoring run-time modified files using timeStampMaster (fileModificationSkew 10)
+allowSystemOperations : Allowing user-supplied system call operations
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+Create time
+
+Create mesh for time = 0
+
+Time = 0s
+
+Mesh stats
+    points:           805
+    faces:            1712
+    internal faces:   1168
+    cells:            480
+    faces per cell:   6
+    boundary patches: 65
+    point zones:      0
+    face zones:       0
+    cell zones:       1
+
+Overall number of cells of each type:
+    hexahedra:     480
+    prisms:        0
+    wedges:        0
+    pyramids:      0
+    tet wedges:    0
+    tetrahedra:    0
+    polyhedra:     0
+
+Checking topology...
+    Boundary definition OK.
+    Cell to face addressing OK.
+    Point usage OK.
+    Upper triangular ordering OK.
+    Face vertices OK.
+   *Number of regions: 3
+    The mesh has multiple regions which are not connected by any face.
+
+Checking patch topology for multiply connected surfaces...
+    Patch               Faces    Points   Surface topology                  
+    statorDuct          96       140      ok (non-closed singly connected)  
+    rotorDuct           144      182      ok (non-closed singly connected)  
+    rotorBlades         96       130      ok (non-closed singly connected)  
+    inlet               24       35       ok (non-closed singly connected)  
+    outlet              24       35       ok (non-closed singly connected)  
+    cyclicIn1           16       25       ok (non-closed singly connected)  
+    cyclicIn2           16       25       ok (non-closed singly connected)  
+    nonCoupleIn1        24       35       ok (non-closed singly connected)  
+    nonCoupleIn2        24       35       ok (non-closed singly connected)  
+    cyclicOut1          16       25       ok (non-closed singly connected)  
+    cyclicOut2          16       25       ok (non-closed singly connected)  
+    nonCoupleOut1       24       35       ok (non-closed singly connected)  
+    nonCoupleOut2       24       35       ok (non-closed singly connected)  
+    nonConformalCoupleIn0_on_nonCoupleIn10        0        ok (empty)                        
+    nonConformalCoupleIn0_on_nonCoupleIn20        0        ok (empty)                        
+    nonConformalCoupleIn30_on_nonCoupleIn10        0        ok (empty)                        
+    nonConformalCoupleIn30_on_nonCoupleIn20        0        ok (empty)                        
+    nonConformalCoupleIn60_on_nonCoupleIn10        0        ok (empty)                        
+    nonConformalCoupleIn60_on_nonCoupleIn20        0        ok (empty)                        
+    nonConformalCoupleIn90_on_nonCoupleIn10        0        ok (empty)                        
+    nonConformalCoupleIn90_on_nonCoupleIn20        0        ok (empty)                        
+    nonConformalCoupleIn120_on_nonCoupleIn10        0        ok (empty)                        
+    nonConformalCoupleIn120_on_nonCoupleIn20        0        ok (empty)                        
+    nonConformalCoupleIn150_on_nonCoupleIn10        0        ok (empty)                        
+    nonConformalCoupleIn150_on_nonCoupleIn20        0        ok (empty)                        
+    nonConformalCoupleIn180_on_nonCoupleIn10        0        ok (empty)                        
+    nonConformalCoupleIn180_on_nonCoupleIn20        0        ok (empty)                        
+    nonConformalCoupleIn210_on_nonCoupleIn10        0        ok (empty)                        
+    nonConformalCoupleIn210_on_nonCoupleIn20        0        ok (empty)                        
+    nonConformalCoupleIn240_on_nonCoupleIn10        0        ok (empty)                        
+    nonConformalCoupleIn240_on_nonCoupleIn20        0        ok (empty)                        
+    nonConformalCoupleIn270_on_nonCoupleIn10        0        ok (empty)                        
+    nonConformalCoupleIn270_on_nonCoupleIn20        0        ok (empty)                        
+    nonConformalCoupleIn300_on_nonCoupleIn10        0        ok (empty)                        
+    nonConformalCoupleIn300_on_nonCoupleIn20        0        ok (empty)                        
+    nonConformalCoupleIn330_on_nonCoupleIn10        0        ok (empty)                        
+    nonConformalCoupleIn330_on_nonCoupleIn20        0        ok (empty)                        
+    nonConformalCoupleOut0_on_nonCoupleOut10        0        ok (empty)                        
+    nonConformalCoupleOut0_on_nonCoupleOut20        0        ok (empty)                        
+    nonConformalCoupleOut30_on_nonCoupleOut10        0        ok (empty)                        
+    nonConformalCoupleOut30_on_nonCoupleOut20        0        ok (empty)                        
+    nonConformalCoupleOut60_on_nonCoupleOut10        0        ok (empty)                        
+    nonConformalCoupleOut60_on_nonCoupleOut20        0        ok (empty)                        
+    nonConformalCoupleOut90_on_nonCoupleOut10        0        ok (empty)                        
+    nonConformalCoupleOut90_on_nonCoupleOut20        0        ok (empty)                        
+    nonConformalCoupleOut120_on_nonCoupleOut10        0        ok (empty)                        
+    nonConformalCoupleOut120_on_nonCoupleOut20        0        ok (empty)                        
+    nonConformalCoupleOut150_on_nonCoupleOut10        0        ok (empty)                        
+    nonConformalCoupleOut150_on_nonCoupleOut20        0        ok (empty)                        
+    nonConformalCoupleOut180_on_nonCoupleOut10        0        ok (empty)                        
+    nonConformalCoupleOut180_on_nonCoupleOut20        0        ok (empty)                        
+    nonConformalCoupleOut210_on_nonCoupleOut10        0        ok (empty)                        
+    nonConformalCoupleOut210_on_nonCoupleOut20        0        ok (empty)                        
+    nonConformalCoupleOut240_on_nonCoupleOut10        0        ok (empty)                        
+    nonConformalCoupleOut240_on_nonCoupleOut20        0        ok (empty)                        
+    nonConformalCoupleOut270_on_nonCoupleOut10        0        ok (empty)                        
+    nonConformalCoupleOut270_on_nonCoupleOut20        0        ok (empty)                        
+    nonConformalCoupleOut300_on_nonCoupleOut10        0        ok (empty)                        
+    nonConformalCoupleOut300_on_nonCoupleOut20        0        ok (empty)                        
+    nonConformalCoupleOut330_on_nonCoupleOut10        0        ok (empty)                        
+    nonConformalCoupleOut330_on_nonCoupleOut20        0        ok (empty)                        
+    nonConformalError_on_nonCoupleIn10        0        ok (empty)                        
+    nonConformalError_on_nonCoupleIn20        0        ok (empty)                        
+    nonConformalError_on_nonCoupleOut10        0        ok (empty)                        
+    nonConformalError_on_nonCoupleOut20        0        ok (empty)                        
+
+Checking geometry...
+    Overall domain bounding box (0 0.0386370330516 -0.0258819045103) (0.06 0.1 0.0258819045103)
+    Mesh has 3 geometric (non-empty/wedge) directions (1 1 1)
+    Mesh has 3 solution (non-empty) directions (1 1 1)
+    Max cell openness = 1.81911359878e-16 OK.
+    Max aspect ratio = 1.6255839393 OK.
+    Minimum face area = 1.74477549461e-05. Maximum face area = 4.36193873654e-05.  Face area magnitudes OK.
+    Min volume = 9.26029766692e-08. Max volume = 2.12442122948e-07.  Total volume = 6.48438726043e-05.  Cell volumes OK.
+    Mesh non-orthogonality Max: 1.47877933347e-06 average: 0
+    Non-orthogonality check OK.
+    Face pyramids OK.
+    Max skewness = 0.0656726406411 OK.
+    Coupled point location match (average 1.5211788899e-17) OK.
+
+Mesh OK.
+
+End
+

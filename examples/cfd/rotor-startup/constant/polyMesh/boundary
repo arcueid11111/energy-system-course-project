@@ -1,0 +1,822 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.org
+    \\  /    A nd           | Version:  14
+     \\/     M anipulation  |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    format      ascii;
+    class       polyBoundaryMesh;
+    location    "constant/polyMesh";
+    object      boundary;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+65
+(
+    statorDuct
+    {
+        type            wall;
+        inGroups        List<word> 1(wall);
+        nFaces          96;
+        startFace       1168;
+    }
+    rotorDuct
+    {
+        type            wall;
+        inGroups        List<word> 1(wall);
+        nFaces          144;
+        startFace       1264;
+    }
+    rotorBlades
+    {
+        type            wall;
+        inGroups        List<word> 1(wall);
+        nFaces          96;
+        startFace       1408;
+    }
+    inlet
+    {
+        type            patch;
+        nFaces          24;
+        startFace       1504;
+    }
+    outlet
+    {
+        type            patch;
+        nFaces          24;
+        startFace       1528;
+    }
+    cyclicIn1
+    {
+        type            cyclic;
+        inGroups        List<word> 1(cyclic);
+        nFaces          16;
+        startFace       1552;
+        matchTolerance  0.0001;
+        neighbourPatch  cyclicIn2;
+        transformType   rotational;
+        rotationAxis    (-1 -2.870130989417599e-32 3.431657895757496e-16);
+        rotationCentre  (0 5.731934104352713e-13 3.842623916606007e-17);
+        rotationAngle   30.00000000039507;
+    }
+    cyclicIn2
+    {
+        type            cyclic;
+        inGroups        List<word> 1(cyclic);
+        nFaces          16;
+        startFace       1568;
+        matchTolerance  0.0001;
+        neighbourPatch  cyclicIn1;
+        transformType   rotational;
+        rotationAxis    (-1 -2.870130989417599e-32 3.431657895757496e-16);
+        rotationCentre  (0 5.731934104352713e-13 3.842623916606007e-17);
+        rotationAngle   -30.00000000039507;
+    }
+    nonCoupleIn1
+    {
+        type            patch;
+        inGroups        List<word> 1(nonCouple);
+        nFaces          24;
+        startFace       1584;
+    }
+    nonCoupleIn2
+    {
+        type            patch;
+        inGroups        List<word> 1(nonCouple);
+        nFaces          24;
+        startFace       1608;
+    }
+    cyclicOut1
+    {
+        type            cyclic;
+        inGroups        List<word> 1(cyclic);
+        nFaces          16;
+        startFace       1632;
+        matchTolerance  0.0001;
+        neighbourPatch  cyclicOut2;
+        transformType   rotational;
+        rotationAxis    (-1 -5.895247174600802e-34 2.247830168242031e-49);
+        rotationCentre  (0 6.463463840075579e-13 2.872692364841838e-17);
+        rotationAngle   30.00000000024676;
+    }
+    cyclicOut2
+    {
+        type            cyclic;
+        inGroups        List<word> 1(cyclic);
+        nFaces          16;
+        startFace       1648;
+        matchTolerance  0.0001;
+        neighbourPatch  cyclicOut1;
+        transformType   rotational;
+        rotationAxis    (-1 -5.895247174600802e-34 2.247830168242031e-49);
+        rotationCentre  (0 6.463463840075579e-13 2.872692364841838e-17);
+        rotationAngle   -30.00000000024676;
+    }
+    nonCoupleOut1
+    {
+        type            patch;
+        inGroups        List<word> 1(nonCouple);
+        nFaces          24;
+        startFace       1664;
+    }
+    nonCoupleOut2
+    {
+        type            patch;
+        inGroups        List<word> 1(nonCouple);
+        nFaces          24;
+        startFace       1688;
+    }
+    nonConformalCoupleIn0_on_nonCoupleIn1
+    {
+        type            nonConformalCyclic;
+        inGroups        List<word> 1(nonConformalCyclic);
+        nFaces          0;
+        startFace       1712;
+        matchTolerance  0.0001;
+        neighbourPatch  nonConformalCoupleIn0_on_nonCoupleIn2;
+        transformType   none;
+        originalPatch   nonCoupleIn1;
+    }
+    nonConformalCoupleIn0_on_nonCoupleIn2
+    {
+        type            nonConformalCyclic;
+        inGroups        List<word> 1(nonConformalCyclic);
+        nFaces          0;
+        startFace       1712;
+        matchTolerance  0.0001;
+        neighbourPatch  nonConformalCoupleIn0_on_nonCoupleIn1;
+        transformType   none;
+        originalPatch   nonCoupleIn2;
+    }
+    nonConformalCoupleIn30_on_nonCoupleIn1
+    {
+        type            nonConformalCyclic;
+        inGroups        List<word> 1(nonConformalCyclic);
+        nFaces          0;
+        startFace       1712;
+        matchTolerance  0.0001;
+        neighbourPatch  nonConformalCoupleIn30_on_nonCoupleIn2;
+        transformType   rotational;
+        rotationAxis    (-1 0 0);
+        rotationCentre  (0 0 0);
+        rotationAngle   30;
+        originalPatch   nonCoupleIn1;
+    }
+    nonConformalCoupleIn30_on_nonCoupleIn2
+    {
+        type            nonConformalCyclic;
+        inGroups        List<word> 1(nonConformalCyclic);
+        nFaces          0;
+        startFace       1712;
+        matchTolerance  0.0001;
+        neighbourPatch  nonConformalCoupleIn30_on_nonCoupleIn1;
+        transformType   rotational;
+        rotationAxis    (-1 0 0);
+        rotationCentre  (0 0 0);
+        rotationAngle   -30;
+        originalPatch   nonCoupleIn2;
+    }
+    nonConformalCoupleIn60_on_nonCoupleIn1
+    {
+        type            nonConformalCyclic;
+        inGroups        List<word> 1(nonConformalCyclic);
+        nFaces          0;
+        startFace       1712;
+        matchTolerance  0.0001;
+        neighbourPatch  nonConformalCoupleIn60_on_nonCoupleIn2;
+        transformType   rotational;
+        rotationAxis    (-1 0 0);
+        rotationCentre  (0 0 0);
+        rotationAngle   59.99999999999999;
+        originalPatch   nonCoupleIn1;
+    }
+    nonConformalCoupleIn60_on_nonCoupleIn2
+    {
+        type            nonConformalCyclic;
+        inGroups        List<word> 1(nonConformalCyclic);
+        nFaces          0;
+        startFace       1712;
+        matchTolerance  0.0001;
+        neighbourPatch  nonConformalCoupleIn60_on_nonCoupleIn1;
+        transformType   rotational;
+        rotationAxis    (-1 0 0);
+        rotationCentre  (0 0 0);
+        rotationAngle   -59.99999999999999;
+        originalPatch   nonCoupleIn2;
+    }
+    nonConformalCoupleIn90_on_nonCoupleIn1
+    {
+        type            nonConformalCyclic;
+        inGroups        List<word> 1(nonConformalCyclic);
+        nFaces          0;
+        startFace       1712;
+        matchTolerance  0.0001;
+        neighbourPatch  nonConformalCoupleIn90_on_nonCoupleIn2;
+        transformType   rotational;
+        rotationAxis    (-1 0 0);
+        rotationCentre  (0 0 0);
+        rotationAngle   90;
+        originalPatch   nonCoupleIn1;
+    }
+    nonConformalCoupleIn90_on_nonCoupleIn2
+    {
+        type            nonConformalCyclic;
+        inGroups        List<word> 1(nonConformalCyclic);
+        nFaces          0;
+        startFace       1712;
+        matchTolerance  0.0001;
+        neighbourPatch  nonConformalCoupleIn90_on_nonCoupleIn1;
+        transformType   rotational;
+        rotationAxis    (-1 0 0);
+        rotationCentre  (0 0 0);
+        rotationAngle   -90;
+        originalPatch   nonCoupleIn2;
+    }
+    nonConformalCoupleIn120_on_nonCoupleIn1
+    {
+        type            nonConformalCyclic;
+        inGroups        List<word> 1(nonConformalCyclic);
+        nFaces          0;
+        startFace       1712;
+        matchTolerance  0.0001;
+        neighbourPatch  nonConformalCoupleIn120_on_nonCoupleIn2;
+        transformType   rotational;
+        rotationAxis    (-1 0 0);
+        rotationCentre  (0 0 0);
+        rotationAngle   120;
+        originalPatch   nonCoupleIn1;
+    }
+    nonConformalCoupleIn120_on_nonCoupleIn2
+    {
+        type            nonConformalCyclic;
+        inGroups        List<word> 1(nonConformalCyclic);
+        nFaces          0;
+        startFace       1712;
+        matchTolerance  0.0001;
+        neighbourPatch  nonConformalCoupleIn120_on_nonCoupleIn1;
+        transformType   rotational;
+        rotationAxis    (-1 0 0);
+        rotationCentre  (0 0 0);
+        rotationAngle   -120;
+        originalPatch   nonCoupleIn2;
+    }
+    nonConformalCoupleIn150_on_nonCoupleIn1
+    {
+        type            nonConformalCyclic;
+        inGroups        List<word> 1(nonConformalCyclic);
+        nFaces          0;
+        startFace       1712;
+        matchTolerance  0.0001;
+        neighbourPatch  nonConformalCoupleIn150_on_nonCoupleIn2;
+        transformType   rotational;
+        rotationAxis    (-1 0 0);
+        rotationCentre  (0 0 0);
+        rotationAngle   150;
+        originalPatch   nonCoupleIn1;
+    }
+    nonConformalCoupleIn150_on_nonCoupleIn2
+    {
+        type            nonConformalCyclic;
+        inGroups        List<word> 1(nonConformalCyclic);
+        nFaces          0;
+        startFace       1712;
+        matchTolerance  0.0001;
+        neighbourPatch  nonConformalCoupleIn150_on_nonCoupleIn1;
+        transformType   rotational;
+        rotationAxis    (-1 0 0);
+        rotationCentre  (0 0 0);
+        rotationAngle   -150;
+        originalPatch   nonCoupleIn2;
+    }
+    nonConformalCoupleIn180_on_nonCoupleIn1
+    {
+        type            nonConformalCyclic;
+        inGroups        List<word> 1(nonConformalCyclic);
+        nFaces          0;
+        startFace       1712;
+        matchTolerance  0.0001;
+        neighbourPatch  nonConformalCoupleIn180_on_nonCoupleIn2;
+        transformType   rotational;
+        rotationAxis    (-1 0 0);
+        rotationCentre  (0 0 0);
+        rotationAngle   180;
+        originalPatch   nonCoupleIn1;
+    }
+    nonConformalCoupleIn180_on_nonCoupleIn2
+    {
+        type            nonConformalCyclic;
+        inGroups        List<word> 1(nonConformalCyclic);
+        nFaces          0;
+        startFace       1712;
+        matchTolerance  0.0001;
+        neighbourPatch  nonConformalCoupleIn180_on_nonCoupleIn1;
+        transformType   rotational;
+        rotationAxis    (-1 0 0);
+        rotationCentre  (0 0 0);
+        rotationAngle   -180;
+        originalPatch   nonCoupleIn2;
+    }
+    nonConformalCoupleIn210_on_nonCoupleIn1
+    {
+        type            nonConformalCyclic;
+        inGroups        List<word> 1(nonConformalCyclic);
+        nFaces          0;
+        startFace       1712;
+        matchTolerance  0.0001;
+        neighbourPatch  nonConformalCoupleIn210_on_nonCoupleIn2;
+        transformType   rotational;
+        rotationAxis    (-1 0 0);
+        rotationCentre  (0 0 0);
+        rotationAngle   210;
+        originalPatch   nonCoupleIn1;
+    }
+    nonConformalCoupleIn210_on_nonCoupleIn2
+    {
+        type            nonConformalCyclic;
+        inGroups        List<word> 1(nonConformalCyclic);
+        nFaces          0;
+        startFace       1712;
+        matchTolerance  0.0001;
+        neighbourPatch  nonConformalCoupleIn210_on_nonCoupleIn1;
+        transformType   rotational;
+        rotationAxis    (-1 0 0);
+        rotationCentre  (0 0 0);
+        rotationAngle   -210;
+        originalPatch   nonCoupleIn2;
+    }
+    nonConformalCoupleIn240_on_nonCoupleIn1
+    {
+        type            nonConformalCyclic;
+        inGroups        List<word> 1(nonConformalCyclic);
+        nFaces          0;
+        startFace       1712;
+        matchTolerance  0.0001;
+        neighbourPatch  nonConformalCoupleIn240_on_nonCoupleIn2;
+        transformType   rotational;
+        rotationAxis    (-1 0 0);
+        rotationCentre  (0 0 0);
+        rotationAngle   240;
+        originalPatch   nonCoupleIn1;
+    }
+    nonConformalCoupleIn240_on_nonCoupleIn2
+    {
+        type            nonConformalCyclic;
+        inGroups        List<word> 1(nonConformalCyclic);
+        nFaces          0;
+        startFace       1712;
+        matchTolerance  0.0001;
+        neighbourPatch  nonConformalCoupleIn240_on_nonCoupleIn1;
+        transformType   rotational;
+        rotationAxis    (-1 0 0);
+        rotationCentre  (0 0 0);
+        rotationAngle   -240;
+        originalPatch   nonCoupleIn2;
+    }
+    nonConformalCoupleIn270_on_nonCoupleIn1
+    {
+        type            nonConformalCyclic;
+        inGroups        List<word> 1(nonConformalCyclic);
+        nFaces          0;
+        startFace       1712;
+        matchTolerance  0.0001;
+        neighbourPatch  nonConformalCoupleIn270_on_nonCoupleIn2;
+        transformType   rotational;
+        rotationAxis    (-1 0 0);
+        rotationCentre  (0 0 0);
+        rotationAngle   270;
+        originalPatch   nonCoupleIn1;
+    }
+    nonConformalCoupleIn270_on_nonCoupleIn2
+    {
+        type            nonConformalCyclic;
+        inGroups        List<word> 1(nonConformalCyclic);
+        nFaces          0;
+        startFace       1712;
+        matchTolerance  0.0001;
+        neighbourPatch  nonConformalCoupleIn270_on_nonCoupleIn1;
+        transformType   rotational;
+        rotationAxis    (-1 0 0);
+        rotationCentre  (0 0 0);
+        rotationAngle   -270;
+        originalPatch   nonCoupleIn2;
+    }
+    nonConformalCoupleIn300_on_nonCoupleIn1
+    {
+        type            nonConformalCyclic;
+        inGroups        List<word> 1(nonConformalCyclic);
+        nFaces          0;
+        startFace       1712;
+        matchTolerance  0.0001;
+        neighbourPatch  nonConformalCoupleIn300_on_nonCoupleIn2;
+        transformType   rotational;
+        rotationAxis    (-1 0 0);
+        rotationCentre  (0 0 0);
+        rotationAngle   300;
+        originalPatch   nonCoupleIn1;
+    }
+    nonConformalCoupleIn300_on_nonCoupleIn2
+    {
+        type            nonConformalCyclic;
+        inGroups        List<word> 1(nonConformalCyclic);
+        nFaces          0;
+        startFace       1712;
+        matchTolerance  0.0001;
+        neighbourPatch  nonConformalCoupleIn300_on_nonCoupleIn1;
+        transformType   rotational;
+        rotationAxis    (-1 0 0);
+        rotationCentre  (0 0 0);
+        rotationAngle   -300;
+        originalPatch   nonCoupleIn2;
+    }
+    nonConformalCoupleIn330_on_nonCoupleIn1
+    {
+        type            nonConformalCyclic;
+        inGroups        List<word> 1(nonConformalCyclic);
+        nFaces          0;
+        startFace       1712;
+        matchTolerance  0.0001;
+        neighbourPatch  nonConformalCoupleIn330_on_nonCoupleIn2;
+        transformType   rotational;
+        rotationAxis    (-1 0 0);
+        rotationCentre  (0 0 0);
+        rotationAngle   330;
+        originalPatch   nonCoupleIn1;
+    }
+    nonConformalCoupleIn330_on_nonCoupleIn2
+    {
+        type            nonConformalCyclic;
+        inGroups        List<word> 1(nonConformalCyclic);
+        nFaces          0;
+        startFace       1712;
+        matchTolerance  0.0001;
+        neighbourPatch  nonConformalCoupleIn330_on_nonCoupleIn1;
+        transformType   rotational;
+        rotationAxis    (-1 0 0);
+        rotationCentre  (0 0 0);
+        rotationAngle   -330;
+        originalPatch   nonCoupleIn2;
+    }
+    nonConformalCoupleOut0_on_nonCoupleOut1
+    {
+        type            nonConformalCyclic;
+        inGroups        List<word> 1(nonConformalCyclic);
+        nFaces          0;
+        startFace       1712;
+        matchTolerance  0.0001;
+        neighbourPatch  nonConformalCoupleOut0_on_nonCoupleOut2;
+        transformType   none;
+        originalPatch   nonCoupleOut1;
+    }
+    nonConformalCoupleOut0_on_nonCoupleOut2
+    {
+        type            nonConformalCyclic;
+        inGroups        List<word> 1(nonConformalCyclic);
+        nFaces          0;
+        startFace       1712;
+        matchTolerance  0.0001;
+        neighbourPatch  nonConformalCoupleOut0_on_nonCoupleOut1;
+        transformType   none;
+        originalPatch   nonCoupleOut2;
+    }
+    nonConformalCoupleOut30_on_nonCoupleOut1
+    {
+        type            nonConformalCyclic;
+        inGroups        List<word> 1(nonConformalCyclic);
+        nFaces          0;
+        startFace       1712;
+        matchTolerance  0.0001;
+        neighbourPatch  nonConformalCoupleOut30_on_nonCoupleOut2;
+        transformType   rotational;
+        rotationAxis    (-1 0 0);
+        rotationCentre  (0 0 0);
+        rotationAngle   -30;
+        originalPatch   nonCoupleOut1;
+    }
+    nonConformalCoupleOut30_on_nonCoupleOut2
+    {
+        type            nonConformalCyclic;
+        inGroups        List<word> 1(nonConformalCyclic);
+        nFaces          0;
+        startFace       1712;
+        matchTolerance  0.0001;
+        neighbourPatch  nonConformalCoupleOut30_on_nonCoupleOut1;
+        transformType   rotational;
+        rotationAxis    (-1 0 0);
+        rotationCentre  (0 0 0);
+        rotationAngle   30;
+        originalPatch   nonCoupleOut2;
+    }
+    nonConformalCoupleOut60_on_nonCoupleOut1
+    {
+        type            nonConformalCyclic;
+        inGroups        List<word> 1(nonConformalCyclic);
+        nFaces          0;
+        startFace       1712;
+        matchTolerance  0.0001;
+        neighbourPatch  nonConformalCoupleOut60_on_nonCoupleOut2;
+        transformType   rotational;
+        rotationAxis    (-1 0 0);
+        rotationCentre  (0 0 0);
+        rotationAngle   -59.99999999999999;
+        originalPatch   nonCoupleOut1;
+    }
+    nonConformalCoupleOut60_on_nonCoupleOut2
+    {
+        type            nonConformalCyclic;
+        inGroups        List<word> 1(nonConformalCyclic);
+        nFaces          0;
+        startFace       1712;
+        matchTolerance  0.0001;
+        neighbourPatch  nonConformalCoupleOut60_on_nonCoupleOut1;
+        transformType   rotational;
+        rotationAxis    (-1 0 0);
+        rotationCentre  (0 0 0);
+        rotationAngle   59.99999999999999;
+        originalPatch   nonCoupleOut2;
+    }
+    nonConformalCoupleOut90_on_nonCoupleOut1
+    {
+        type            nonConformalCyclic;
+        inGroups        List<word> 1(nonConformalCyclic);
+        nFaces          0;
+        startFace       1712;
+        matchTolerance  0.0001;
+        neighbourPatch  nonConformalCoupleOut90_on_nonCoupleOut2;
+        transformType   rotational;
+        rotationAxis    (-1 0 0);
+        rotationCentre  (0 0 0);
+        rotationAngle   -90;
+        originalPatch   nonCoupleOut1;
+    }
+    nonConformalCoupleOut90_on_nonCoupleOut2
+    {
+        type            nonConformalCyclic;
+        inGroups        List<word> 1(nonConformalCyclic);
+        nFaces          0;
+        startFace       1712;
+        matchTolerance  0.0001;
+        neighbourPatch  nonConformalCoupleOut90_on_nonCoupleOut1;
+        transformType   rotational;
+        rotationAxis    (-1 0 0);
+        rotationCentre  (0 0 0);
+        rotationAngle   90;
+        originalPatch   nonCoupleOut2;
+    }
+    nonConformalCoupleOut120_on_nonCoupleOut1
+    {
+        type            nonConformalCyclic;
+        inGroups        List<word> 1(nonConformalCyclic);
+        nFaces          0;
+        startFace       1712;
+        matchTolerance  0.0001;
+        neighbourPatch  nonConformalCoupleOut120_on_nonCoupleOut2;
+        transformType   rotational;
+        rotationAxis    (-1 0 0);
+        rotationCentre  (0 0 0);
+        rotationAngle   -120;
+        originalPatch   nonCoupleOut1;
+    }
+    nonConformalCoupleOut120_on_nonCoupleOut2
+    {
+        type            nonConformalCyclic;
+        inGroups        List<word> 1(nonConformalCyclic);
+        nFaces          0;
+        startFace       1712;
+        matchTolerance  0.0001;
+        neighbourPatch  nonConformalCoupleOut120_on_nonCoupleOut1;
+        transformType   rotational;
+        rotationAxis    (-1 0 0);
+        rotationCentre  (0 0 0);
+        rotationAngle   120;
+        originalPatch   nonCoupleOut2;
+    }
+    nonConformalCoupleOut150_on_nonCoupleOut1
+    {
+        type            nonConformalCyclic;
+        inGroups        List<word> 1(nonConformalCyclic);
+        nFaces          0;
+        startFace       1712;
+        matchTolerance  0.0001;
+        neighbourPatch  nonConformalCoupleOut150_on_nonCoupleOut2;
+        transformType   rotational;
+        rotationAxis    (-1 0 0);
+        rotationCentre  (0 0 0);
+        rotationAngle   -150;
+        originalPatch   nonCoupleOut1;
+    }
+    nonConformalCoupleOut150_on_nonCoupleOut2
+    {
+        type            nonConformalCyclic;
+        inGroups        List<word> 1(nonConformalCyclic);
+        nFaces          0;
+        startFace       1712;
+        matchTolerance  0.0001;
+        neighbourPatch  nonConformalCoupleOut150_on_nonCoupleOut1;
+        transformType   rotational;
+        rotationAxis    (-1 0 0);
+        rotationCentre  (0 0 0);
+        rotationAngle   150;
+        originalPatch   nonCoupleOut2;
+    }
+    nonConformalCoupleOut180_on_nonCoupleOut1
+    {
+        type            nonConformalCyclic;
+        inGroups        List<word> 1(nonConformalCyclic);
+        nFaces          0;
+        startFace       1712;
+        matchTolerance  0.0001;
+        neighbourPatch  nonConformalCoupleOut180_on_nonCoupleOut2;
+        transformType   rotational;
+        rotationAxis    (-1 0 0);
+        rotationCentre  (0 0 0);
+        rotationAngle   -180;
+        originalPatch   nonCoupleOut1;
+    }
+    nonConformalCoupleOut180_on_nonCoupleOut2
+    {
+        type            nonConformalCyclic;
+        inGroups        List<word> 1(nonConformalCyclic);
+        nFaces          0;
+        startFace       1712;
+        matchTolerance  0.0001;
+        neighbourPatch  nonConformalCoupleOut180_on_nonCoupleOut1;
+        transformType   rotational;
+        rotationAxis    (-1 0 0);
+        rotationCentre  (0 0 0);
+        rotationAngle   180;
+        originalPatch   nonCoupleOut2;
+    }
+    nonConformalCoupleOut210_on_nonCoupleOut1
+    {
+        type            nonConformalCyclic;
+        inGroups        List<word> 1(nonConformalCyclic);
+        nFaces          0;
+        startFace       1712;
+        matchTolerance  0.0001;
+        neighbourPatch  nonConformalCoupleOut210_on_nonCoupleOut2;
+        transformType   rotational;
+        rotationAxis    (-1 0 0);
+        rotationCentre  (0 0 0);
+        rotationAngle   -210;
+        originalPatch   nonCoupleOut1;
+    }
+    nonConformalCoupleOut210_on_nonCoupleOut2
+    {
+        type            nonConformalCyclic;
+        inGroups        List<word> 1(nonConformalCyclic);
+        nFaces          0;
+        startFace       1712;
+        matchTolerance  0.0001;
+        neighbourPatch  nonConformalCoupleOut210_on_nonCoupleOut1;
+        transformType   rotational;
+        rotationAxis    (-1 0 0);
+        rotationCentre  (0 0 0);
+        rotationAngle   210;
+        originalPatch   nonCoupleOut2;
+    }
+    nonConformalCoupleOut240_on_nonCoupleOut1
+    {
+        type            nonConformalCyclic;
+        inGroups        List<word> 1(nonConformalCyclic);
+        nFaces          0;
+        startFace       1712;
+        matchTolerance  0.0001;
+        neighbourPatch  nonConformalCoupleOut240_on_nonCoupleOut2;
+        transformType   rotational;
+        rotationAxis    (-1 0 0);
+        rotationCentre  (0 0 0);
+        rotationAngle   -240;
+        originalPatch   nonCoupleOut1;
+    }
+    nonConformalCoupleOut240_on_nonCoupleOut2
+    {
+        type            nonConformalCyclic;
+        inGroups        List<word> 1(nonConformalCyclic);
+        nFaces          0;
+        startFace       1712;
+        matchTolerance  0.0001;
+        neighbourPatch  nonConformalCoupleOut240_on_nonCoupleOut1;
+        transformType   rotational;
+        rotationAxis    (-1 0 0);
+        rotationCentre  (0 0 0);
+        rotationAngle   240;
+        originalPatch   nonCoupleOut2;
+    }
+    nonConformalCoupleOut270_on_nonCoupleOut1
+    {
+        type            nonConformalCyclic;
+        inGroups        List<word> 1(nonConformalCyclic);
+        nFaces          0;
+        startFace       1712;
+        matchTolerance  0.0001;
+        neighbourPatch  nonConformalCoupleOut270_on_nonCoupleOut2;
+        transformType   rotational;
+        rotationAxis    (-1 0 0);
+        rotationCentre  (0 0 0);
+        rotationAngle   -270;
+        originalPatch   nonCoupleOut1;
+    }
+    nonConformalCoupleOut270_on_nonCoupleOut2
+    {
+        type            nonConformalCyclic;
+        inGroups        List<word> 1(nonConformalCyclic);
+        nFaces          0;
+        startFace       1712;
+        matchTolerance  0.0001;
+        neighbourPatch  nonConformalCoupleOut270_on_nonCoupleOut1;
+        transformType   rotational;
+        rotationAxis    (-1 0 0);
+        rotationCentre  (0 0 0);
+        rotationAngle   270;
+        originalPatch   nonCoupleOut2;
+    }
+    nonConformalCoupleOut300_on_nonCoupleOut1
+    {
+        type            nonConformalCyclic;
+        inGroups        List<word> 1(nonConformalCyclic);
+        nFaces          0;
+        startFace       1712;
+        matchTolerance  0.0001;
+        neighbourPatch  nonConformalCoupleOut300_on_nonCoupleOut2;
+        transformType   rotational;
+        rotationAxis    (-1 0 0);
+        rotationCentre  (0 0 0);
+        rotationAngle   -300;
+        originalPatch   nonCoupleOut1;
+    }
+    nonConformalCoupleOut300_on_nonCoupleOut2
+    {
+        type            nonConformalCyclic;
+        inGroups        List<word> 1(nonConformalCyclic);
+        nFaces          0;
+        startFace       1712;
+        matchTolerance  0.0001;
+        neighbourPatch  nonConformalCoupleOut300_on_nonCoupleOut1;
+        transformType   rotational;
+        rotationAxis    (-1 0 0);
+        rotationCentre  (0 0 0);
+        rotationAngle   300;
+        originalPatch   nonCoupleOut2;
+    }
+    nonConformalCoupleOut330_on_nonCoupleOut1
+    {
+        type            nonConformalCyclic;
+        inGroups        List<word> 1(nonConformalCyclic);
+        nFaces          0;
+        startFace       1712;
+        matchTolerance  0.0001;
+        neighbourPatch  nonConformalCoupleOut330_on_nonCoupleOut2;
+        transformType   rotational;
+        rotationAxis    (-1 0 0);
+        rotationCentre  (0 0 0);
+        rotationAngle   -330;
+        originalPatch   nonCoupleOut1;
+    }
+    nonConformalCoupleOut330_on_nonCoupleOut2
+    {
+        type            nonConformalCyclic;
+        inGroups        List<word> 1(nonConformalCyclic);
+        nFaces          0;
+        startFace       1712;
+        matchTolerance  0.0001;
+        neighbourPatch  nonConformalCoupleOut330_on_nonCoupleOut1;
+        transformType   rotational;
+        rotationAxis    (-1 0 0);
+        rotationCentre  (0 0 0);
+        rotationAngle   330;
+        originalPatch   nonCoupleOut2;
+    }
+    nonConformalError_on_nonCoupleIn1
+    {
+        type            nonConformalError;
+        nFaces          0;
+        startFace       1712;
+        originalPatch   nonCoupleIn1;
+    }
+    nonConformalError_on_nonCoupleIn2
+    {
+        type            nonConformalError;
+        nFaces          0;
+        startFace       1712;
+        originalPatch   nonCoupleIn2;
+    }
+    nonConformalError_on_nonCoupleOut1
+    {
+        type            nonConformalError;
+        nFaces          0;
+        startFace       1712;
+        originalPatch   nonCoupleOut1;
+    }
+    nonConformalError_on_nonCoupleOut2
+    {
+        type            nonConformalError;
+        nFaces          0;
+        startFace       1712;
+        originalPatch   nonCoupleOut2;
+    }
+)
+
+// ************************************************************************* //

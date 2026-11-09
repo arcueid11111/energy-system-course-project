@@ -1,0 +1,15 @@
+FoamFile
+{ format ascii; class volScalarField; object k; }
+dimensions [0 2 -2 0 0 0 0];
+internalField uniform 0.00375;
+boundaryField
+{
+#includeEtc "caseDicts/setConstraintTypes"
+
+inlet { type fixedValue; value $internalField; }
+outlet { type inletOutlet; inletValue $internalField; value $internalField; }
+wall { type kqRWallFunction; value $internalField; }
+nonCouple { type zeroGradient; value $internalField; }
+
+}
+

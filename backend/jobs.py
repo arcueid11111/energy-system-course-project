@@ -84,6 +84,10 @@ def optimize_design(doc, progress=None):
 
 
 def execute_design_task(kind, payload, progress, save):
+    from .physical_jobs import KINDS, execute_physics_task
+
+    if kind in KINDS:
+        return execute_physics_task(kind, payload, progress, save)
     doc = NetworkDocument.model_validate(payload["document"])
     if kind == "design_calibration":
         from .observations import calibrate_design

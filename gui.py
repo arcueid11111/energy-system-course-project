@@ -27,6 +27,8 @@ def main():
         raise SystemExit("缺少图形依赖，请运行：python -m pip install -r requirements.txt")
     from desktop.window import MainWindow
 
+    from desktop.environment import prepare_qt_plugins
+    prepare_qt_plugins()
     app = QApplication(sys.argv[:1])
     app.setApplicationName("FLOWSTATE")
     app.setOrganizationName("Flowstate")

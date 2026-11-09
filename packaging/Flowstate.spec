@@ -7,6 +7,10 @@ from importlib.metadata import distribution
 
 from PyInstaller.utils.hooks import collect_data_files, copy_metadata
 
+gmsh_dist=distribution("gmsh")
+gmsh_libs=[Path(gmsh_dist.locate_file(f)).resolve() for f in gmsh_dist.files or [] if str(f).endswith(("libgmsh.4.15.dylib","libgmsh.so.4.15","gmsh-4.15.dll"))]
+assert gmsh_libs, "Missing Gmsh native library"
+
 root = Path(SPECPATH).parent
 wntr_root = Path(distribution('wntr').locate_file('wntr'))
 if sys.platform == 'darwin':
@@ -19,6 +23,7 @@ libpath = wntr_root / 'epanet' / 'libepanet' / lib
 assert libpath.exists(), f'Missing EPANET solver library: {libpath}'
 # Include only this architecture's EPANET 2.2 library, not other-platform or MSX binaries.
 datas = [(str(root / 'examples'), 'examples'), (str(root / 'LICENSE'), '.'), (str(root / 'THIRD_PARTY_NOTICES.md'), '.')]
+datas += [(str(root / 'resources'), 'resources'), (str(root / 'cfd_runtime'), 'cfd_runtime')]
 datas += collect_data_files('wntr', includes=['**/*.json', '**/*.inp', '**/*.txt'])
 datas += copy_metadata('wntr') + copy_metadata('ezdxf')
 if (root / 'build' / 'licenses').exists():
@@ -26,7 +31,7 @@ if (root / 'build' / 'licenses').exists():
 a = Analysis(
     [str(root / 'gui.py')],
     pathex=[str(root)],
-    binaries=[(str(libpath), str(Path('wntr/epanet/libepanet') / Path(lib).parent))],
+    binaries=[(str(libpath), str(Path('wntr/epanet/libepanet') / Path(lib).parent))] + [(str(p),'.') for p in gmsh_libs],
     datas=datas,
     hiddenimports=['scipy.special.cython_special', 'wntr.sim.aml._evaluator', 'wntr.sim.network_isolation._network_isolation'],
     hookspath=[],
@@ -37,4 +42,4 @@ pyz = PYZ(a.pure)
 exe = EXE(pyz, a.scripts, [], exclude_binaries=True, name='Flowstate', debug=False, strip=False, upx=False, console=False)
 coll = COLLECT(exe, a.binaries, a.datas, strip=False, upx=False, name='Flowstate')
 if sys.platform == 'darwin':
-    app = BUNDLE(coll, name='Flowstate.app', icon=None, bundle_identifier='org.flowstate.pumpnetwork', info_plist={'CFBundleShortVersionString':'1.0.0', 'NSHighResolutionCapable':True})
+    app = BUNDLE(coll, name='Flowstate.app', icon=None, bundle_identifier='org.flowstate.pumpnetwork', info_plist={'CFBundleShortVersionString':'2.0.0', 'NSHighResolutionCapable':True})

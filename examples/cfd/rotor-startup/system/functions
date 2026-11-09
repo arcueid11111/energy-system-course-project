@@ -1,0 +1,13 @@
+FoamFile
+{ format ascii; class dictionary; object functions; }
+
+forces
+{
+ type forces; libs ("libforces.so"); patches ("rotor.*");
+ p p; U U; rho rhoInf; rhoInf 998.2; pRef 0;
+ CofR (0 0 0);
+ executeControl timeStep; executeInterval 1; writeControl timeStep; writeInterval 1;
+}
+#includeFunc patchFlowRate(name=inletFlowRate, patch=inlet)
+#includeFunc patchFlowRate(name=outletFlowRate, patch=outlet)
+
