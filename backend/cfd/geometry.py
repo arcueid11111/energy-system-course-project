@@ -28,7 +28,7 @@ def _gmsh():
     try:
         import gmsh
     except (ImportError, OSError) as exc:
-        raise ValueError("STEP 流体域转换需要 gmsh（安装 requirements-cfd.txt）") from exc
+        raise ValueError("STEP 流体域转换需要 gmsh（安装 requirements.txt）") from exc
     return gmsh
 
 
@@ -121,7 +121,7 @@ def inspect_stl_directory(directory, units="m", seed=None):
         from vtkmodules.vtkCommonCore import vtkPoints
         from vtkmodules.vtkCommonDataModel import vtkPolyData
     except ImportError as exc:
-        raise ValueError("三维流域检查需要 VTK（安装 requirements-cfd.txt）") from exc
+        raise ValueError("三维流域检查需要 VTK（安装 requirements.txt）") from exc
     directory = Path(directory).resolve()
     files = {p.stem: p for p in directory.glob("*.stl")}
     if not {"inlet", "outlet", "walls"} <= files.keys() or not files.keys() <= ROLES:
