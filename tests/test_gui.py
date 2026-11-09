@@ -156,3 +156,28 @@ def test_physics_workspace_actual_fields_and_task_options(window):
     assert panel.project().end_time_s < 0.031
     panel.plane.setCurrentIndex(1)
     wait_qt(lambda: not window.workers)
+
+
+def test_transient_view_selects_node_pipe_and_device(window):
+    from backend.transient import simulate_transient, TransientSettings
+
+    r = simulate_transient(
+        window.document, TransientSettings(duration_s=0.004, report_interval_s=0.001)
+    )
+    panel = window.physics_panel
+    panel.display_result(r)
+    assert panel.location.currentData()[0] == "node"
+    assert panel.location.currentData()[1] != "R"
+    panel.channel.setCurrentText("pressure_pa")
+    assert panel.plot.rows
+    for i in range(panel.location.count()):
+        item = panel.location.itemData(i)
+        if item[0] == "pipe":
+            panel.location.setCurrentIndex(i)
+            assert (
+                panel.series()[0]["pressure_pa"]
+                == r["points"][0]["pipes"][item[1]]["pressure_pa"][item[2]]
+            )
+            break
+    panel.display_result({"accepted_for_reduced_model": False, "rejection_reasons": ["unsettled"]})
+    assert "校核未通过" in panel.assessment.text()

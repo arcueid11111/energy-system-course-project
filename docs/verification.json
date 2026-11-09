@@ -1,7 +1,7 @@
 {
   "schema_version": "flowstate-verification-1",
   "date": "2026-11-09",
-  "test_count": 42,
+  "test_count": 43,
   "real_asset_validated": false,
   "acoustic_convergence": {
     "mesh": {

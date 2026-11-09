@@ -57,6 +57,9 @@ class PhysicsPanel(QWidget):
         )
         notice.setWordWrap(True)
         root.addWidget(notice)
+        self.assessment = QLabel("尚未加载物理结果")
+        self.assessment.setWordWrap(True)
+        root.addWidget(self.assessment)
         split = QSplitter()
         root.addWidget(split, 1)
         scroll = QScrollArea()
@@ -167,6 +170,8 @@ class PhysicsPanel(QWidget):
                 "head_m",
                 "flow_m3h",
                 "pressure_pa",
+                "speed_ms",
+                "velocity_ms",
                 "force_x_n",
                 "force_y_n",
                 "force_z_n",
@@ -176,7 +181,10 @@ class PhysicsPanel(QWidget):
                 "vapour_fraction",
             ]
         )
+        self.location = QComboBox()
+        self.location.setMinimumWidth(160)
         self.spectrum = QCheckBox("频谱")
+        plotrow.addWidget(self.location)
         plotrow.addWidget(self.channel)
         plotrow.addWidget(self.spectrum)
         view.addLayout(plotrow)
@@ -196,6 +204,7 @@ class PhysicsPanel(QWidget):
         self.vectors.toggled.connect(
             lambda value: (setattr(self.field, "vectors", value), self.field.update())
         )
+        self.location.currentIndexChanged.connect(self.show_series)
         self.channel.currentIndexChanged.connect(self.show_series)
         self.spectrum.toggled.connect(self.show_series)
         self.preset("impeller")
@@ -350,8 +359,66 @@ class PhysicsPanel(QWidget):
             )
 
     def display_result(self, result):
+        self.play_timer.stop()
+        self.play.setText("播放")
         self.result = result
         self.cfd = result.get("cfd", result) if "frames" in result or "cfd" in result else None
+        self.location.blockSignals(True)
+        self.location.clear()
+        if self.cfd:
+            probes = self.cfd.get("pressure_probes", [])
+            for i in range(len(probes[0]["pressure_pa"]) if probes else 1):
+                self.location.addItem(f"CFD 探针 {i + 1}", ["cfd", i])
+        network = result.get("network", result)
+        if network.get("points") and "nodes" in network["points"][0]:
+            first = network["points"][0]
+            for key in first["nodes"]:
+                self.location.addItem("节点 " + key, ["node", key])
+            for key in first.get("devices", {}):
+                self.location.addItem("设备 " + key, ["device", key])
+            for key, pipe in first.get("pipes", {}).items():
+                for j in sorted(set([0, len(pipe["x_m"]) // 2, len(pipe["x_m"]) - 1])):
+                    self.location.addItem(f"管段 {key} @ {pipe['x_m'][j]:.4g} m", ["pipe", key, j])
+            if not self.cfd:
+                junction = next(
+                    (
+                        n["id"]
+                        for n in network.get("document", {}).get("nodes", [])
+                        if n["kind"] == "junction"
+                    ),
+                    None,
+                )
+                for i in range(self.location.count()):
+                    if self.location.itemData(i) == ["node", junction]:
+                        self.location.setCurrentIndex(i)
+                        break
+        self.location.blockSignals(False)
+        failed = (
+            result.get("converged") is False or result.get("accepted_for_reduced_model") is False
+        )
+        failed = failed or any(
+            v.get("within_requested_tolerance") is False
+            for v in result.get("comparisons", {}).values()
+        )
+        failed = failed or any(v.get("passed") is False for v in result.get("metrics", {}).values())
+        failed = failed or any("压力低于饱和蒸汽压" in w for w in network.get("warnings", []))
+        verification = (self.cfd or result).get("verification", {})
+        wave = verification.get("joukowsky", {})
+        failed = (
+            failed
+            or abs(wave.get("relative_error", 0)) > 0.05
+            or verification.get("absolute_pressure_positive") is False
+            or verification.get("single_phase_valid") is False
+        )
+        text = (
+            "校核未通过：请查看残差、统计窗口或适用条件；结果已保留。"
+            if failed
+            else "计算结果可查看；网格/步长及真实设备验证状态请见下方记录。"
+        )
+        self.assessment.setText(text)
+        self.assessment.setStyleSheet(
+            "color:#a7352b;font-weight:600;" if failed else "color:#765b23;"
+        )
         summary = {
             k: v
             for k, v in result.items()
@@ -437,16 +504,31 @@ class PhysicsPanel(QWidget):
                 {"seconds": p["npsha_m"], "head_m": p["head_m"], "flow_m3h": p["flow_m3h"]}
                 for p in sorted(self.result["map"]["points"], key=lambda r: r["npsha_m"])
             ]
-        if (
-            "points" in self.result
-            and self.result["points"]
-            and "nodes" in self.result["points"][0]
-        ):
-            point = self.result["points"][0]
-            node = next(iter(point["nodes"]))
-            device = next(iter(point["devices"]), "")
-            return result_series(self.result, node_id=node, device_id=device)
-        return result_series(self.result)
+        location = self.location.currentData() or ["cfd", 0]
+        source = self.result.get("network", self.result)
+        if location[0] in ("node", "device"):
+            return result_series(
+                source,
+                node_id=location[1] if location[0] == "node" else "",
+                device_id=location[1]
+                if location[0] == "device"
+                else next(iter(source["points"][0].get("devices", {})), ""),
+            )
+        if location[0] == "pipe":
+            rows = []
+            for frame in source["points"]:
+                pipe = frame["pipes"][location[1]]
+                i = location[2]
+                rows.append(
+                    {
+                        "seconds": frame["seconds"],
+                        "pressure_pa": pipe["pressure_pa"][i],
+                        "speed_ms": abs(pipe["velocity_ms"][i]),
+                        "velocity_ms": pipe["velocity_ms"][i],
+                    }
+                )
+            return rows
+        return result_series(self.result, probe_index=int(location[1]))
 
     def show_series(self, *args):
         def draw():

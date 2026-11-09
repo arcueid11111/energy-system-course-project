@@ -42,4 +42,4 @@ pyz = PYZ(a.pure)
 exe = EXE(pyz, a.scripts, [], exclude_binaries=True, name='Flowstate', debug=False, strip=False, upx=False, console=False)
 coll = COLLECT(exe, a.binaries, a.datas, strip=False, upx=False, name='Flowstate')
 if sys.platform == 'darwin':
-    app = BUNDLE(coll, name='Flowstate.app', icon=None, bundle_identifier='org.flowstate.pumpnetwork', info_plist={'CFBundleShortVersionString':'2.0.0', 'NSHighResolutionCapable':True})
+    app = BUNDLE(coll, name='Flowstate.app', icon=None, bundle_identifier='org.flowstate.pumpnetwork', info_plist={'CFBundleShortVersionString':'2.0.1', 'NSHighResolutionCapable':True})

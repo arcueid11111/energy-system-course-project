@@ -124,6 +124,7 @@ class LocalSolver:
             ],
             capture_output=True,
             text=True,
+            encoding="utf-8",
             timeout=15,
             check=True,
         ).stdout.strip()
@@ -140,6 +141,8 @@ class LocalSolver:
             stdout=subprocess.PIPE,
             stderr=subprocess.STDOUT,
             text=True,
+            encoding="utf-8",
+            errors="replace",
             timeout=30,
         )
         version = result.stdout.strip()
