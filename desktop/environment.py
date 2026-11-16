@@ -18,3 +18,19 @@ def prepare_qt_plugins():
                 os.chflags(path, flags & ~0x8000)
             except PermissionError:
                 pass
+
+
+def install_translations(app):
+    """Load Qt's own Chinese strings (standard buttons, file dialogs) when available."""
+    from PySide6.QtCore import QLibraryInfo, QLocale, QTranslator
+
+    loaded = []
+    path = QLibraryInfo.path(QLibraryInfo.LibraryPath.TranslationsPath)
+    for name in ("qtbase_zh_CN", "qt_zh_CN"):
+        translator = QTranslator(app)
+        if translator.load(name, path):
+            app.installTranslator(translator)
+            loaded.append(translator)
+    if loaded:
+        QLocale.setDefault(QLocale("zh_CN"))
+    return loaded

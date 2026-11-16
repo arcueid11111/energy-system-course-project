@@ -32,6 +32,9 @@ def main():
     app = QApplication(sys.argv[:1])
     app.setApplicationName("FLOWSTATE")
     app.setOrganizationName("Flowstate")
+    from desktop.environment import install_translations
+
+    install_translations(app)
     if args.self_check:
         from desktop.checks import self_check
 
@@ -44,8 +47,9 @@ def main():
     except Exception as exc:
         QMessageBox.critical(None, "FLOWSTATE 启动失败", str(exc))
         return 1
+    window.restore_window_state()
     if args.project:
-        window.load_project(args.project)
+        window.open_path(args.project)
     window.show()
     return app.exec()
 

@@ -20,13 +20,13 @@ from PySide6.QtWidgets import (
     QFileDialog,
     QDialog,
     QDialogButtonBox,
-    QScrollArea,
     QCheckBox,
     QInputDialog,
 )
 from backend.cfd.schemas import CFDProject, benchmark_project
 from backend.transient import TransientSettings
 from .physics_view import FieldView, SeriesView
+from .scrolling import fit_to_screen, scrollable
 
 TASKS = [
     ("三维流场 / 压力脉动", "physics_cfd"),
@@ -62,11 +62,10 @@ class PhysicsPanel(QWidget):
         root.addWidget(self.assessment)
         split = QSplitter()
         root.addWidget(split, 1)
-        scroll = QScrollArea()
-        scroll.setWidgetResizable(True)
         left = QWidget()
-        scroll.setWidget(left)
         layout = QVBoxLayout(left)
+        self.parameter_scroll = scrollable(left, "physicsParametersScroll")
+        scroll = self.parameter_scroll
         split.addWidget(scroll)
         form = QFormLayout()
         layout.addLayout(form)
@@ -192,7 +191,7 @@ class PhysicsPanel(QWidget):
         view.addWidget(self.plot, 2)
         self.details = QPlainTextEdit()
         self.details.setReadOnly(True)
-        self.details.setMaximumHeight(180)
+        self.details.setMaximumHeight(110)
         view.addWidget(self.details)
         self.kind.currentTextChanged.connect(self.preset)
         self.task.currentIndexChanged.connect(self.task_preset)
@@ -406,7 +405,7 @@ class PhysicsPanel(QWidget):
         wave = verification.get("joukowsky", {})
         failed = (
             failed
-            or abs(wave.get("relative_error", 0)) > 0.05
+            or (wave.get("applicable", True) and abs(wave.get("relative_error", 0)) > 0.05)
             or verification.get("absolute_pressure_positive") is False
             or verification.get("single_phase_valid") is False
         )
@@ -449,6 +448,11 @@ class PhysicsPanel(QWidget):
             self.time.setValue(len(self.cfd["frames"]) - 1)
             self.show_frame()
         else:
+            self.field.placeholder = (
+                "当前为管网一维弹性瞬变结果（无三维场）\n在下方选择节点、设备或管段位置，查看压力 / 流量时序"
+                if network.get("points")
+                else "加载本机 CFD 结果，显示求解器输出的真实网格场"
+            )
             self.field.set_data(None)
         self.details.setPlainText(json.dumps(summary, ensure_ascii=False, indent=2))
         self.show_series()
@@ -695,8 +699,10 @@ class PhysicsPanel(QWidget):
         units = QComboBox()
         units.addItems(["m", "mm"])
         outer.addWidget(units)
+        faces = QWidget()
         form = QFormLayout()
-        outer.addLayout(form)
+        faces.setLayout(form)
+        outer.addWidget(scrollable(faces, "stepFacesScroll"), 1)
         choices = {}
         for face in info["faces"]:
             combo = QComboBox()
@@ -709,6 +715,7 @@ class PhysicsPanel(QWidget):
         buttons.accepted.connect(dialog.accept)
         buttons.rejected.connect(dialog.reject)
         outer.addWidget(buttons)
+        fit_to_screen(dialog, 720, 680)
         if dialog.exec() != QDialog.DialogCode.Accepted:
             return
         directory = QFileDialog.getExistingDirectory(self, "选择空目录保存分区STL")

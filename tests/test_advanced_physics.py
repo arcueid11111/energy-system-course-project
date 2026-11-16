@@ -231,3 +231,17 @@ def test_cfd_map_rejected_before_transient_feedback():
     )
     with pytest.raises(ValueError, match="稳定性审核"):
         simulate_transient(d, s)
+
+
+def test_slow_valve_closure_is_not_judged_against_joukowsky(tmp_path):
+    from backend.cfd.acoustics import execute_acoustics
+    from backend.cfd.schemas import benchmark_project
+
+    base = benchmark_project("water_hammer")
+    values = {**base.model_dump(), "pipe_length_m": 5.0, "pipe_cells": 20, "radial_cells": 2,
+              "end_time_s": 0.03, "write_interval_s": 0.01, "close_duration_s": 0.02,
+              "inlet_absolute_pa": 1.2e6}
+    slow = execute_acoustics(type(base).model_validate(values), tmp_path)
+    joukowsky = slow["verification"]["joukowsky"]
+    assert joukowsky["applicable"] is False
+    assert joukowsky["predicted_rise_pa"] < joukowsky["reference_rise_pa"]

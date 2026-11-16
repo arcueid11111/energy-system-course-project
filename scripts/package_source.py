@@ -13,6 +13,7 @@ FILES = [
     "requirements.txt",
     "requirements-cfd.txt",
     "requirements-dev.txt",
+    "requirements-demo.txt",
     "pyproject.toml",
     "start.sh",
     "start.bat",
@@ -40,7 +41,10 @@ def source_files():
         p
         for name in FOLDERS
         for p in (ROOT / name).rglob("*")
-        if p.is_file() and "__pycache__" not in p.parts and p.suffix != ".pyc"
+        if p.is_file()
+        and "__pycache__" not in p.parts
+        and p.suffix != ".pyc"
+        and p.name != ".DS_Store"
     ]
     return sorted(p for p in paths if p.is_file())
 

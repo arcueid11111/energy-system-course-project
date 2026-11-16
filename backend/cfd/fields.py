@@ -151,6 +151,7 @@ def display_frame(
         cell = poly.GetCell(i)
         if cell.GetNumberOfPoints() == 3:
             faces.append([cell.GetPointId(j) for j in range(3)])
+    colored = poly
     if plane_axis is not None:
         axis = int(plane_axis)
         center = (points.min(axis=0) + points.max(axis=0)) / 2
@@ -166,6 +167,36 @@ def display_frame(
         cut.Update()
         if cut.GetOutput().GetNumberOfPoints():
             _, points, velocity, values = arrays(cut.GetOutput(), manifest)
+            cutter_tri = vtkTriangleFilter()
+            cutter_tri.SetInputData(cut.GetOutput())
+            cutter_tri.Update()
+            colored = cutter_tri.GetOutput()
+    cloud = False
+    if metric == "vapour_fraction" and plane_axis is None and values[metric].max() >= 0.1:
+        from vtkmodules.vtkFiltersCore import vtkContourFilter
+
+        contour = vtkContourFilter()
+        contour.SetInputData(data)
+        contour.SetInputArrayToProcess(0, 0, 0, 0, "alpha.vapour")
+        contour.SetValue(0, 0.1)
+        contour.Update()
+        iso = vtkTriangleFilter()
+        iso.SetInputData(contour.GetOutput())
+        iso.Update()
+        colored = iso.GetOutput()
+        cloud = True
+    cp = np.empty((0, 3))
+    cf = []
+    cv = np.empty(0)
+    if colored.GetNumberOfPoints():
+        _, cp, _, colored_values = arrays(colored, manifest)
+        cv = colored_values[metric]
+        for i in range(
+            0, colored.GetNumberOfCells(), max(1, math.ceil(colored.GetNumberOfCells() / 6000))
+        ):
+            cell = colored.GetCell(i)
+            if cell.GetNumberOfPoints() == 3:
+                cf.append([cell.GetPointId(j) for j in range(3)])
     indexes = np.linspace(0, len(points) - 1, min(len(points), max_points), dtype=int)
     paths = trace_streamlines(data, seeds) if streamlines and seeds else []
     return {
@@ -176,6 +207,11 @@ def display_frame(
         "metric": metric,
         "surface_points": shell_points,
         "surface_triangles": np.asarray(faces, dtype=int),
+        "colored_points": cp,
+        "colored_triangles": np.asarray(cf, dtype=int),
+        "colored_values": cv,
+        "is_slice": plane_axis is not None,
+        "vapor_isosurface": cloud,
         "streamlines": paths,
         "minimum": float(values[metric].min()),
         "maximum": float(values[metric].max()),

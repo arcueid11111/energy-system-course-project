@@ -141,7 +141,8 @@ def test_physics_workspace_actual_fields_and_task_options(window):
 
     panel = window.physics_panel
     panel.load_example()
-    wait_qt(lambda: panel.field.data is not None)
+    # A cold VTK import may exceed five seconds on a freshly started process.
+    wait_qt(lambda: panel.field.data is not None, seconds=15)
     assert panel.field.data["cell_count"] == 480
     assert panel.plot.rows
     panel.channel.setCurrentText("force_x_n")
@@ -181,3 +182,262 @@ def test_transient_view_selects_node_pipe_and_device(window):
             break
     panel.display_result({"accepted_for_reduced_model": False, "rejection_reasons": ["unsettled"]})
     assert "校核未通过" in panel.assessment.text()
+
+
+@pytest.mark.parametrize("width,height", [(1280, 720), (1024, 600), (800, 500)])
+def test_small_window_can_scroll_to_bottom_on_every_tab(window, width, height):
+    from PySide6.QtCore import QPoint
+
+    window.resize(width, height)
+    QApplication.processEvents()
+    assert window.height() <= height
+    assert window.width() <= width
+    area = window.main_scroll
+    for i in range(window.tabs.count()):
+        window.tabs.setCurrentIndex(i)
+        QApplication.processEvents()
+        bar = area.verticalScrollBar()
+        assert bar.maximum() > 0
+        bar.setValue(bar.maximum())
+        QApplication.processEvents()
+        top = window.log.mapTo(area.viewport(), QPoint()).y()
+        assert top >= 0
+        assert top + window.log.height() <= area.viewport().height()
+
+
+def test_main_view_responds_to_mouse_wheel(window):
+    from PySide6.QtCore import QPoint, QPointF
+    from PySide6.QtGui import QWheelEvent
+
+    window.resize(1024, 600)
+    QApplication.processEvents()
+    area = window.main_scroll
+    bar = area.verticalScrollBar()
+    bar.setValue(0)
+    point = area.viewport().rect().center()
+    event = QWheelEvent(
+        QPointF(point),
+        QPointF(area.viewport().mapToGlobal(point)),
+        QPoint(),
+        QPoint(0, -240),
+        Qt.MouseButton.NoButton,
+        Qt.KeyboardModifier.NoModifier,
+        Qt.ScrollPhase.NoScrollPhase,
+        False,
+    )
+    QApplication.sendEvent(area.viewport(), event)
+    assert bar.value() > 0
+
+
+def test_long_parameter_panels_keep_bottom_buttons_reachable(window):
+    from PySide6.QtCore import QPoint
+    from PySide6.QtWidgets import QPushButton
+
+    window.resize(1024, 600)
+    window.select_element("link", "P1")
+    QApplication.processEvents()
+    inspector = window.inspector_scroll
+    button = next(b for b in window.inspector.findChildren(QPushButton) if b.text() == "应用参数")
+    inspector.ensureWidgetVisible(button)
+    QApplication.processEvents()
+    assert 0 <= button.mapTo(inspector.viewport(), QPoint()).y()
+    assert (
+        button.mapTo(inspector.viewport(), QPoint()).y() + button.height()
+        <= inspector.viewport().height()
+    )
+
+    panel = window.physics_panel
+    window.tabs.setCurrentWidget(panel)
+    QApplication.processEvents()
+    area = panel.parameter_scroll
+    assert area.verticalScrollBar().maximum() > 0
+    last = next(b for b in area.findChildren(QPushButton) if b.text() == "导入实测 CSV 进行对比")
+    area.ensureWidgetVisible(last)
+    window.main_scroll.ensureWidgetVisible(last)
+    QApplication.processEvents()
+    assert 0 <= last.mapTo(area.viewport(), QPoint()).y()
+    assert last.mapTo(area.viewport(), QPoint()).y() + last.height() <= area.viewport().height()
+    assert (
+        last.mapTo(window.main_scroll.viewport(), QPoint()).y() + last.height()
+        <= window.main_scroll.viewport().height()
+    )
+
+
+@pytest.mark.parametrize("kind", ["settings", "step_faces"])
+def test_long_dialogs_scroll_without_hiding_confirm_buttons(window, monkeypatch, kind):
+    from PySide6.QtWidgets import QDialog, QScrollArea, QDialogButtonBox
+    from PySide6.QtCore import QPoint
+
+    inspected = []
+
+    def inspect(dialog):
+        dialog.resize(680, 400)
+        dialog.show()
+        QApplication.processEvents()
+        area = dialog.findChild(QScrollArea)
+        assert area is not None
+        assert area.verticalScrollBar().maximum() > 0
+        box = dialog.findChild(QDialogButtonBox)
+        assert not area.isAncestorOf(box)
+        assert box.mapTo(dialog, QPoint()).y() + box.height() <= dialog.height()
+        area.verticalScrollBar().setValue(area.verticalScrollBar().maximum())
+        assert area.verticalScrollBar().value() > 0
+        inspected.append(True)
+        dialog.hide()
+        return QDialog.DialogCode.Rejected
+
+    monkeypatch.setattr(QDialog, "exec", inspect)
+    if kind == "settings":
+        window.edit_settings()
+    else:
+        window.physics_panel.step_roles(
+            "unused.step",
+            {"faces": [{"face": i + 1, "center_m": [0.0, 0.0, float(i)]} for i in range(100)]},
+        )
+    assert inspected
+
+
+@pytest.mark.parametrize("canvas_name,tab", [("editor", 0), ("physics", 5)])
+def test_wheel_over_canvas_scrolls_page_and_modifier_zooms(window, canvas_name, tab):
+    from PySide6.QtCore import QPoint, QPointF
+    from PySide6.QtGui import QWheelEvent
+
+    window.resize(1024, 600)
+    window.tabs.setCurrentIndex(tab)
+    QApplication.processEvents()
+    canvas = window.editor if canvas_name == "editor" else window.physics_panel.field
+    bar = window.main_scroll.verticalScrollBar()
+    bar.setValue(0)
+    initial = canvas.zoom
+
+    def wheel(modifiers):
+        pos = canvas.rect().center()
+        event = QWheelEvent(
+            QPointF(pos),
+            QPointF(canvas.mapToGlobal(pos)),
+            QPoint(),
+            QPoint(0, -120),
+            Qt.MouseButton.NoButton,
+            modifiers,
+            Qt.ScrollPhase.NoScrollPhase,
+            False,
+        )
+        QApplication.sendEvent(canvas, event)
+
+    wheel(Qt.KeyboardModifier.NoModifier)
+    assert bar.value() > 0
+    assert canvas.zoom == initial
+    for modifier in (Qt.KeyboardModifier.ControlModifier, Qt.KeyboardModifier.MetaModifier):
+        bar.setValue(0)
+        before = canvas.zoom
+        wheel(modifier)
+        assert canvas.zoom < before
+        assert bar.value() == 0
+
+
+def test_result_visualization_modes_profile_and_diagnostics(window):
+    from backend.models import default_document
+    from backend.physics import simulate_design
+
+    w = window
+    doc = default_document()
+    for link in doc.links:
+        if link.kind == "pipe":
+            link.diameter_m = 0.025
+    w.display_result(simulate_design(doc))
+    assert w.result_canvas.color_metric == "combined"
+    assert {"pressure", "flow", "velocity", "headloss"} <= set(w.result_canvas.ranges)
+    for i in range(w.color_mode.count()):
+        w.color_mode.setCurrentIndex(i)
+        w.result_canvas.repaint()
+    assert w.diagnostics["findings"] and w.result_canvas.flags
+    assert w.kpis["health"].value.text() != "正常"
+    w.result_canvas.set_animate(True)
+    w.result_canvas.phase = 1.3
+    w.result_canvas.repaint()
+    w.trend_metric.setCurrentIndex(w.trend_metric.findData("profile"))
+    w.result_selection("node", "J5")
+    profile = w.trend.profile
+    ids = [s["id"] for s in profile["stations"]]
+    assert ids[0] == "R1" and ids[-1] == "J5" and "J2" in ids
+    j1, j2 = (next(s for s in profile["stations"] if s["id"] == k) for k in ("J1", "J2"))
+    assert j2["head"] > j1["head"] and j2["pump"]
+    w.trend.repaint()
+    w.trend_metric.setCurrentIndex(w.trend_metric.findData("element"))
+    assert w.trend.series and "J5" in w.trend.label
+    first = w.diagnostics["findings"][0]
+    w.pick_finding(first["target_kind"], first["target"], first["first_hour"])
+    assert w.result_element == (first["target_kind"], first["target"])
+    assert w.element_table.rowCount() > 3
+    w.result_canvas.set_animate(False)
+
+
+def test_tool_palette_browser_and_inspector_units(window):
+    w = window
+    w.tool.setCurrentIndex(w.tool.findData("pipe"))
+    assert w.tool_buttons.checkedId() == w.tool.currentIndex()
+    assert w.editor.mode == "pipe"
+    w.tool_buttons.button(0).click()
+    assert w.editor.mode == "select"
+    w.browser.picked.emit("link", "L2")
+    assert w.selected == ("link", "L2")
+    assert w.fields["diameter_m"].value() == 40  # shown in mm
+    w.fields["diameter_m"].setValue(50)
+    w.apply_properties()
+    assert next(l for l in w.document.links if l.id == "L2").diameter_m == 0.05
+    w.select_element("link", "P1")
+    rows = w.fields["curve"].value()
+    assert rows[0]["flow_m3h"] == 0 and len(rows) == 5
+    w.validate_document()
+    assert w.design_flags == {}
+
+
+def test_optimization_dialog_ranks_feasible_lowest_energy_first(window):
+    from backend.jobs import optimize_design
+    from backend.models import default_document
+
+    doc = default_document()
+    value = optimize_design(doc)
+    dialog = window.show_optimization(value)
+    from PySide6.QtWidgets import QTableWidget
+
+    table = dialog.findChild(QTableWidget)
+    assert table.rowCount() == len(value["candidates"])
+    assert table.item(0, 4).text().startswith("✓")
+    feasible = [c["energy_kwh"] for c in value["candidates"] if c["feasible"]]
+    assert float(table.item(0, 2).text()) == pytest.approx(min(feasible), abs=0.01)
+    dialog.close()
+
+
+def test_failed_diagnostics_do_not_show_normal_health(window, monkeypatch):
+    import backend.diagnostics
+    from backend.models import default_document
+    from backend.physics import simulate_design
+
+    def unavailable(result):
+        raise ValueError("diagnostic unavailable")
+
+    monkeypatch.setattr(backend.diagnostics, "diagnose", unavailable)
+    window.display_result(simulate_design(default_document()))
+    assert window.kpis["health"].value.text() == "诊断未完成"
+    assert window.result_canvas.point is not None
+    assert "diagnostic unavailable" in window.kpis["health"].toolTip()
+
+
+def test_hydraulic_profile_excludes_closed_pipe_and_valve(window):
+    from backend.models import DesignLink, default_document
+    from backend.physics import simulate_design
+
+    result = simulate_design(default_document())
+    # Closed shortcuts must not supersede the open supply route in the profile.
+    for kind in ("pipe", "valve"):
+        link = DesignLink(id=f"closed_{kind}", kind=kind, start="R1", end="J5",
+                          length_m=1, enabled=False)
+        result["document"]["links"].append(link.model_dump(mode="json"))
+        for point in result["points"]:
+            point["links"][link.id] = {"active": False, "flow_m3h": 0}
+    window.display_result(result)
+    window.result_selection("node", "J5")
+    assert [s["id"] for s in window.hydraulic_profile()["stations"]] == [
+        "R1", "J1", "J2", "J5"
+    ]

@@ -22,7 +22,7 @@ assert app.platformName() == "offscreen"
 with tempfile.TemporaryDirectory() as temp:
     window = MainWindow(temp)
     window.poll_timer.stop()
-    window.resize(1500, 990)
+    window.resize(1470, 880)
     window.show()
     app.processEvents()
     window.select_element("link", "P1")
@@ -32,7 +32,12 @@ with tempfile.TemporaryDirectory() as temp:
     window.view_mode.setCurrentIndex(1)
     app.processEvents()
     window.grab().save(str(reports / "gui_3d.png"))
+    window.view_mode.setCurrentIndex(0)
     window.display_result(simulate_design(default_document()))
+    window.timeline.setValue(4)
+    window.trend_metric.setCurrentIndex(window.trend_metric.findData("profile"))
+    window.result_selection("node", "J5")
+    window.result_canvas.phase = 0.4
     app.processEvents()
     window.grab().save(str(reports / "gui_result.png"))
     window.dirty = False

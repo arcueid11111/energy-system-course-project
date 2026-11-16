@@ -5,6 +5,7 @@ import numpy as np
 from PySide6.QtCore import Qt, QPointF, QRectF
 from PySide6.QtGui import QColor, QPainter, QPen, QPolygonF
 from PySide6.QtWidgets import QWidget
+from .scrolling import zoom_wheel
 
 
 def color(f):
@@ -21,7 +22,8 @@ class FieldView(QWidget):
         self.zoom = 1
         self.last = None
         self.vectors = True
-        self.setMinimumSize(380, 320)
+        self.placeholder = "加载本机 CFD 结果，显示求解器输出的真实网格场"
+        self.setMinimumSize(380, 230)
 
     def set_data(self, data):
         self.data = data
@@ -43,6 +45,8 @@ class FieldView(QWidget):
         self.last = None
 
     def wheelEvent(self, e):
+        if not zoom_wheel(self, e):
+            return
         self.zoom = max(0.2, min(10, self.zoom * math.exp(e.angleDelta().y() / 1200)))
         self.update()
 
@@ -52,11 +56,7 @@ class FieldView(QWidget):
         p.fillRect(self.rect(), QColor("#101b2b"))
         p.setPen(QColor("#b9cddd"))
         if self.data is None:
-            p.drawText(
-                self.rect(),
-                Qt.AlignmentFlag.AlignCenter,
-                "加载本机 CFD 结果，显示求解器输出的真实网格场",
-            )
+            p.drawText(self.rect(), Qt.AlignmentFlag.AlignCenter, self.placeholder)
             return
         d = self.data
         xyz = d["points"]
@@ -83,17 +83,44 @@ class FieldView(QWidget):
         for ids in d["surface_triangles"]:
             poly = QPolygonF([QPointF(*sp[i, :2]) for i in ids])
             p.drawPolygon(poly)
-        vmin, vmax = d["minimum"], d["maximum"]
+        vmin = d.get("color_minimum", d["minimum"])
+        vmax = d.get("color_maximum", d["maximum"])
         den = max(vmax - vmin, 1e-12)
-        for i in np.argsort(pp[:, 2]):
-            p.setPen(Qt.PenStyle.NoPen)
-            p.setBrush(color((d["values"][i] - vmin) / den))
-            p.drawEllipse(QPointF(*pp[i, :2]), 2.1, 2.1)
-        if self.vectors:
+        if len(d.get("colored_triangles", [])):
+            cp = d["colored_points"]
+            ids = d["colored_triangles"]
+            proj = project(cp)
+            normals = np.cross(cp[ids[:, 1]] - cp[ids[:, 0]], cp[ids[:, 2]] - cp[ids[:, 0]])
+            normals /= np.maximum(np.linalg.norm(normals, axis=1)[:, None], 1e-20)
+            lighting = 0.48 + 0.52 * np.abs((normals @ matrix.T) @ np.array([0.3, -0.4, 0.866]))
+            face_values = d["colored_values"][ids].mean(axis=1)
+            for i in np.argsort(proj[ids, 2].mean(axis=1)):
+                shade = (
+                    QColor("#ffb74c")
+                    if d.get("vapor_isosurface")
+                    else color((face_values[i] - vmin) / den)
+                )
+                shade = QColor.fromRgbF(
+                    shade.redF() * lighting[i],
+                    shade.greenF() * lighting[i],
+                    shade.blueF() * lighting[i],
+                    0.96 if d.get("vapor_isosurface") else 0.9,
+                )
+                p.setBrush(shade)
+                p.setPen(QPen(QColor(230, 245, 250, 28), 0.35))
+                p.drawPolygon(QPolygonF([QPointF(*proj[j, :2]) for j in ids[i]]))
+        if d.get("is_slice") or not len(d.get("colored_triangles", [])):
+            for i in np.argsort(pp[:, 2]):
+                if d["metric"] == "vapour_fraction" and d["values"][i] < 0.01:
+                    continue
+                p.setPen(Qt.PenStyle.NoPen)
+                p.setBrush(color((d["values"][i] - vmin) / den))
+                p.drawEllipse(QPointF(*pp[i, :2]), 2.1, 2.1)
+        if self.vectors and d["metric"] != "vapour_fraction":
             velocity = d["velocity"] @ matrix.T
             maxv = max(np.linalg.norm(velocity, axis=1).max(), 1e-12)
             p.setPen(QPen(QColor(230, 242, 250, 170), 0.7))
-            for i in range(0, len(xyz), max(1, len(xyz) // 220)):
+            for i in range(0, len(xyz), max(1, len(xyz) // 110)):
                 start = pp[i, :2]
                 end = start + velocity[i, :2] / maxv * 25
                 p.drawLine(QPointF(*start), QPointF(*end))
@@ -104,18 +131,28 @@ class FieldView(QWidget):
                     normal = np.array([-tangent[1], tangent[0]])
                     for sign in (-1, 1):
                         p.drawLine(QPointF(*end), QPointF(*(end - 4 * tangent + sign * 2 * normal)))
-        p.setPen(QPen(QColor("#f8df8c"), 1.3))
+        p.setPen(QPen(QColor("#f8df8c"), 2.2))
         for line in d["streamlines"]:
             projected = project(line)
             p.drawPolyline(QPolygonF([QPointF(*row[:2]) for row in projected]))
-        for j in range(150):
-            p.fillRect(self.width() - 45, 55 + j, 15, 2, color(1 - j / 149))
+        if d.get("vapor_isosurface"):
+            p.fillRect(self.width() - 150, 52, 16, 16, QColor("#ffb74c"))
+            p.setPen(QColor("#ffd99e"))
+            p.drawText(self.width() - 125, 65, "αv = 0.1")
+        else:
+            for j in range(150):
+                p.fillRect(self.width() - 45, 55 + j, 15, 2, color(1 - j / 149))
         p.setPen(QColor("#d3e5ef"))
         p.drawText(16, 24, f"t = {d['seconds']:.6g} s   {d['cell_count']:,} cells   {d['metric']}")
         p.drawText(
             16,
             self.height() - 17,
-            f"范围 {vmin:.5g} — {vmax:.5g} | 拖动旋转 · 滚轮缩放 | 矢量为显示采样",
+            f"范围 {d['minimum']:.5g} — {d['maximum']:.5g} | "
+            + (
+                "汽相率等值面 α=0.1"
+                if d.get("vapor_isosurface")
+                else "真实网格场 · Ctrl或⌘+滚轮缩放"
+            ),
         )
 
 
@@ -124,7 +161,7 @@ class SeriesView(QWidget):
         super().__init__()
         self.rows = []
         self.label = ""
-        self.setMinimumHeight(240)
+        self.setMinimumHeight(160)
 
     def set_series(self, x, y, label):
         self.rows = list(zip(x, y))

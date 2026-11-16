@@ -280,6 +280,8 @@ def execute_acoustics(project, root, progress=None):
                 "reference_rise_pa": wave["joukowsky_pa"],
                 "relative_error": error,
                 "within_5_percent": abs(error) <= 0.05,
+                # Δp = ρ·a·Δu holds only for closures shorter than the round trip 2L/a.
+                "applicable": p.close_duration_s <= wave["round_trip_s"],
             },
             "wavefront_normalized_rmse": wavefront_rmse,
             "wavefront_reference": "finite linear valve closure, first incident wave, actual cell-centre probe locations",
